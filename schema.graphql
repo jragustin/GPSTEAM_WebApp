@@ -1,0 +1,3074 @@
+schema {
+  query: Root
+  mutation: Mutations
+}
+
+type accessLevels implements Node {
+  # The ID of an object
+  id: ID!
+  type: String!
+  users(after: String, first: Int, before: String, last: Int, orderBy: [accessLevelsUsersConnectionOrder]): accessLevelsUsersConnection
+}
+
+# A connection to a list of items.
+type accessLevelsUsersConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [accessLevelsUsersEdge]
+
+  # Total count of users results associated with accessLevels.
+  total: Int!
+}
+
+enum accessLevelsUsersConnectionOrder {
+  ID
+}
+
+# An edge in a connection.
+type accessLevelsUsersEdge {
+  # The item at the end of the edge
+  node: users
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+type antennaModels implements Node {
+  # The ID of an object
+  id: ID!
+  name: String!
+  equipment_brand_id: Int
+  antennas(after: String, first: Int, before: String, last: Int, orderBy: [antennaModelsAntennasConnectionOrder]): antennaModelsAntennasConnection
+  equipmentBrand: equipmentBrands
+}
+
+# A connection to a list of items.
+type antennaModelsAntennasConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [antennaModelsAntennasEdge]
+
+  # Total count of antennas results associated with antennaModels.
+  total: Int!
+}
+
+enum antennaModelsAntennasConnectionOrder {
+  ID
+}
+
+# An edge in a connection.
+type antennaModelsAntennasEdge {
+  # The item at the end of the edge
+  node: antennas
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+type antennas implements Node {
+  # The ID of an object
+  id: ID!
+  serialNumber: String!
+  partNumber: String!
+  retirementDate: String
+  createdAt: String!
+  updatedAt: String!
+  antenna_model_id: Int
+  antennaModel: antennaModels
+}
+
+type campaign_observers implements Node {
+  campaign_logsheet_id: Int!
+  person_id: Int!
+
+  # The ID of an object
+  id: ID!
+}
+
+type campaignLogsheets implements Node {
+  # The ID of an object
+  id: ID!
+  date: String!
+  heightNorthMeters: Float!
+  heightEastMeters: Float!
+  heightSouthMeters: Float!
+  heightWestMeters: Float!
+  timeStart: String
+  timeEnd: String
+  failureTime: String
+  azimuth: Float
+  notes: String
+  createdAt: String!
+  site_id: Int
+  antenna_id: Int
+  receiver_id: Int
+  site: sites
+  antenna: antennas
+  receiver: receivers
+  people(after: String, first: Int, before: String, last: Int, orderBy: [campaignLogsheetsPeopleConnectionOrder]): campaignLogsheetsPeopleConnection
+}
+
+# A connection to a list of items.
+type campaignLogsheetsPeopleConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [campaignLogsheetsPeopleEdge]
+
+  # Total count of people results associated with campaignLogsheets.
+  total: Int!
+}
+
+enum campaignLogsheetsPeopleConnectionOrder {
+  ID
+}
+
+# An edge in a connection.
+type campaignLogsheetsPeopleEdge {
+  # The item at the end of the edge
+  node: people
+
+  # A cursor for use in pagination
+  cursor: String!
+  campaign_logsheet_id: Int!
+  person_id: Int!
+
+  # The ID of an object
+  id: ID!
+}
+
+type contactNumbers implements Node {
+  # The ID of an object
+  id: ID!
+  number: String!
+  person_id: Int
+}
+
+type continuous_observers implements Node {
+  continuous_logsheet_id: Int!
+  person_id: Int!
+
+  # The ID of an object
+  id: ID!
+}
+
+type continuousLogsheets implements Node {
+  # The ID of an object
+  id: ID!
+  isPowerOn: Int!
+  date: String!
+  batteryCondition: String
+  chargerCondition: String
+  otherNotes: String
+  createdAt: String!
+  site_id: Int
+  antenna_id: Int
+  receiver_id: Int
+  site: sites
+  antenna: antennas
+  receiver: receivers
+  people(after: String, first: Int, before: String, last: Int, orderBy: [continuousLogsheetsPeopleConnectionOrder]): continuousLogsheetsPeopleConnection
+}
+
+# A connection to a list of items.
+type continuousLogsheetsPeopleConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [continuousLogsheetsPeopleEdge]
+
+  # Total count of people results associated with continuousLogsheets.
+  total: Int!
+}
+
+enum continuousLogsheetsPeopleConnectionOrder {
+  ID
+}
+
+# An edge in a connection.
+type continuousLogsheetsPeopleEdge {
+  # The item at the end of the edge
+  node: people
+
+  # A cursor for use in pagination
+  cursor: String!
+  continuous_logsheet_id: Int!
+  person_id: Int!
+
+  # The ID of an object
+  id: ID!
+}
+
+input createAccessLevelsInput {
+  # The ID for accessLevels
+  id: ID
+  type: String!
+  clientMutationId: String
+}
+
+type createAccessLevelsPayload {
+  # The new accessLevels, if successfully created.
+  newAccessLevels: accessLevels
+  clientMutationId: String
+}
+
+input createAntennaModelsInput {
+  # The ID for antennaModels
+  id: ID
+  name: String!
+
+  # The ID for equipment_brands
+  equipment_brand_id: ID!
+  clientMutationId: String
+}
+
+type createAntennaModelsPayload {
+  # The new antennaModels, if successfully created.
+  newAntennaModels: antennaModels
+  newEquipmentBrandsAntennaModelsEdge: equipmentBrandsAntennaModelsEdge
+  equipmentBrand: equipmentBrands
+  clientMutationId: String
+}
+
+input createAntennasInput {
+  # The ID for antennas
+  id: ID
+  serialNumber: String!
+  partNumber: String!
+  retirementDate: String
+
+  # The ID for antenna_models
+  antenna_model_id: ID!
+  clientMutationId: String
+}
+
+type createAntennasPayload {
+  # The new antennas, if successfully created.
+  newAntennas: antennas
+  newAntennaModelsAntennasEdge: antennaModelsAntennasEdge
+  antennaModel: antennaModels
+  clientMutationId: String
+}
+
+input createCampaignLogsheetsInput {
+  # The ID for campaignLogsheets
+  id: ID
+  date: String!
+  heightNorthMeters: Float!
+  heightEastMeters: Float!
+  heightSouthMeters: Float!
+  heightWestMeters: Float!
+  timeStart: String
+  timeEnd: String
+  failureTime: String
+  azimuth: Float
+  notes: String
+
+  # The ID for sites
+  site_id: ID!
+
+  # The ID for antennas
+  antenna_id: ID!
+
+  # The ID for receivers
+  receiver_id: ID!
+  clientMutationId: String
+}
+
+type createCampaignLogsheetsPayload {
+  # The new campaignLogsheets, if successfully created.
+  newCampaignLogsheets: campaignLogsheets
+  newPeopleCampaignLogsheetsEdge: peopleCampaignLogsheetsEdge
+  newSitesCampaignLogsheetsEdge: sitesCampaignLogsheetsEdge
+  site: sites
+  antenna: antennas
+  receiver: receivers
+  clientMutationId: String
+}
+
+input createCampaignObserversInput {
+  # The ID for campaign_logsheets
+  campaign_logsheet_id: ID!
+
+  # The ID for people
+  person_id: ID!
+  clientMutationId: String
+}
+
+type createCampaignObserversPayload {
+  # The new campaign_observers, if successfully created.
+  newCampaignObservers: campaign_observers
+  clientMutationId: String
+}
+
+input createContactNumbersInput {
+  # The ID for contactNumbers
+  id: ID
+  number: String!
+
+  # The ID for people
+  person_id: ID!
+  clientMutationId: String
+}
+
+type createContactNumbersPayload {
+  # The new contactNumbers, if successfully created.
+  newContactNumbers: contactNumbers
+  newPeopleContactNumbersEdge: peopleContactNumbersEdge
+  clientMutationId: String
+}
+
+input createContinuousLogsheetsInput {
+  # The ID for continuousLogsheets
+  id: ID
+  isPowerOn: Int!
+  date: String!
+  batteryCondition: String
+  chargerCondition: String
+  otherNotes: String
+
+  # The ID for sites
+  site_id: ID!
+
+  # The ID for antennas
+  antenna_id: ID!
+
+  # The ID for receivers
+  receiver_id: ID!
+  clientMutationId: String
+}
+
+type createContinuousLogsheetsPayload {
+  # The new continuousLogsheets, if successfully created.
+  newContinuousLogsheets: continuousLogsheets
+  newPeopleContinuousLogsheetsEdge: peopleContinuousLogsheetsEdge
+  newSitesContinuousLogsheetsEdge: sitesContinuousLogsheetsEdge
+  site: sites
+  antenna: antennas
+  receiver: receivers
+  clientMutationId: String
+}
+
+input createContinuousObserversInput {
+  # The ID for continuous_logsheets
+  continuous_logsheet_id: ID!
+
+  # The ID for people
+  person_id: ID!
+  clientMutationId: String
+}
+
+type createContinuousObserversPayload {
+  # The new continuous_observers, if successfully created.
+  newContinuousObservers: continuous_observers
+  clientMutationId: String
+}
+
+input createDivisionsInput {
+  # The ID for divisions
+  id: ID
+  name: String!
+  clientMutationId: String
+}
+
+type createDivisionsPayload {
+  # The new divisions, if successfully created.
+  newDivisions: divisions
+  clientMutationId: String
+}
+
+input createEmailsInput {
+  # The ID for emails
+  id: ID
+  address: String!
+
+  # The ID for people
+  person_id: ID!
+  clientMutationId: String
+}
+
+type createEmailsPayload {
+  # The new emails, if successfully created.
+  newEmails: emails
+  newPeopleEmailsEdge: peopleEmailsEdge
+  clientMutationId: String
+}
+
+input createEquipmentBrandsInput {
+  # The ID for equipmentBrands
+  id: ID
+  name: String!
+  clientMutationId: String
+}
+
+type createEquipmentBrandsPayload {
+  # The new equipmentBrands, if successfully created.
+  newEquipmentBrands: equipmentBrands
+  clientMutationId: String
+}
+
+input createMarkersInput {
+  # The ID for markers
+  id: ID
+  name: String!
+  description: String!
+  clientMutationId: String
+}
+
+type createMarkersPayload {
+  # The new markers, if successfully created.
+  newMarkers: markers
+  clientMutationId: String
+}
+
+input createNonStaffPositionsInput {
+  # The ID for nonStaffPositions
+  id: ID
+  name: String!
+  description: String!
+  clientMutationId: String
+}
+
+type createNonStaffPositionsPayload {
+  # The new nonStaffPositions, if successfully created.
+  newNonStaffPositions: nonStaffPositions
+  clientMutationId: String
+}
+
+input createOfficeLocationsInput {
+  # The ID for officeLocations
+  id: ID
+  name: String!
+  clientMutationId: String
+}
+
+type createOfficeLocationsPayload {
+  # The new officeLocations, if successfully created.
+  newOfficeLocations: officeLocations
+  clientMutationId: String
+}
+
+input createPeopleInput {
+  # The ID for people
+  id: ID
+  firstName: String!
+  lastName: String!
+  nickName: String!
+  birthdate: String
+
+  # The ID for positions
+  position_id: ID!
+
+  # The ID for divisions
+  division_id: ID!
+
+  # The ID for sites
+  site_id: ID!
+
+  # The ID for person_types
+  person_type_id: ID!
+
+  # The ID for non_staff_positions
+  non_staff_position_id: ID!
+
+  # The ID for office_locations
+  office_location_id: ID!
+  clientMutationId: String
+}
+
+type createPeoplePayload {
+  # The new people, if successfully created.
+  newPeople: people
+  newCampaignLogsheetsPeopleEdge: campaignLogsheetsPeopleEdge
+  newContinuousLogsheetsPeopleEdge: continuousLogsheetsPeopleEdge
+  newDivisionsPeopleEdge: divisionsPeopleEdge
+  newNonStaffPositionsPeopleEdge: nonStaffPositionsPeopleEdge
+  newOfficeLocationsPeopleEdge: officeLocationsPeopleEdge
+  newPersonTypesPeopleEdge: personTypesPeopleEdge
+  newPositionsPeopleEdge: positionsPeopleEdge
+  newSitesPeopleEdge: sitesPeopleEdge
+  position: positions
+  division: divisions
+  personType: personTypes
+  nonStaffPosition: nonStaffPositions
+  officeLocation: officeLocations
+  clientMutationId: String
+}
+
+input createPersonTypesInput {
+  # The ID for personTypes
+  id: ID
+  type: String!
+  description: String!
+  clientMutationId: String
+}
+
+type createPersonTypesPayload {
+  # The new personTypes, if successfully created.
+  newPersonTypes: personTypes
+  clientMutationId: String
+}
+
+input createPositionsInput {
+  # The ID for positions
+  id: ID
+  name: String!
+  clientMutationId: String
+}
+
+type createPositionsPayload {
+  # The new positions, if successfully created.
+  newPositions: positions
+  clientMutationId: String
+}
+
+input createReceiverModelsInput {
+  # The ID for receiverModels
+  id: ID
+  name: String!
+
+  # The ID for equipment_brands
+  equipment_brand_id: ID!
+  clientMutationId: String
+}
+
+type createReceiverModelsPayload {
+  # The new receiverModels, if successfully created.
+  newReceiverModels: receiverModels
+  newEquipmentBrandsReceiverModelsEdge: equipmentBrandsReceiverModelsEdge
+  equipmentBrand: equipmentBrands
+  clientMutationId: String
+}
+
+input createReceiversInput {
+  # The ID for receivers
+  id: ID
+  serialNumber: String!
+  partNumber: String!
+  retirementDate: String
+
+  # The ID for receiver_models
+  receiver_model_id: ID!
+  clientMutationId: String
+}
+
+type createReceiversPayload {
+  # The new receivers, if successfully created.
+  newReceivers: receivers
+  newReceiverModelsReceiversEdge: receiverModelsReceiversEdge
+  receiverModel: receiverModels
+  clientMutationId: String
+}
+
+input createSitesInput {
+  # The ID for sites
+  id: ID
+  name: String!
+  dateEstablished: String
+  latitude: Float
+  longitude: Float
+  location: String
+  description: String
+
+  # The ID for survey_types
+  survey_type_id: ID!
+
+  # The ID for markers
+  marker_id: ID!
+  clientMutationId: String
+}
+
+type createSitesPayload {
+  # The new sites, if successfully created.
+  newSites: sites
+  newMarkersSitesEdge: markersSitesEdge
+  surveyType: surveyTypes
+  marker: markers
+  clientMutationId: String
+}
+
+input createSurveyTypesInput {
+  # The ID for surveyTypes
+  id: ID
+  type: String!
+  clientMutationId: String
+}
+
+type createSurveyTypesPayload {
+  # The new surveyTypes, if successfully created.
+  newSurveyTypes: surveyTypes
+  clientMutationId: String
+}
+
+input createUsersInput {
+  # The ID for users
+  id: ID
+  username: String!
+  password: String!
+
+  # The ID for access_levels
+  access_level_id: ID!
+
+  # The ID for people
+  person_id: ID!
+  clientMutationId: String
+}
+
+type createUsersPayload {
+  # The new users, if successfully created.
+  newUsers: users
+  newAccessLevelsUsersEdge: accessLevelsUsersEdge
+  person: people
+  clientMutationId: String
+}
+
+input deleteAccessLevelsInput {
+  where: DeleteaccessLevelsWhereInput
+  clientMutationId: String
+}
+
+type deleteAccessLevelsPayload {
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Options to describe the scope of the search.
+input DeleteaccessLevelsWhereInput {
+  # The ID for accessLevels
+  id: ID
+  type: String
+}
+
+input deleteAntennaModelsInput {
+  where: DeleteantennaModelsWhereInput
+  clientMutationId: String
+}
+
+type deleteAntennaModelsPayload {
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Options to describe the scope of the search.
+input DeleteantennaModelsWhereInput {
+  # The ID for antennaModels
+  id: ID
+  name: String
+
+  # The ID for equipment_brands
+  equipment_brand_id: ID!
+}
+
+input deleteAntennasInput {
+  where: DeleteantennasWhereInput
+  clientMutationId: String
+}
+
+type deleteAntennasPayload {
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Options to describe the scope of the search.
+input DeleteantennasWhereInput {
+  # The ID for antennas
+  id: ID
+  serialNumber: String
+  partNumber: String
+  retirementDate: String
+  createdAt: String
+  updatedAt: String
+
+  # The ID for antenna_models
+  antenna_model_id: ID!
+}
+
+# Options to describe the scope of the search.
+input Deletecampaign_observersWhereInput {
+  # The ID for campaign_logsheets
+  campaign_logsheet_id: ID!
+
+  # The ID for people
+  person_id: ID!
+}
+
+input deleteCampaignLogsheetsInput {
+  where: DeletecampaignLogsheetsWhereInput
+  clientMutationId: String
+}
+
+type deleteCampaignLogsheetsPayload {
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Options to describe the scope of the search.
+input DeletecampaignLogsheetsWhereInput {
+  # The ID for campaignLogsheets
+  id: ID
+  date: String
+  heightNorthMeters: Float
+  heightEastMeters: Float
+  heightSouthMeters: Float
+  heightWestMeters: Float
+  timeStart: String
+  timeEnd: String
+  failureTime: String
+  azimuth: Float
+  notes: String
+  createdAt: String
+
+  # The ID for sites
+  site_id: ID!
+
+  # The ID for antennas
+  antenna_id: ID!
+
+  # The ID for receivers
+  receiver_id: ID!
+}
+
+input deleteCampaignObserversInput {
+  where: Deletecampaign_observersWhereInput
+  clientMutationId: String
+}
+
+type deleteCampaignObserversPayload {
+  affectedCount: Int
+  clientMutationId: String
+}
+
+input deleteContactNumbersInput {
+  where: DeletecontactNumbersWhereInput
+  clientMutationId: String
+}
+
+type deleteContactNumbersPayload {
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Options to describe the scope of the search.
+input DeletecontactNumbersWhereInput {
+  # The ID for contactNumbers
+  id: ID
+  number: String
+
+  # The ID for people
+  person_id: ID!
+}
+
+# Options to describe the scope of the search.
+input Deletecontinuous_observersWhereInput {
+  # The ID for continuous_logsheets
+  continuous_logsheet_id: ID!
+
+  # The ID for people
+  person_id: ID!
+}
+
+input deleteContinuousLogsheetsInput {
+  where: DeletecontinuousLogsheetsWhereInput
+  clientMutationId: String
+}
+
+type deleteContinuousLogsheetsPayload {
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Options to describe the scope of the search.
+input DeletecontinuousLogsheetsWhereInput {
+  # The ID for continuousLogsheets
+  id: ID
+  isPowerOn: Int
+  date: String
+  batteryCondition: String
+  chargerCondition: String
+  otherNotes: String
+  createdAt: String
+
+  # The ID for sites
+  site_id: ID!
+
+  # The ID for antennas
+  antenna_id: ID!
+
+  # The ID for receivers
+  receiver_id: ID!
+}
+
+input deleteContinuousObserversInput {
+  where: Deletecontinuous_observersWhereInput
+  clientMutationId: String
+}
+
+type deleteContinuousObserversPayload {
+  affectedCount: Int
+  clientMutationId: String
+}
+
+input deleteDivisionsInput {
+  where: DeletedivisionsWhereInput
+  clientMutationId: String
+}
+
+type deleteDivisionsPayload {
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Options to describe the scope of the search.
+input DeletedivisionsWhereInput {
+  # The ID for divisions
+  id: ID
+  name: String
+}
+
+input deleteEmailsInput {
+  where: DeleteemailsWhereInput
+  clientMutationId: String
+}
+
+type deleteEmailsPayload {
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Options to describe the scope of the search.
+input DeleteemailsWhereInput {
+  # The ID for emails
+  id: ID
+  address: String
+
+  # The ID for people
+  person_id: ID!
+}
+
+input deleteEquipmentBrandsInput {
+  where: DeleteequipmentBrandsWhereInput
+  clientMutationId: String
+}
+
+type deleteEquipmentBrandsPayload {
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Options to describe the scope of the search.
+input DeleteequipmentBrandsWhereInput {
+  # The ID for equipmentBrands
+  id: ID
+  name: String
+}
+
+input deleteMarkersInput {
+  where: DeletemarkersWhereInput
+  clientMutationId: String
+}
+
+type deleteMarkersPayload {
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Options to describe the scope of the search.
+input DeletemarkersWhereInput {
+  # The ID for markers
+  id: ID
+  name: String
+  description: String
+}
+
+input deleteNonStaffPositionsInput {
+  where: DeletenonStaffPositionsWhereInput
+  clientMutationId: String
+}
+
+type deleteNonStaffPositionsPayload {
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Options to describe the scope of the search.
+input DeletenonStaffPositionsWhereInput {
+  # The ID for nonStaffPositions
+  id: ID
+  name: String
+  description: String
+}
+
+input deleteOfficeLocationsInput {
+  where: DeleteofficeLocationsWhereInput
+  clientMutationId: String
+}
+
+type deleteOfficeLocationsPayload {
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Options to describe the scope of the search.
+input DeleteofficeLocationsWhereInput {
+  # The ID for officeLocations
+  id: ID
+  name: String
+}
+
+input deletePeopleInput {
+  where: DeletepeopleWhereInput
+  clientMutationId: String
+}
+
+type deletePeoplePayload {
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Options to describe the scope of the search.
+input DeletepeopleWhereInput {
+  # The ID for people
+  id: ID
+  firstName: String
+  lastName: String
+  nickName: String
+  birthdate: String
+
+  # The ID for positions
+  position_id: ID!
+
+  # The ID for divisions
+  division_id: ID!
+
+  # The ID for sites
+  site_id: ID!
+
+  # The ID for person_types
+  person_type_id: ID!
+
+  # The ID for non_staff_positions
+  non_staff_position_id: ID!
+
+  # The ID for office_locations
+  office_location_id: ID!
+}
+
+input deletePersonTypesInput {
+  where: DeletepersonTypesWhereInput
+  clientMutationId: String
+}
+
+type deletePersonTypesPayload {
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Options to describe the scope of the search.
+input DeletepersonTypesWhereInput {
+  # The ID for personTypes
+  id: ID
+  type: String
+  description: String
+}
+
+input deletePositionsInput {
+  where: DeletepositionsWhereInput
+  clientMutationId: String
+}
+
+type deletePositionsPayload {
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Options to describe the scope of the search.
+input DeletepositionsWhereInput {
+  # The ID for positions
+  id: ID
+  name: String
+}
+
+input deleteReceiverModelsInput {
+  where: DeletereceiverModelsWhereInput
+  clientMutationId: String
+}
+
+type deleteReceiverModelsPayload {
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Options to describe the scope of the search.
+input DeletereceiverModelsWhereInput {
+  # The ID for receiverModels
+  id: ID
+  name: String
+
+  # The ID for equipment_brands
+  equipment_brand_id: ID!
+}
+
+input deleteReceiversInput {
+  where: DeletereceiversWhereInput
+  clientMutationId: String
+}
+
+type deleteReceiversPayload {
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Options to describe the scope of the search.
+input DeletereceiversWhereInput {
+  # The ID for receivers
+  id: ID
+  serialNumber: String
+  partNumber: String
+  retirementDate: String
+  createdAt: String
+  updatedAt: String
+
+  # The ID for receiver_models
+  receiver_model_id: ID!
+}
+
+input deleteSitesInput {
+  where: DeletesitesWhereInput
+  clientMutationId: String
+}
+
+type deleteSitesPayload {
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Options to describe the scope of the search.
+input DeletesitesWhereInput {
+  # The ID for sites
+  id: ID
+  name: String
+  dateEstablished: String
+  latitude: Float
+  longitude: Float
+  location: String
+  description: String
+  createdAt: String
+  updatedAt: String
+
+  # The ID for survey_types
+  survey_type_id: ID!
+
+  # The ID for markers
+  marker_id: ID!
+}
+
+input deleteSurveyTypesInput {
+  where: DeletesurveyTypesWhereInput
+  clientMutationId: String
+}
+
+type deleteSurveyTypesPayload {
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Options to describe the scope of the search.
+input DeletesurveyTypesWhereInput {
+  # The ID for surveyTypes
+  id: ID
+  type: String
+}
+
+input deleteUsersInput {
+  where: DeleteusersWhereInput
+  clientMutationId: String
+}
+
+type deleteUsersPayload {
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Options to describe the scope of the search.
+input DeleteusersWhereInput {
+  # The ID for users
+  id: ID
+  username: String
+  password: String
+
+  # The ID for access_levels
+  access_level_id: ID!
+
+  # The ID for people
+  person_id: ID!
+}
+
+type divisions implements Node {
+  # The ID of an object
+  id: ID!
+  name: String!
+  people(after: String, first: Int, before: String, last: Int, orderBy: [divisionsPeopleConnectionOrder]): divisionsPeopleConnection
+}
+
+# A connection to a list of items.
+type divisionsPeopleConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [divisionsPeopleEdge]
+
+  # Total count of people results associated with divisions.
+  total: Int!
+}
+
+enum divisionsPeopleConnectionOrder {
+  ID
+}
+
+# An edge in a connection.
+type divisionsPeopleEdge {
+  # The item at the end of the edge
+  node: people
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+type emails implements Node {
+  # The ID of an object
+  id: ID!
+  address: String!
+  person_id: Int
+}
+
+type equipmentBrands implements Node {
+  # The ID of an object
+  id: ID!
+  name: String!
+  antennaModels(after: String, first: Int, before: String, last: Int, orderBy: [equipmentBrandsAntennaModelsConnectionOrder]): equipmentBrandsAntennaModelsConnection
+  receiverModels(after: String, first: Int, before: String, last: Int, orderBy: [equipmentBrandsReceiverModelsConnectionOrder]): equipmentBrandsReceiverModelsConnection
+}
+
+# A connection to a list of items.
+type equipmentBrandsAntennaModelsConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [equipmentBrandsAntennaModelsEdge]
+
+  # Total count of antennaModels results associated with equipmentBrands.
+  total: Int!
+}
+
+enum equipmentBrandsAntennaModelsConnectionOrder {
+  ID
+}
+
+# An edge in a connection.
+type equipmentBrandsAntennaModelsEdge {
+  # The item at the end of the edge
+  node: antennaModels
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+# A connection to a list of items.
+type equipmentBrandsReceiverModelsConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [equipmentBrandsReceiverModelsEdge]
+
+  # Total count of receiverModels results associated with equipmentBrands.
+  total: Int!
+}
+
+enum equipmentBrandsReceiverModelsConnectionOrder {
+  ID
+}
+
+# An edge in a connection.
+type equipmentBrandsReceiverModelsEdge {
+  # The item at the end of the edge
+  node: receiverModels
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+type markers implements Node {
+  # The ID of an object
+  id: ID!
+  name: String!
+  description: String!
+  sites(after: String, first: Int, before: String, last: Int, orderBy: [markersSitesConnectionOrder]): markersSitesConnection
+}
+
+# A connection to a list of items.
+type markersSitesConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [markersSitesEdge]
+
+  # Total count of sites results associated with markers.
+  total: Int!
+}
+
+enum markersSitesConnectionOrder {
+  ID
+}
+
+# An edge in a connection.
+type markersSitesEdge {
+  # The item at the end of the edge
+  node: sites
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+type Mutations {
+  # Create accessLevels record.
+  createAccessLevels(input: createAccessLevelsInput!): createAccessLevelsPayload
+
+  # Update multiple accessLevels records.
+  updateAccessLevels(input: updateAccessLevelsInput!): updateAccessLevelsPayload
+
+  # Delete accessLevels records.
+  deleteAccessLevels(input: deleteAccessLevelsInput!): deleteAccessLevelsPayload
+
+  # Create antennaModels record.
+  createAntennaModels(input: createAntennaModelsInput!): createAntennaModelsPayload
+
+  # Update multiple antennaModels records.
+  updateAntennaModels(input: updateAntennaModelsInput!): updateAntennaModelsPayload
+
+  # Delete antennaModels records.
+  deleteAntennaModels(input: deleteAntennaModelsInput!): deleteAntennaModelsPayload
+
+  # Create antennas record.
+  createAntennas(input: createAntennasInput!): createAntennasPayload
+
+  # Update multiple antennas records.
+  updateAntennas(input: updateAntennasInput!): updateAntennasPayload
+
+  # Delete antennas records.
+  deleteAntennas(input: deleteAntennasInput!): deleteAntennasPayload
+
+  # Create campaignLogsheets record.
+  createCampaignLogsheets(input: createCampaignLogsheetsInput!): createCampaignLogsheetsPayload
+
+  # Update multiple campaignLogsheets records.
+  updateCampaignLogsheets(input: updateCampaignLogsheetsInput!): updateCampaignLogsheetsPayload
+
+  # Delete campaignLogsheets records.
+  deleteCampaignLogsheets(input: deleteCampaignLogsheetsInput!): deleteCampaignLogsheetsPayload
+
+  # Create contactNumbers record.
+  createContactNumbers(input: createContactNumbersInput!): createContactNumbersPayload
+
+  # Update multiple contactNumbers records.
+  updateContactNumbers(input: updateContactNumbersInput!): updateContactNumbersPayload
+
+  # Delete contactNumbers records.
+  deleteContactNumbers(input: deleteContactNumbersInput!): deleteContactNumbersPayload
+
+  # Create continuousLogsheets record.
+  createContinuousLogsheets(input: createContinuousLogsheetsInput!): createContinuousLogsheetsPayload
+
+  # Update multiple continuousLogsheets records.
+  updateContinuousLogsheets(input: updateContinuousLogsheetsInput!): updateContinuousLogsheetsPayload
+
+  # Delete continuousLogsheets records.
+  deleteContinuousLogsheets(input: deleteContinuousLogsheetsInput!): deleteContinuousLogsheetsPayload
+
+  # Create divisions record.
+  createDivisions(input: createDivisionsInput!): createDivisionsPayload
+
+  # Update multiple divisions records.
+  updateDivisions(input: updateDivisionsInput!): updateDivisionsPayload
+
+  # Delete divisions records.
+  deleteDivisions(input: deleteDivisionsInput!): deleteDivisionsPayload
+
+  # Create emails record.
+  createEmails(input: createEmailsInput!): createEmailsPayload
+
+  # Update multiple emails records.
+  updateEmails(input: updateEmailsInput!): updateEmailsPayload
+
+  # Delete emails records.
+  deleteEmails(input: deleteEmailsInput!): deleteEmailsPayload
+
+  # Create equipmentBrands record.
+  createEquipmentBrands(input: createEquipmentBrandsInput!): createEquipmentBrandsPayload
+
+  # Update multiple equipmentBrands records.
+  updateEquipmentBrands(input: updateEquipmentBrandsInput!): updateEquipmentBrandsPayload
+
+  # Delete equipmentBrands records.
+  deleteEquipmentBrands(input: deleteEquipmentBrandsInput!): deleteEquipmentBrandsPayload
+
+  # Create markers record.
+  createMarkers(input: createMarkersInput!): createMarkersPayload
+
+  # Update multiple markers records.
+  updateMarkers(input: updateMarkersInput!): updateMarkersPayload
+
+  # Delete markers records.
+  deleteMarkers(input: deleteMarkersInput!): deleteMarkersPayload
+
+  # Create nonStaffPositions record.
+  createNonStaffPositions(input: createNonStaffPositionsInput!): createNonStaffPositionsPayload
+
+  # Update multiple nonStaffPositions records.
+  updateNonStaffPositions(input: updateNonStaffPositionsInput!): updateNonStaffPositionsPayload
+
+  # Delete nonStaffPositions records.
+  deleteNonStaffPositions(input: deleteNonStaffPositionsInput!): deleteNonStaffPositionsPayload
+
+  # Create officeLocations record.
+  createOfficeLocations(input: createOfficeLocationsInput!): createOfficeLocationsPayload
+
+  # Update multiple officeLocations records.
+  updateOfficeLocations(input: updateOfficeLocationsInput!): updateOfficeLocationsPayload
+
+  # Delete officeLocations records.
+  deleteOfficeLocations(input: deleteOfficeLocationsInput!): deleteOfficeLocationsPayload
+
+  # Create people record.
+  createPeople(input: createPeopleInput!): createPeoplePayload
+
+  # Update multiple people records.
+  updatePeople(input: updatePeopleInput!): updatePeoplePayload
+
+  # Delete people records.
+  deletePeople(input: deletePeopleInput!): deletePeoplePayload
+
+  # Create personTypes record.
+  createPersonTypes(input: createPersonTypesInput!): createPersonTypesPayload
+
+  # Update multiple personTypes records.
+  updatePersonTypes(input: updatePersonTypesInput!): updatePersonTypesPayload
+
+  # Delete personTypes records.
+  deletePersonTypes(input: deletePersonTypesInput!): deletePersonTypesPayload
+
+  # Create positions record.
+  createPositions(input: createPositionsInput!): createPositionsPayload
+
+  # Update multiple positions records.
+  updatePositions(input: updatePositionsInput!): updatePositionsPayload
+
+  # Delete positions records.
+  deletePositions(input: deletePositionsInput!): deletePositionsPayload
+
+  # Create receiverModels record.
+  createReceiverModels(input: createReceiverModelsInput!): createReceiverModelsPayload
+
+  # Update multiple receiverModels records.
+  updateReceiverModels(input: updateReceiverModelsInput!): updateReceiverModelsPayload
+
+  # Delete receiverModels records.
+  deleteReceiverModels(input: deleteReceiverModelsInput!): deleteReceiverModelsPayload
+
+  # Create receivers record.
+  createReceivers(input: createReceiversInput!): createReceiversPayload
+
+  # Update multiple receivers records.
+  updateReceivers(input: updateReceiversInput!): updateReceiversPayload
+
+  # Delete receivers records.
+  deleteReceivers(input: deleteReceiversInput!): deleteReceiversPayload
+
+  # Create sites record.
+  createSites(input: createSitesInput!): createSitesPayload
+
+  # Update multiple sites records.
+  updateSites(input: updateSitesInput!): updateSitesPayload
+
+  # Delete sites records.
+  deleteSites(input: deleteSitesInput!): deleteSitesPayload
+
+  # Create surveyTypes record.
+  createSurveyTypes(input: createSurveyTypesInput!): createSurveyTypesPayload
+
+  # Update multiple surveyTypes records.
+  updateSurveyTypes(input: updateSurveyTypesInput!): updateSurveyTypesPayload
+
+  # Delete surveyTypes records.
+  deleteSurveyTypes(input: deleteSurveyTypesInput!): deleteSurveyTypesPayload
+
+  # Create users record.
+  createUsers(input: createUsersInput!): createUsersPayload
+
+  # Update multiple users records.
+  updateUsers(input: updateUsersInput!): updateUsersPayload
+
+  # Delete users records.
+  deleteUsers(input: deleteUsersInput!): deleteUsersPayload
+
+  # Create campaign_observers record.
+  createCampaignObservers(input: createCampaignObserversInput!): createCampaignObserversPayload
+
+  # Update multiple campaign_observers records.
+  updateCampaignObservers(input: updateCampaignObserversInput!): updateCampaignObserversPayload
+
+  # Delete campaign_observers records.
+  deleteCampaignObservers(input: deleteCampaignObserversInput!): deleteCampaignObserversPayload
+
+  # Create continuous_observers record.
+  createContinuousObservers(input: createContinuousObserversInput!): createContinuousObserversPayload
+
+  # Update multiple continuous_observers records.
+  updateContinuousObservers(input: updateContinuousObserversInput!): updateContinuousObserversPayload
+
+  # Delete continuous_observers records.
+  deleteContinuousObservers(input: deleteContinuousObserversInput!): deleteContinuousObserversPayload
+}
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+type nonStaffPositions implements Node {
+  # The ID of an object
+  id: ID!
+  name: String!
+  description: String!
+  people(after: String, first: Int, before: String, last: Int, orderBy: [nonStaffPositionsPeopleConnectionOrder]): nonStaffPositionsPeopleConnection
+}
+
+# A connection to a list of items.
+type nonStaffPositionsPeopleConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [nonStaffPositionsPeopleEdge]
+
+  # Total count of people results associated with nonStaffPositions.
+  total: Int!
+}
+
+enum nonStaffPositionsPeopleConnectionOrder {
+  ID
+}
+
+# An edge in a connection.
+type nonStaffPositionsPeopleEdge {
+  # The item at the end of the edge
+  node: people
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+type officeLocations implements Node {
+  # The ID of an object
+  id: ID!
+  name: String!
+  people(after: String, first: Int, before: String, last: Int, orderBy: [officeLocationsPeopleConnectionOrder]): officeLocationsPeopleConnection
+}
+
+# A connection to a list of items.
+type officeLocationsPeopleConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [officeLocationsPeopleEdge]
+
+  # Total count of people results associated with officeLocations.
+  total: Int!
+}
+
+enum officeLocationsPeopleConnectionOrder {
+  ID
+}
+
+# An edge in a connection.
+type officeLocationsPeopleEdge {
+  # The item at the end of the edge
+  node: people
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
+type people implements Node {
+  # The ID of an object
+  id: ID!
+  firstName: String!
+  lastName: String!
+  nickName: String!
+  birthdate: String
+  position_id: Int
+  division_id: Int
+  site_id: Int
+  person_type_id: Int
+  non_staff_position_id: Int
+  office_location_id: Int
+  position: positions
+  division: divisions
+  emails(after: String, first: Int, before: String, last: Int, orderBy: [peopleEmailsConnectionOrder]): peopleEmailsConnection
+  contactNumbers(after: String, first: Int, before: String, last: Int, orderBy: [peopleContactNumbersConnectionOrder]): peopleContactNumbersConnection
+  personType: personTypes
+  nonStaffPosition: nonStaffPositions
+  officeLocation: officeLocations
+  campaignLogsheets(after: String, first: Int, before: String, last: Int, orderBy: [peopleCampaignLogsheetsConnectionOrder]): peopleCampaignLogsheetsConnection
+  continuousLogsheets(after: String, first: Int, before: String, last: Int, orderBy: [peopleContinuousLogsheetsConnectionOrder]): peopleContinuousLogsheetsConnection
+}
+
+# A connection to a list of items.
+type peopleCampaignLogsheetsConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [peopleCampaignLogsheetsEdge]
+
+  # Total count of campaignLogsheets results associated with people.
+  total: Int!
+}
+
+enum peopleCampaignLogsheetsConnectionOrder {
+  ID
+}
+
+# An edge in a connection.
+type peopleCampaignLogsheetsEdge {
+  # The item at the end of the edge
+  node: campaignLogsheets
+
+  # A cursor for use in pagination
+  cursor: String!
+  campaign_logsheet_id: Int!
+  person_id: Int!
+
+  # The ID of an object
+  id: ID!
+}
+
+# A connection to a list of items.
+type peopleContactNumbersConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [peopleContactNumbersEdge]
+
+  # Total count of contactNumbers results associated with people.
+  total: Int!
+}
+
+enum peopleContactNumbersConnectionOrder {
+  ID
+}
+
+# An edge in a connection.
+type peopleContactNumbersEdge {
+  # The item at the end of the edge
+  node: contactNumbers
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+# A connection to a list of items.
+type peopleContinuousLogsheetsConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [peopleContinuousLogsheetsEdge]
+
+  # Total count of continuousLogsheets results associated with people.
+  total: Int!
+}
+
+enum peopleContinuousLogsheetsConnectionOrder {
+  ID
+}
+
+# An edge in a connection.
+type peopleContinuousLogsheetsEdge {
+  # The item at the end of the edge
+  node: continuousLogsheets
+
+  # A cursor for use in pagination
+  cursor: String!
+  continuous_logsheet_id: Int!
+  person_id: Int!
+
+  # The ID of an object
+  id: ID!
+}
+
+# A connection to a list of items.
+type peopleEmailsConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [peopleEmailsEdge]
+
+  # Total count of emails results associated with people.
+  total: Int!
+}
+
+enum peopleEmailsConnectionOrder {
+  ID
+}
+
+# An edge in a connection.
+type peopleEmailsEdge {
+  # The item at the end of the edge
+  node: emails
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+type personTypes implements Node {
+  # The ID of an object
+  id: ID!
+  type: String!
+  description: String!
+  people(after: String, first: Int, before: String, last: Int, orderBy: [personTypesPeopleConnectionOrder]): personTypesPeopleConnection
+}
+
+# A connection to a list of items.
+type personTypesPeopleConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [personTypesPeopleEdge]
+
+  # Total count of people results associated with personTypes.
+  total: Int!
+}
+
+enum personTypesPeopleConnectionOrder {
+  ID
+}
+
+# An edge in a connection.
+type personTypesPeopleEdge {
+  # The item at the end of the edge
+  node: people
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+type positions implements Node {
+  # The ID of an object
+  id: ID!
+  name: String!
+  people(after: String, first: Int, before: String, last: Int, orderBy: [positionsPeopleConnectionOrder]): positionsPeopleConnection
+}
+
+# A connection to a list of items.
+type positionsPeopleConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [positionsPeopleEdge]
+
+  # Total count of people results associated with positions.
+  total: Int!
+}
+
+enum positionsPeopleConnectionOrder {
+  ID
+}
+
+# An edge in a connection.
+type positionsPeopleEdge {
+  # The item at the end of the edge
+  node: people
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+type receiverModels implements Node {
+  # The ID of an object
+  id: ID!
+  name: String!
+  equipment_brand_id: Int
+  receivers(after: String, first: Int, before: String, last: Int, orderBy: [receiverModelsReceiversConnectionOrder]): receiverModelsReceiversConnection
+  equipmentBrand: equipmentBrands
+}
+
+# A connection to a list of items.
+type receiverModelsReceiversConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [receiverModelsReceiversEdge]
+
+  # Total count of receivers results associated with receiverModels.
+  total: Int!
+}
+
+enum receiverModelsReceiversConnectionOrder {
+  ID
+}
+
+# An edge in a connection.
+type receiverModelsReceiversEdge {
+  # The item at the end of the edge
+  node: receivers
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+type receivers implements Node {
+  # The ID of an object
+  id: ID!
+  serialNumber: String!
+  partNumber: String!
+  retirementDate: String
+  createdAt: String!
+  updatedAt: String!
+  receiver_model_id: Int
+  receiverModel: receiverModels
+}
+
+# Root of the Schema
+type Root {
+  # Self-Pointer from Root to Root
+  root: Root!
+  accessLevels(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    include: SequelizeJSON
+  ): [accessLevels!]!
+  antennaModels(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    include: SequelizeJSON
+  ): [antennaModels!]!
+  antennas(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    include: SequelizeJSON
+  ): [antennas!]!
+  campaignLogsheets(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    include: SequelizeJSON
+  ): [campaignLogsheets!]!
+  contactNumbers(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    include: SequelizeJSON
+  ): [contactNumbers!]!
+  continuousLogsheets(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    include: SequelizeJSON
+  ): [continuousLogsheets!]!
+  divisions(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    include: SequelizeJSON
+  ): [divisions!]!
+  emails(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    include: SequelizeJSON
+  ): [emails!]!
+  equipmentBrands(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    include: SequelizeJSON
+  ): [equipmentBrands!]!
+  markers(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    include: SequelizeJSON
+  ): [markers!]!
+  nonStaffPositions(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    include: SequelizeJSON
+  ): [nonStaffPositions!]!
+  officeLocations(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    include: SequelizeJSON
+  ): [officeLocations!]!
+  people(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    include: SequelizeJSON
+  ): [people!]!
+  personTypes(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    include: SequelizeJSON
+  ): [personTypes!]!
+  positions(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    include: SequelizeJSON
+  ): [positions!]!
+  receiverModels(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    include: SequelizeJSON
+  ): [receiverModels!]!
+  receivers(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    include: SequelizeJSON
+  ): [receivers!]!
+  sites(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    include: SequelizeJSON
+  ): [sites!]!
+  surveyTypes(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    include: SequelizeJSON
+  ): [surveyTypes!]!
+  users(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    include: SequelizeJSON
+  ): [users!]!
+  campaignObservers(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    include: SequelizeJSON
+  ): [campaign_observers!]!
+  continuousObservers(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    include: SequelizeJSON
+  ): [continuous_observers!]!
+
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+}
+
+# The `JSON` scalar type represents raw JSON as values.
+scalar SequelizeJSON
+
+type sites implements Node {
+  # The ID of an object
+  id: ID!
+  name: String!
+  dateEstablished: String
+  latitude: Float
+  longitude: Float
+  location: String
+  description: String
+  createdAt: String!
+  updatedAt: String!
+  survey_type_id: Int
+  marker_id: Int
+  people(after: String, first: Int, before: String, last: Int, orderBy: [sitesPeopleConnectionOrder]): sitesPeopleConnection
+  surveyType: surveyTypes
+  campaignLogsheets(after: String, first: Int, before: String, last: Int, orderBy: [sitesCampaignLogsheetsConnectionOrder]): sitesCampaignLogsheetsConnection
+  continuousLogsheets(after: String, first: Int, before: String, last: Int, orderBy: [sitesContinuousLogsheetsConnectionOrder]): sitesContinuousLogsheetsConnection
+  marker: markers
+}
+
+# A connection to a list of items.
+type sitesCampaignLogsheetsConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [sitesCampaignLogsheetsEdge]
+
+  # Total count of campaignLogsheets results associated with sites.
+  total: Int!
+}
+
+enum sitesCampaignLogsheetsConnectionOrder {
+  ID
+}
+
+# An edge in a connection.
+type sitesCampaignLogsheetsEdge {
+  # The item at the end of the edge
+  node: campaignLogsheets
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+# A connection to a list of items.
+type sitesContinuousLogsheetsConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [sitesContinuousLogsheetsEdge]
+
+  # Total count of continuousLogsheets results associated with sites.
+  total: Int!
+}
+
+enum sitesContinuousLogsheetsConnectionOrder {
+  ID
+}
+
+# An edge in a connection.
+type sitesContinuousLogsheetsEdge {
+  # The item at the end of the edge
+  node: continuousLogsheets
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+# A connection to a list of items.
+type sitesPeopleConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [sitesPeopleEdge]
+
+  # Total count of people results associated with sites.
+  total: Int!
+}
+
+enum sitesPeopleConnectionOrder {
+  ID
+}
+
+# An edge in a connection.
+type sitesPeopleEdge {
+  # The item at the end of the edge
+  node: people
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+type surveyTypes implements Node {
+  # The ID of an object
+  id: ID!
+  type: String!
+}
+
+input updateAccessLevelsInput {
+  values: UpdateaccessLevelsValuesInput
+  where: UpdateaccessLevelsWhereInput
+  clientMutationId: String
+}
+
+type UpdateaccessLevelsOutput {
+  # The new accessLevels, if successfully created.
+  newAccessLevels: accessLevels
+}
+
+type updateAccessLevelsPayload {
+  nodes: [UpdateaccessLevelsOutput!]!
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Values to update
+input UpdateaccessLevelsValuesInput {
+  # The ID for accessLevels
+  id: ID
+  type: String
+}
+
+# Options to describe the scope of the search.
+input UpdateaccessLevelsWhereInput {
+  # The ID for accessLevels
+  id: ID
+  type: String
+}
+
+input updateAntennaModelsInput {
+  values: UpdateantennaModelsValuesInput
+  where: UpdateantennaModelsWhereInput
+  clientMutationId: String
+}
+
+type UpdateantennaModelsOutput {
+  # The new antennaModels, if successfully created.
+  newAntennaModels: antennaModels
+  newEquipmentBrandsAntennaModelsEdge: equipmentBrandsAntennaModelsEdge
+  equipmentBrand: equipmentBrands
+}
+
+type updateAntennaModelsPayload {
+  nodes: [UpdateantennaModelsOutput!]!
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Values to update
+input UpdateantennaModelsValuesInput {
+  # The ID for antennaModels
+  id: ID
+  name: String
+
+  # The ID for equipment_brands
+  equipment_brand_id: ID!
+}
+
+# Options to describe the scope of the search.
+input UpdateantennaModelsWhereInput {
+  # The ID for antennaModels
+  id: ID
+  name: String
+
+  # The ID for equipment_brands
+  equipment_brand_id: ID!
+}
+
+input updateAntennasInput {
+  values: UpdateantennasValuesInput
+  where: UpdateantennasWhereInput
+  clientMutationId: String
+}
+
+type UpdateantennasOutput {
+  # The new antennas, if successfully created.
+  newAntennas: antennas
+  newAntennaModelsAntennasEdge: antennaModelsAntennasEdge
+  antennaModel: antennaModels
+}
+
+type updateAntennasPayload {
+  nodes: [UpdateantennasOutput!]!
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Values to update
+input UpdateantennasValuesInput {
+  # The ID for antennas
+  id: ID
+  serialNumber: String
+  partNumber: String
+  retirementDate: String
+  createdAt: String
+  updatedAt: String
+
+  # The ID for antenna_models
+  antenna_model_id: ID!
+}
+
+# Options to describe the scope of the search.
+input UpdateantennasWhereInput {
+  # The ID for antennas
+  id: ID
+  serialNumber: String
+  partNumber: String
+  retirementDate: String
+  createdAt: String
+  updatedAt: String
+
+  # The ID for antenna_models
+  antenna_model_id: ID!
+}
+
+type Updatecampaign_observersOutput {
+  # The new campaign_observers, if successfully created.
+  newCampaignObservers: campaign_observers
+}
+
+# Values to update
+input Updatecampaign_observersValuesInput {
+  # The ID for campaign_logsheets
+  campaign_logsheet_id: ID!
+
+  # The ID for people
+  person_id: ID!
+}
+
+# Options to describe the scope of the search.
+input Updatecampaign_observersWhereInput {
+  # The ID for campaign_logsheets
+  campaign_logsheet_id: ID!
+
+  # The ID for people
+  person_id: ID!
+}
+
+input updateCampaignLogsheetsInput {
+  values: UpdatecampaignLogsheetsValuesInput
+  where: UpdatecampaignLogsheetsWhereInput
+  clientMutationId: String
+}
+
+type UpdatecampaignLogsheetsOutput {
+  # The new campaignLogsheets, if successfully created.
+  newCampaignLogsheets: campaignLogsheets
+  newPeopleCampaignLogsheetsEdge: peopleCampaignLogsheetsEdge
+  newSitesCampaignLogsheetsEdge: sitesCampaignLogsheetsEdge
+  site: sites
+  antenna: antennas
+  receiver: receivers
+}
+
+type updateCampaignLogsheetsPayload {
+  nodes: [UpdatecampaignLogsheetsOutput!]!
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Values to update
+input UpdatecampaignLogsheetsValuesInput {
+  # The ID for campaignLogsheets
+  id: ID
+  date: String
+  heightNorthMeters: Float
+  heightEastMeters: Float
+  heightSouthMeters: Float
+  heightWestMeters: Float
+  timeStart: String
+  timeEnd: String
+  failureTime: String
+  azimuth: Float
+  notes: String
+  createdAt: String
+
+  # The ID for sites
+  site_id: ID!
+
+  # The ID for antennas
+  antenna_id: ID!
+
+  # The ID for receivers
+  receiver_id: ID!
+}
+
+# Options to describe the scope of the search.
+input UpdatecampaignLogsheetsWhereInput {
+  # The ID for campaignLogsheets
+  id: ID
+  date: String
+  heightNorthMeters: Float
+  heightEastMeters: Float
+  heightSouthMeters: Float
+  heightWestMeters: Float
+  timeStart: String
+  timeEnd: String
+  failureTime: String
+  azimuth: Float
+  notes: String
+  createdAt: String
+
+  # The ID for sites
+  site_id: ID!
+
+  # The ID for antennas
+  antenna_id: ID!
+
+  # The ID for receivers
+  receiver_id: ID!
+}
+
+input updateCampaignObserversInput {
+  values: Updatecampaign_observersValuesInput
+  where: Updatecampaign_observersWhereInput
+  clientMutationId: String
+}
+
+type updateCampaignObserversPayload {
+  nodes: [Updatecampaign_observersOutput!]!
+  affectedCount: Int
+  clientMutationId: String
+}
+
+input updateContactNumbersInput {
+  values: UpdatecontactNumbersValuesInput
+  where: UpdatecontactNumbersWhereInput
+  clientMutationId: String
+}
+
+type UpdatecontactNumbersOutput {
+  # The new contactNumbers, if successfully created.
+  newContactNumbers: contactNumbers
+  newPeopleContactNumbersEdge: peopleContactNumbersEdge
+}
+
+type updateContactNumbersPayload {
+  nodes: [UpdatecontactNumbersOutput!]!
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Values to update
+input UpdatecontactNumbersValuesInput {
+  # The ID for contactNumbers
+  id: ID
+  number: String
+
+  # The ID for people
+  person_id: ID!
+}
+
+# Options to describe the scope of the search.
+input UpdatecontactNumbersWhereInput {
+  # The ID for contactNumbers
+  id: ID
+  number: String
+
+  # The ID for people
+  person_id: ID!
+}
+
+type Updatecontinuous_observersOutput {
+  # The new continuous_observers, if successfully created.
+  newContinuousObservers: continuous_observers
+}
+
+# Values to update
+input Updatecontinuous_observersValuesInput {
+  # The ID for continuous_logsheets
+  continuous_logsheet_id: ID!
+
+  # The ID for people
+  person_id: ID!
+}
+
+# Options to describe the scope of the search.
+input Updatecontinuous_observersWhereInput {
+  # The ID for continuous_logsheets
+  continuous_logsheet_id: ID!
+
+  # The ID for people
+  person_id: ID!
+}
+
+input updateContinuousLogsheetsInput {
+  values: UpdatecontinuousLogsheetsValuesInput
+  where: UpdatecontinuousLogsheetsWhereInput
+  clientMutationId: String
+}
+
+type UpdatecontinuousLogsheetsOutput {
+  # The new continuousLogsheets, if successfully created.
+  newContinuousLogsheets: continuousLogsheets
+  newPeopleContinuousLogsheetsEdge: peopleContinuousLogsheetsEdge
+  newSitesContinuousLogsheetsEdge: sitesContinuousLogsheetsEdge
+  site: sites
+  antenna: antennas
+  receiver: receivers
+}
+
+type updateContinuousLogsheetsPayload {
+  nodes: [UpdatecontinuousLogsheetsOutput!]!
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Values to update
+input UpdatecontinuousLogsheetsValuesInput {
+  # The ID for continuousLogsheets
+  id: ID
+  isPowerOn: Int
+  date: String
+  batteryCondition: String
+  chargerCondition: String
+  otherNotes: String
+  createdAt: String
+
+  # The ID for sites
+  site_id: ID!
+
+  # The ID for antennas
+  antenna_id: ID!
+
+  # The ID for receivers
+  receiver_id: ID!
+}
+
+# Options to describe the scope of the search.
+input UpdatecontinuousLogsheetsWhereInput {
+  # The ID for continuousLogsheets
+  id: ID
+  isPowerOn: Int
+  date: String
+  batteryCondition: String
+  chargerCondition: String
+  otherNotes: String
+  createdAt: String
+
+  # The ID for sites
+  site_id: ID!
+
+  # The ID for antennas
+  antenna_id: ID!
+
+  # The ID for receivers
+  receiver_id: ID!
+}
+
+input updateContinuousObserversInput {
+  values: Updatecontinuous_observersValuesInput
+  where: Updatecontinuous_observersWhereInput
+  clientMutationId: String
+}
+
+type updateContinuousObserversPayload {
+  nodes: [Updatecontinuous_observersOutput!]!
+  affectedCount: Int
+  clientMutationId: String
+}
+
+input updateDivisionsInput {
+  values: UpdatedivisionsValuesInput
+  where: UpdatedivisionsWhereInput
+  clientMutationId: String
+}
+
+type UpdatedivisionsOutput {
+  # The new divisions, if successfully created.
+  newDivisions: divisions
+}
+
+type updateDivisionsPayload {
+  nodes: [UpdatedivisionsOutput!]!
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Values to update
+input UpdatedivisionsValuesInput {
+  # The ID for divisions
+  id: ID
+  name: String
+}
+
+# Options to describe the scope of the search.
+input UpdatedivisionsWhereInput {
+  # The ID for divisions
+  id: ID
+  name: String
+}
+
+input updateEmailsInput {
+  values: UpdateemailsValuesInput
+  where: UpdateemailsWhereInput
+  clientMutationId: String
+}
+
+type UpdateemailsOutput {
+  # The new emails, if successfully created.
+  newEmails: emails
+  newPeopleEmailsEdge: peopleEmailsEdge
+}
+
+type updateEmailsPayload {
+  nodes: [UpdateemailsOutput!]!
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Values to update
+input UpdateemailsValuesInput {
+  # The ID for emails
+  id: ID
+  address: String
+
+  # The ID for people
+  person_id: ID!
+}
+
+# Options to describe the scope of the search.
+input UpdateemailsWhereInput {
+  # The ID for emails
+  id: ID
+  address: String
+
+  # The ID for people
+  person_id: ID!
+}
+
+input updateEquipmentBrandsInput {
+  values: UpdateequipmentBrandsValuesInput
+  where: UpdateequipmentBrandsWhereInput
+  clientMutationId: String
+}
+
+type UpdateequipmentBrandsOutput {
+  # The new equipmentBrands, if successfully created.
+  newEquipmentBrands: equipmentBrands
+}
+
+type updateEquipmentBrandsPayload {
+  nodes: [UpdateequipmentBrandsOutput!]!
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Values to update
+input UpdateequipmentBrandsValuesInput {
+  # The ID for equipmentBrands
+  id: ID
+  name: String
+}
+
+# Options to describe the scope of the search.
+input UpdateequipmentBrandsWhereInput {
+  # The ID for equipmentBrands
+  id: ID
+  name: String
+}
+
+input updateMarkersInput {
+  values: UpdatemarkersValuesInput
+  where: UpdatemarkersWhereInput
+  clientMutationId: String
+}
+
+type UpdatemarkersOutput {
+  # The new markers, if successfully created.
+  newMarkers: markers
+}
+
+type updateMarkersPayload {
+  nodes: [UpdatemarkersOutput!]!
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Values to update
+input UpdatemarkersValuesInput {
+  # The ID for markers
+  id: ID
+  name: String
+  description: String
+}
+
+# Options to describe the scope of the search.
+input UpdatemarkersWhereInput {
+  # The ID for markers
+  id: ID
+  name: String
+  description: String
+}
+
+input updateNonStaffPositionsInput {
+  values: UpdatenonStaffPositionsValuesInput
+  where: UpdatenonStaffPositionsWhereInput
+  clientMutationId: String
+}
+
+type UpdatenonStaffPositionsOutput {
+  # The new nonStaffPositions, if successfully created.
+  newNonStaffPositions: nonStaffPositions
+}
+
+type updateNonStaffPositionsPayload {
+  nodes: [UpdatenonStaffPositionsOutput!]!
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Values to update
+input UpdatenonStaffPositionsValuesInput {
+  # The ID for nonStaffPositions
+  id: ID
+  name: String
+  description: String
+}
+
+# Options to describe the scope of the search.
+input UpdatenonStaffPositionsWhereInput {
+  # The ID for nonStaffPositions
+  id: ID
+  name: String
+  description: String
+}
+
+input updateOfficeLocationsInput {
+  values: UpdateofficeLocationsValuesInput
+  where: UpdateofficeLocationsWhereInput
+  clientMutationId: String
+}
+
+type UpdateofficeLocationsOutput {
+  # The new officeLocations, if successfully created.
+  newOfficeLocations: officeLocations
+}
+
+type updateOfficeLocationsPayload {
+  nodes: [UpdateofficeLocationsOutput!]!
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Values to update
+input UpdateofficeLocationsValuesInput {
+  # The ID for officeLocations
+  id: ID
+  name: String
+}
+
+# Options to describe the scope of the search.
+input UpdateofficeLocationsWhereInput {
+  # The ID for officeLocations
+  id: ID
+  name: String
+}
+
+input updatePeopleInput {
+  values: UpdatepeopleValuesInput
+  where: UpdatepeopleWhereInput
+  clientMutationId: String
+}
+
+type UpdatepeopleOutput {
+  # The new people, if successfully created.
+  newPeople: people
+  newCampaignLogsheetsPeopleEdge: campaignLogsheetsPeopleEdge
+  newContinuousLogsheetsPeopleEdge: continuousLogsheetsPeopleEdge
+  newDivisionsPeopleEdge: divisionsPeopleEdge
+  newNonStaffPositionsPeopleEdge: nonStaffPositionsPeopleEdge
+  newOfficeLocationsPeopleEdge: officeLocationsPeopleEdge
+  newPersonTypesPeopleEdge: personTypesPeopleEdge
+  newPositionsPeopleEdge: positionsPeopleEdge
+  newSitesPeopleEdge: sitesPeopleEdge
+  position: positions
+  division: divisions
+  personType: personTypes
+  nonStaffPosition: nonStaffPositions
+  officeLocation: officeLocations
+}
+
+type updatePeoplePayload {
+  nodes: [UpdatepeopleOutput!]!
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Values to update
+input UpdatepeopleValuesInput {
+  # The ID for people
+  id: ID
+  firstName: String
+  lastName: String
+  nickName: String
+  birthdate: String
+
+  # The ID for positions
+  position_id: ID!
+
+  # The ID for divisions
+  division_id: ID!
+
+  # The ID for sites
+  site_id: ID!
+
+  # The ID for person_types
+  person_type_id: ID!
+
+  # The ID for non_staff_positions
+  non_staff_position_id: ID!
+
+  # The ID for office_locations
+  office_location_id: ID!
+}
+
+# Options to describe the scope of the search.
+input UpdatepeopleWhereInput {
+  # The ID for people
+  id: ID
+  firstName: String
+  lastName: String
+  nickName: String
+  birthdate: String
+
+  # The ID for positions
+  position_id: ID!
+
+  # The ID for divisions
+  division_id: ID!
+
+  # The ID for sites
+  site_id: ID!
+
+  # The ID for person_types
+  person_type_id: ID!
+
+  # The ID for non_staff_positions
+  non_staff_position_id: ID!
+
+  # The ID for office_locations
+  office_location_id: ID!
+}
+
+input updatePersonTypesInput {
+  values: UpdatepersonTypesValuesInput
+  where: UpdatepersonTypesWhereInput
+  clientMutationId: String
+}
+
+type UpdatepersonTypesOutput {
+  # The new personTypes, if successfully created.
+  newPersonTypes: personTypes
+}
+
+type updatePersonTypesPayload {
+  nodes: [UpdatepersonTypesOutput!]!
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Values to update
+input UpdatepersonTypesValuesInput {
+  # The ID for personTypes
+  id: ID
+  type: String
+  description: String
+}
+
+# Options to describe the scope of the search.
+input UpdatepersonTypesWhereInput {
+  # The ID for personTypes
+  id: ID
+  type: String
+  description: String
+}
+
+input updatePositionsInput {
+  values: UpdatepositionsValuesInput
+  where: UpdatepositionsWhereInput
+  clientMutationId: String
+}
+
+type UpdatepositionsOutput {
+  # The new positions, if successfully created.
+  newPositions: positions
+}
+
+type updatePositionsPayload {
+  nodes: [UpdatepositionsOutput!]!
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Values to update
+input UpdatepositionsValuesInput {
+  # The ID for positions
+  id: ID
+  name: String
+}
+
+# Options to describe the scope of the search.
+input UpdatepositionsWhereInput {
+  # The ID for positions
+  id: ID
+  name: String
+}
+
+input updateReceiverModelsInput {
+  values: UpdatereceiverModelsValuesInput
+  where: UpdatereceiverModelsWhereInput
+  clientMutationId: String
+}
+
+type UpdatereceiverModelsOutput {
+  # The new receiverModels, if successfully created.
+  newReceiverModels: receiverModels
+  newEquipmentBrandsReceiverModelsEdge: equipmentBrandsReceiverModelsEdge
+  equipmentBrand: equipmentBrands
+}
+
+type updateReceiverModelsPayload {
+  nodes: [UpdatereceiverModelsOutput!]!
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Values to update
+input UpdatereceiverModelsValuesInput {
+  # The ID for receiverModels
+  id: ID
+  name: String
+
+  # The ID for equipment_brands
+  equipment_brand_id: ID!
+}
+
+# Options to describe the scope of the search.
+input UpdatereceiverModelsWhereInput {
+  # The ID for receiverModels
+  id: ID
+  name: String
+
+  # The ID for equipment_brands
+  equipment_brand_id: ID!
+}
+
+input updateReceiversInput {
+  values: UpdatereceiversValuesInput
+  where: UpdatereceiversWhereInput
+  clientMutationId: String
+}
+
+type UpdatereceiversOutput {
+  # The new receivers, if successfully created.
+  newReceivers: receivers
+  newReceiverModelsReceiversEdge: receiverModelsReceiversEdge
+  receiverModel: receiverModels
+}
+
+type updateReceiversPayload {
+  nodes: [UpdatereceiversOutput!]!
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Values to update
+input UpdatereceiversValuesInput {
+  # The ID for receivers
+  id: ID
+  serialNumber: String
+  partNumber: String
+  retirementDate: String
+  createdAt: String
+  updatedAt: String
+
+  # The ID for receiver_models
+  receiver_model_id: ID!
+}
+
+# Options to describe the scope of the search.
+input UpdatereceiversWhereInput {
+  # The ID for receivers
+  id: ID
+  serialNumber: String
+  partNumber: String
+  retirementDate: String
+  createdAt: String
+  updatedAt: String
+
+  # The ID for receiver_models
+  receiver_model_id: ID!
+}
+
+input updateSitesInput {
+  values: UpdatesitesValuesInput
+  where: UpdatesitesWhereInput
+  clientMutationId: String
+}
+
+type UpdatesitesOutput {
+  # The new sites, if successfully created.
+  newSites: sites
+  newMarkersSitesEdge: markersSitesEdge
+  surveyType: surveyTypes
+  marker: markers
+}
+
+type updateSitesPayload {
+  nodes: [UpdatesitesOutput!]!
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Values to update
+input UpdatesitesValuesInput {
+  # The ID for sites
+  id: ID
+  name: String
+  dateEstablished: String
+  latitude: Float
+  longitude: Float
+  location: String
+  description: String
+  createdAt: String
+  updatedAt: String
+
+  # The ID for survey_types
+  survey_type_id: ID!
+
+  # The ID for markers
+  marker_id: ID!
+}
+
+# Options to describe the scope of the search.
+input UpdatesitesWhereInput {
+  # The ID for sites
+  id: ID
+  name: String
+  dateEstablished: String
+  latitude: Float
+  longitude: Float
+  location: String
+  description: String
+  createdAt: String
+  updatedAt: String
+
+  # The ID for survey_types
+  survey_type_id: ID!
+
+  # The ID for markers
+  marker_id: ID!
+}
+
+input updateSurveyTypesInput {
+  values: UpdatesurveyTypesValuesInput
+  where: UpdatesurveyTypesWhereInput
+  clientMutationId: String
+}
+
+type UpdatesurveyTypesOutput {
+  # The new surveyTypes, if successfully created.
+  newSurveyTypes: surveyTypes
+}
+
+type updateSurveyTypesPayload {
+  nodes: [UpdatesurveyTypesOutput!]!
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Values to update
+input UpdatesurveyTypesValuesInput {
+  # The ID for surveyTypes
+  id: ID
+  type: String
+}
+
+# Options to describe the scope of the search.
+input UpdatesurveyTypesWhereInput {
+  # The ID for surveyTypes
+  id: ID
+  type: String
+}
+
+input updateUsersInput {
+  values: UpdateusersValuesInput
+  where: UpdateusersWhereInput
+  clientMutationId: String
+}
+
+type UpdateusersOutput {
+  # The new users, if successfully created.
+  newUsers: users
+  newAccessLevelsUsersEdge: accessLevelsUsersEdge
+  person: people
+}
+
+type updateUsersPayload {
+  nodes: [UpdateusersOutput!]!
+  affectedCount: Int
+  clientMutationId: String
+}
+
+# Values to update
+input UpdateusersValuesInput {
+  # The ID for users
+  id: ID
+  username: String
+  password: String
+
+  # The ID for access_levels
+  access_level_id: ID!
+
+  # The ID for people
+  person_id: ID!
+}
+
+# Options to describe the scope of the search.
+input UpdateusersWhereInput {
+  # The ID for users
+  id: ID
+  username: String
+  password: String
+
+  # The ID for access_levels
+  access_level_id: ID!
+
+  # The ID for people
+  person_id: ID!
+}
+
+type users implements Node {
+  # The ID of an object
+  id: ID!
+  username: String!
+  password: String!
+  access_level_id: Int
+  person_id: Int
+  person: people
+}
+
