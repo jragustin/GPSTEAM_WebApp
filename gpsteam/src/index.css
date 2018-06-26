@@ -1,0 +1,111 @@
+body {
+    margin: 0
+}
+
+.markerLabel {
+    width: 23px;
+    height: 23px;
+    margin-top: 5px;
+    margin-left: 6.5px;
+    line-height: 12px;
+    overflow-wrap: break-word;
+    text-align: center;
+    text-anchor: middle;
+    font-size: 1em;
+    color: white;
+    border: .5px;
+}
+
+.leaflet-control-custom {
+    padding-top: 6px;
+}
+
+.bg { 
+    background: linear-gradient(343deg, #3f51b5, #ffffff, #2196f3);
+    background-size: 600% 600%;
+
+    -webkit-animation: AnimationName 17s ease infinite;
+    -moz-animation: AnimationName 17s ease infinite;
+    animation: AnimationName 17s ease infinite;
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .5s linear;
+}
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 4s .4s, opacity .4s linear;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 17%}
+    50%{background-position:100% 84%}
+    100%{background-position:0% 17%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 17%}
+    50%{background-position:100% 84%}
+    100%{background-position:0% 17%}
+}
+@keyframes AnimationName { 
+    0%{background-position:0% 17%}
+    50%{background-position:100% 84%}
+    100%{background-position:0% 17%}
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #727272;
+  border: 0px none #ffffff;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #464646;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #464646;
+}
+::-webkit-scrollbar-track {
+  background: #ffffff;
+  border: 0px none #ffffff;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #ffffff;
+}
+::-webkit-scrollbar-track:active {
+  background: #ffffff;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* css to customize Leaflet default styles  */
+.leaflet-popup-tip,
+.leaflet-popup-content-wrapper {
+    background-color : transparent;
+	box-shadow: 0 0px 14px rgba(0,0,0,0.0);
+}
+.leaflet-popup-content {
+	width:auto !important;
+}
+
+.arrow-down {
+  width: 0; 
+  height: 0; 
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  
+  border-top: 10px solid white;
+
+}
