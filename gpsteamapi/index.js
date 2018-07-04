@@ -19,7 +19,7 @@ const expressPlayground = require('graphql-playground-middleware-express').defau
 
 const server = express();
 
-const PORT = 4000;
+const PORT = 4000; //port of the graphql server
 
 server.use('*', cors());
 

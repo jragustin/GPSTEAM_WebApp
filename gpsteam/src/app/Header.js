@@ -15,7 +15,7 @@ class Header extends Component {
             <AppBar className={classes.appBar}>
                 <Toolbar>
                 <IconButton
-                    color="contrast"
+                    color="default"
                     aria-label="open drawer"
                     onClick={handleDrawerToggle}
                     className={classes.navIconHide}>

@@ -1,6 +1,6 @@
 import { refreshTokens, tryLogin } from '../helpers/auth'
 import { SECRET } from '../index'
-import { User } from '../sql/connector'
+import { User, Site } from '../sql/connector'
 import bcrypt from 'bcrypt'
 
 export const resolvers = {
@@ -18,6 +18,12 @@ export const resolvers = {
             // not logged in
             return 'Not logged in'
 
+        },
+        users(){ 
+            return User.findAll()
+        },
+        sites(){
+            return Site.findAll()
         }
     },
     Mutation: {

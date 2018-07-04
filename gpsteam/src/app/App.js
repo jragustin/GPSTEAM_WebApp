@@ -5,8 +5,12 @@ import Header from './Header'
 import Sidebar from './Sidebar'
 import Contents from './Contents'
 
+/*
+  App collects the contents of the application like the Header, sidebar and the contents
+*/
 const drawerWidth = 240;
 
+// this is just a function style that contains objects
 const styles = theme => ({
   root: {
     width: '100%',
@@ -55,11 +59,12 @@ const styles = theme => ({
   },
 });
 
+//App
 class App extends React.Component {
   state = {
     mobileOpen: false,
   };
-
+  //if the window tab is min size the sidebar will minimize or close
   handleDrawerToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   };

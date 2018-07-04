@@ -1,4 +1,18 @@
+//it looks like a javascript but it's not. it's graphql
+
+
+// this is the graphql schema. 
 export const typeDefs = `
+
+    type User {
+        id: ID
+        username: String
+
+    }
+    type Site {
+        id: ID
+        name: String
+    }
     type AuthPayload {
         token: String!
         refreshToken: String!
@@ -13,8 +27,10 @@ export const typeDefs = `
     type Query {
         developer: String!
         me: regUser
+        users: [User]
+        sites: [Site]
     }
-
+    
     type Mutation {
 
         register(
@@ -26,4 +42,5 @@ export const typeDefs = `
         
         refreshTokens(token: String!, refreshToken: String!) : AuthPayload!
     }
+
 `
