@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
-import CampLogSheetForm from './components/CampLogSheetForm';
-import Footer from './components/Footer';
+import Header from './components/Header';
+
 
 export default class Logsheets extends Component {
     render() {
         return (
             <div>
-                <CampLogSheetForm/>
-                <Footer/>
+            	<Header/>        
             </div>
         )
     }

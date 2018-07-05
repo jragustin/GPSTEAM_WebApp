@@ -17,6 +17,7 @@ To know more about modularizing read:
 
 https://www.apollographql.com/docs/graphql-tools/generate-schema.html#modularizing
 https://www.apollographql.com/docs/graphql-tools/generate-schema.html#Example
+
 */
 
 export const typeDefs = `
@@ -40,6 +41,22 @@ export const typeDefs = `
         updatedAt: String!
         survey_type_id: Int
         marker_id: Int
+    }
+    type CampaignLogsheet{
+        id: ID!
+        date: String!
+        heightNorthMeters: Float!
+        heightEastMeters: Float!
+        heightSouthMeters: Float!
+        heightWestMeters: Float!
+        timeStart: String
+        timeEnd: String
+        failureTime: String
+        azimuth: Float
+        notes: String
+        site_id: Int
+        antenna_id: Int
+        receiver_id: Int
     }
 
     type ContinuousLogsheet{
@@ -71,6 +88,7 @@ export const typeDefs = `
         me: regUser
         users: [User]
         sites: [Site]
+        campaignLogsheets: [CampaignLogsheet]
     }
 
     type Mutation {

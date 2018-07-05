@@ -1,54 +1,35 @@
-/*
-There is a bug here when opened...
-Sometimes it becomes an error, however
-
-if you rearrange 
-
-    "return this.props.data.sites.map((site) => {"
-
-to
-
-    "return 
-        this.props.data.sites.map((site) => {"
-
-then save and wait for reload then change back to
-
-    "return this.props.data.sites.map((site) => {"
-
-it's all well and good. It doesn't make sense I know
-but just do it
-*/
+/*For the bug (is not a property), refer to Sites.js*/
 
 import React, { Component } from 'react'
 import gql from "graphql-tag";
 import { graphql } from 'react-apollo';
 import { Paper, Grid, List } from '@material-ui/core';
 
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 
-const sitesQuery = gql `
+const campaignLogsheetsQuery = gql `
 	{
-		sites{
+		campaignLogsheets{
 			id
-			name
 		}
 	}
 `
 
-class Sites extends Component {
+class CampaignLogsheets extends Component {
 
     renderList(){
-    	console.log(this.props.data.sites)
-    	return( this.props.data.sites.map((site) => {
+    	console.log(this.props.data.campaignLogsheets)
+    	return( this.props.data.campaignLogsheets.map((campaignLogsheet) => {
     	   		return(
-    	   			<li key={site.id}>
-    	   				{site.name}
+    	   			<li key={campaignLogsheet.id}>
+    	   				{campaignLogsheet.id}
     	   			</li>
     	   			);
     	   		}
     	   	)
     	);
     }
-
 
     render() {
         return (
@@ -57,6 +38,7 @@ class Sites extends Component {
 			        <Paper style={{maxHeight:500, overflow:'auto', width:1000, textAlign:'center', marginTop:20}} center='true'>
 			            
 			            <List >
+
 			            	{this.renderList()}
 			            </List>
 			        </Paper>
@@ -67,4 +49,4 @@ class Sites extends Component {
     }
 }
 
-export default graphql(sitesQuery)(Sites)
+export default graphql(campaignLogsheetsQuery)(CampaignLogsheets)

@@ -37,6 +37,9 @@ export const resolvers = {
         },
         sites(){
             return Site.findAll();
+        },
+        campaignLogsheets(){
+            return CampaignLogsheet.findAll();
         }
 
     },
