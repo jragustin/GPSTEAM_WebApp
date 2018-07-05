@@ -2,8 +2,11 @@
 
 
 // this is the graphql schema. 
-export const typeDefs = `
+//Schema Definition Language(SDL)
+//GraphQL Schema Defines the server's API
 
+export const typeDefs = `
+    #defines a structure of a User model
     type User {
         id: ID
         username: String

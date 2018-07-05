@@ -3,6 +3,7 @@ import { SECRET } from '../index'
 import { User, Site } from '../sql/connector'
 import bcrypt from 'bcrypt'
 
+//
 export const resolvers = {
     Query: {
         developer: () => "Oriel Vinci Absin",
