@@ -1,10 +1,14 @@
 /*For the bug (is not a property), refer to Sites.js*/
 
+
+/*
+This handles the view of the continuous logsheet
+*/
 import React, { Component } from 'react'
 import gql from "graphql-tag";
 import { graphql } from 'react-apollo';
 import { Paper, Grid, List } from '@material-ui/core';
-import ConLogIn from './ConLogIn'
+import ConLogMod from './ConLogMod'
 
 const continuousLogsheetsQuery = gql `
 	{
@@ -37,9 +41,8 @@ class ContinuousLogsheets extends Component {
         	<Grid container centered='true' align='center'>
 		    	<Grid item align='center' xs={12}>
 			        <Paper style={{maxHeight:500, overflow:'auto', width:1000, textAlign:'center', marginTop:20}} center='true'>
-			            
+			            <ConLogMod/>
 			            <List >
-                            <ConLogIn/>
 			            	{this.renderList()}
 			            </List>
 			        </Paper>

@@ -1,9 +1,12 @@
 /*
 This file will import all individual sub-components
 in order to properly handle all inputs.
+It will be passed to ConLogIn wherein the values will be handled  
+and uploaded to the database.
  */
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+
 
 /*
 These are for dates
@@ -11,20 +14,6 @@ These are for dates
 import DateTimePicker from 'react-widgets/lib/DateTimePicker'
 import moment from 'moment'
 import momentLocaliser from 'react-widgets-moment'
-/*
-The database has these values:
-  `id` int(11) NOT NULL,
-  `is_power_on` int(1) NOT NULL,
-  `date` datetime NOT NULL,
-  `battery_condition` varchar(1024) DEFAULT NULL,
-  `charger_condition` varchar(1024) DEFAULT NULL,
-  `other_notes` varchar(1024) DEFAULT NULL,
-  `createdAt` datetime NOT NULL,
-  `site_id` int(11) DEFAULT NULL,
-  `antenna_id` int(11) DEFAULT NULL,
-  `receiver_id` int(11) DEFAULT NULL
-*/
-
 import 'react-widgets/dist/css/react-widgets.css'
 
 momentLocaliser(moment)
@@ -156,4 +145,3 @@ ConLogForm = reduxForm({
 })(ConLogForm)
 
 export default ConLogForm
-// export default connect(ConLogForm)
