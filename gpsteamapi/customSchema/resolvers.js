@@ -37,10 +37,13 @@ export const resolvers = {
         },
         sites(){
             return Site.findAll();
+        },
+        camplogsheets(){
+            return CampaignLogsheet.findAll();
         }
 
     },
-    //mutation is responsible for updating the state of the server
+    //Mutation is responsible for updating the state of the server
     Mutation: {
         //this is the place were all the mutations are done.
         register: async (_, args) => {

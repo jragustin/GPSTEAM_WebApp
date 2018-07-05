@@ -55,7 +55,7 @@ const store = createStore(
   enhancer
 )
 
-const persistor = persistStore(store) 
+// const persistor = persistStore(store) 
 
 // Now you can dispatch navigation actions from anywhere!
 // store.dispatch(push('/foo'))

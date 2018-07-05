@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import ListSubheader from 'material-ui/List/ListSubheader';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import Collapse from 'material-ui/transitions/Collapse';
+// import Collapse from 'material-ui/transitions/Collapse';
+// import DraftsIcon from 'material-ui-icons/Drafts';
 import Book from 'material-ui-icons/Book';
-import DraftsIcon from 'material-ui-icons/Drafts';
 import BuildIcon from 'material-ui-icons/Build';
 import MyLocation from 'material-ui-icons/MyLocation';
 import MapIcon from 'material-ui-icons/Map';
 import Person from 'material-ui-icons/Person';
-import ExpandLess from 'material-ui-icons/ExpandLess';
-import ExpandMore from 'material-ui-icons/ExpandMore';
-import StarBorder from 'material-ui-icons/StarBorder';
+// import ExpandLess from 'material-ui-icons/ExpandLess';
+// import ExpandMore from 'material-ui-icons/ExpandMore';
+// import StarBorder from 'material-ui-icons/StarBorder';
 import Divider from 'material-ui/Divider'
 import { Link } from 'react-router-dom'
 

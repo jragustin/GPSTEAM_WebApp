@@ -6,6 +6,8 @@ this is the graphql schema.
 Schema Definition Language(SDL)
 GraphQL Schema Defines the server's API
 
+You need to define everything in your schema (see examples in schema.graphql or schema.js) before putting it in resolvers(resolvers.js)
+
 /*
 the typedefs has three very important types:
 Query - fetch or get or request data from server
@@ -55,6 +57,24 @@ export const typeDefs = `
         receiver_id: Int
     }
 
+    type CampaignLogsheet{
+        id: ID!
+        date: String!
+        heightNorthMeters: Float!
+        heightEastMeters: Float!
+        heightSouthMeters: Float!
+        heightWestMeters: Float!
+        timeStart: String
+        timeEnd: String
+        failureTime: String
+        azimuth: Float
+        notes: String
+        #site_id: Int
+        #antenna_id: Int
+        #receiver_id: Int
+        site:Site
+    }
+
     type AuthPayload {
         token: String!
         refreshToken: String!
@@ -71,6 +91,7 @@ export const typeDefs = `
         me: regUser
         users: [User]
         sites: [Site]
+        camplogsheets:[CampaignLogsheet]
     }
 
     type Mutation {

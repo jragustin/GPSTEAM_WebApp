@@ -10,9 +10,9 @@ const style = {
 export default class CampLogSheetForm extends Component {
     render() {
         return (
-            <Grid container>
+            <Grid container xs={12}>
             	<Grid item sm>
-            		<Paper style={style.Paper}>
+            		<Paper style={style.Paper} >
             			<Grid item xs>
 			            	<TextField 
 			            		id='date' 

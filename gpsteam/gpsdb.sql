@@ -33,15 +33,6 @@ CREATE TABLE `access_levels` (
   `type` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `access_levels`
---
-
-INSERT INTO `access_levels` (`id`, `type`) VALUES
-(1, 'ADMIN'),
-(2, 'STAFF'),
-(3, 'GUEST');
-
 -- --------------------------------------------------------
 
 --
@@ -58,9 +49,173 @@ CREATE TABLE `antennas` (
   `antenna_model_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `antenna_models`
+--
+
+CREATE TABLE `antenna_models` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `equipment_brand_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `campaign_logsheets`
+--
+
+CREATE TABLE `campaign_logsheets` (
+  `id` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  `height_north_meters` double NOT NULL,
+  `height_east_meters` double NOT NULL,
+  `height_south_meters` double NOT NULL,
+  `height_west_meters` double NOT NULL,
+  `time_start` time DEFAULT NULL,
+  `time_end` time DEFAULT NULL,
+  `failure_time` time DEFAULT NULL,
+  `azimuth` float DEFAULT NULL,
+  `notes` varchar(1024) DEFAULT NULL,
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `site_id` int(11) DEFAULT NULL,
+  `antenna_id` int(11) DEFAULT NULL,
+  `receiver_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `campaign_observers`
+--
+
+CREATE TABLE `campaign_observers` (
+  `campaign_logsheet_id` int(11) NOT NULL,
+  `person_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `continuous_logsheets`
+--
+
+CREATE TABLE `continuous_logsheets` (
+  `id` int(11) NOT NULL,
+  `is_power_on` int(1) NOT NULL,
+  `date` datetime NOT NULL,
+  `battery_condition` varchar(1024) DEFAULT NULL,
+  `charger_condition` varchar(1024) DEFAULT NULL,
+  `other_notes` varchar(1024) DEFAULT NULL,
+  `createdAt` datetime NOT NULL,
+  `site_id` int(11) DEFAULT NULL,
+  `antenna_id` int(11) DEFAULT NULL,
+  `receiver_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `continuous_observers`
+--
+
+CREATE TABLE `continuous_observers` (
+  `continuous_logsheet_id` int(11) NOT NULL,
+  `person_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `divisions`
+--
+
+CREATE TABLE `divisions` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact_numbers`
+--
+
+CREATE TABLE `contact_numbers` (
+  `id` int(11) NOT NULL,
+  `number` varchar(30) NOT NULL,
+  `person_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `emails`
+--
+
+CREATE TABLE `emails` (
+  `id` int(11) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `person_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `equipment_brands`
+--
+
+CREATE TABLE `equipment_brands` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `survey_types`
+--
+
+CREATE TABLE `survey_types` (
+  `id` int(1) NOT NULL,
+  `type` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `access_level_id` int(11) DEFAULT '3',
+  `person_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+--
+-- Dumping data for table `access_levels`
+--
+
+INSERT INTO `access_levels` (`id`, `type`) VALUES
+(1, 'ADMIN'),
+(2, 'STAFF'),
+(3, 'GUEST');
+
 --
 -- Dumping data for table `antennas`
 --
+
 
 INSERT INTO `antennas` (`id`, `serial_number`, `part_number`, `retirement_date`, `createdAt`, `updatedAt`, `antenna_model_id`) VALUES
 (1, '123456789', 'adad', NULL, '2017-10-26 10:10:32', '2017-10-26 10:10:32', NULL),
@@ -98,42 +253,6 @@ INSERT INTO `antennas` (`id`, `serial_number`, `part_number`, `retirement_date`,
 (33, '0220179624', '22020-00', NULL, '2017-10-26 10:10:32', '2017-10-26 10:10:32', NULL),
 (34, '0420140606', '22020-00', NULL, '2017-10-26 10:10:32', '2017-10-26 10:10:32', NULL),
 (35, '12421198', '41247-00 DC4442', NULL, '2017-10-26 10:10:32', '2017-10-26 10:10:32', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `antenna_models`
---
-
-CREATE TABLE `antenna_models` (
-  `id` int(11) NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `equipment_brand_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `campaign_logsheets`
---
-
-CREATE TABLE `campaign_logsheets` (
-  `id` int(11) NOT NULL,
-  `date` datetime NOT NULL,
-  `height_north_meters` double NOT NULL,
-  `height_east_meters` double NOT NULL,
-  `height_south_meters` double NOT NULL,
-  `height_west_meters` double NOT NULL,
-  `time_start` time DEFAULT NULL,
-  `time_end` time DEFAULT NULL,
-  `failure_time` time DEFAULT NULL,
-  `azimuth` float DEFAULT NULL,
-  `notes` varchar(1024) DEFAULT NULL,
-  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `site_id` int(11) DEFAULT NULL,
-  `antenna_id` int(11) DEFAULT NULL,
-  `receiver_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `campaign_logsheets`
@@ -513,6 +632,7 @@ INSERT INTO `campaign_logsheets` (`id`, `date`, `height_north_meters`, `height_e
 (468, '2016-07-17 16:00:00', 1.4905, 1.4905, 1.4905, 1.4905, '16:00:00', '15:59:00', NULL, 57, '', '2017-06-06 01:48:14', 342, 11, 16),
 (469, '2016-07-18 16:00:00', 1.4905, 1.4905, 1.4905, 1.4905, '16:00:00', '15:59:00', NULL, 57, '', '2017-06-06 01:49:38', 342, 11, 16),
 (470, '2016-07-19 16:00:00', 1.4905, 1.4905, 1.4905, 1.4905, '16:00:00', '18:40:00', NULL, 57, '', '2017-06-06 01:51:49', 342, 11, 16);
+
 INSERT INTO `campaign_logsheets` (`id`, `date`, `height_north_meters`, `height_east_meters`, `height_south_meters`, `height_west_meters`, `time_start`, `time_end`, `failure_time`, `azimuth`, `notes`, `createdAt`, `site_id`, `antenna_id`, `receiver_id`) VALUES
 (471, '2016-07-19 16:00:00', 1.308, 1.308, 1.308, 1.308, '19:58:00', '15:59:00', NULL, 90, '', '2017-06-06 01:53:30', 585, 11, 16),
 (472, '2016-07-20 16:00:00', 1.308, 1.308, 1.308, 1.308, '16:00:00', '15:59:00', NULL, 90, '', '2017-06-06 01:55:02', 585, 11, 16),
@@ -875,6 +995,7 @@ INSERT INTO `campaign_logsheets` (`id`, `date`, `height_north_meters`, `height_e
 (833, '2015-05-04 16:00:00', 1.3495, 1.3495, 1.35, 1.3505, '23:32:00', '17:24:00', NULL, 30, '', '2017-06-20 04:31:22', 79, 18, 22),
 (834, '2015-05-03 16:00:00', 1.552, 1.552, 1.552, 1.552, '18:15:00', '20:46:00', NULL, 300, '', '2017-06-20 04:34:44', 324, 14, 26),
 (835, '2015-05-03 16:00:00', 1.263, 1.262, 1.263, 1.265, '20:38:00', '17:41:00', NULL, 3, '', '2017-06-20 04:51:37', 381, 16, 20);
+
 INSERT INTO `campaign_logsheets` (`id`, `date`, `height_north_meters`, `height_east_meters`, `height_south_meters`, `height_west_meters`, `time_start`, `time_end`, `failure_time`, `azimuth`, `notes`, `createdAt`, `site_id`, `antenna_id`, `receiver_id`) VALUES
 (836, '2015-05-03 16:00:00', 1.563, 1.563, 1.563, 1.563, '16:48:00', '14:54:00', NULL, 175, '', '2017-06-20 05:10:02', 155, 5, 20),
 (839, '2015-05-03 16:00:00', 1.429, 1.429, 1.43, 1.43, '22:05:00', '03:18:00', NULL, 329, '', '2017-06-20 05:15:36', 99, 5, 18),
@@ -1221,6 +1342,7 @@ INSERT INTO `campaign_logsheets` (`id`, `date`, `height_north_meters`, `height_e
 (1188, '2017-07-17 16:00:00', 1.362, 1.36175, 1.362, 1.3625, '16:00:44', '15:59:49', NULL, 157, '', '2017-08-02 08:52:46', 241, 9, 27),
 (1189, '2017-07-18 16:00:00', 1.361, 1.361, 1.36175, 1.3625, '16:00:59', '18:30:03', NULL, NULL, '', '2017-08-02 08:53:57', 241, 9, 27),
 (1190, '2013-01-09 16:00:00', 1.279, 1.2792, 1.2809, 1.28, '18:58:04', NULL, NULL, 220, '', '2017-08-03 01:17:02', 32, 14, 18);
+
 INSERT INTO `campaign_logsheets` (`id`, `date`, `height_north_meters`, `height_east_meters`, `height_south_meters`, `height_west_meters`, `time_start`, `time_end`, `failure_time`, `azimuth`, `notes`, `createdAt`, `site_id`, `antenna_id`, `receiver_id`) VALUES
 (1191, '2013-01-11 16:00:00', 1.2815, 1.282, 1.282, 1.2815, '16:00:14', '16:42:35', NULL, 110, 'BATTERY OUTOUT= 12.05V WITH LOAD BEFORE DISMANTLED', '2017-08-03 01:27:02', 32, 14, 18),
 (1192, '2013-01-10 16:00:00', 1.279, 1.2792, 1.2809, 1.28, '16:00:45', '20:52:51', NULL, 220, 'BATTERY OUTPUT- 12.22 V WITH LOAD.', '2017-08-03 01:29:00', 32, 14, 18),
@@ -1540,6 +1662,7 @@ INSERT INTO `campaign_logsheets` (`id`, `date`, `height_north_meters`, `height_e
 (1508, '2014-02-13 16:00:00', 1.516, 1.516, 1.516, 1.516, '16:00:14', '01:11:17', NULL, NULL, '', '2017-08-10 03:21:55', 173, 4, 13),
 (1509, '2014-02-11 16:00:00', 1.51, 1.51, 1.511, 1.511, '18:26:09', NULL, NULL, 70, '', '2017-08-10 06:08:46', 195, 18, 27),
 (1510, '2014-02-11 16:00:00', 1.4, 1.4, 1.4, 1.4, '19:48:26', NULL, NULL, 311, '2014 02 12 11:48AM\nJUDITH S. LEONA; PRINCIPAL II (CENTRAL PRINCIPAL)', '2017-08-10 06:11:40', 196, 5, 14);
+
 INSERT INTO `campaign_logsheets` (`id`, `date`, `height_north_meters`, `height_east_meters`, `height_south_meters`, `height_west_meters`, `time_start`, `time_end`, `failure_time`, `azimuth`, `notes`, `createdAt`, `site_id`, `antenna_id`, `receiver_id`) VALUES
 (1511, '2014-03-14 16:00:00', 1.241, 1.24, 1.24, 1.239, '08:03:12', NULL, NULL, NULL, 'CLEAR WEATHER  BUT ON 2ND DAY UNTIL MARCH 19 2014\nCLOUDY SKY WITH RAINY DAYS. IT WAS DIS-ALIGNED ON MARCH 17, 2014', '2017-08-10 06:23:42', 249, 5, 14),
 (1512, '2014-03-16 16:00:00', 1.24, 1.24, 1.241, 1.24, '08:06:00', NULL, NULL, NULL, 'CLOUDY SKY & RAINY DAYS', '2017-08-10 06:25:52', 249, 5, 14),
@@ -1863,6 +1986,7 @@ INSERT INTO `campaign_logsheets` (`id`, `date`, `height_north_meters`, `height_e
 (1832, '2012-02-20 16:00:00', 1.157, 1.1565, 1.157, 1.1575, '18:08:36', '17:23:43', NULL, 50, '', '2017-08-18 07:54:06', 146, 8, 13),
 (1833, '2012-02-19 16:00:00', 1.1215, 1.122, 1.123, 1.1225, '22:23:52', '17:47:08', NULL, 240, '', '2017-08-18 07:55:32', 146, 8, 13),
 (1834, '2012-02-17 16:00:00', 1.192, 1.192, 1.193, 1.192, '02:36:44', '15:50:49', NULL, 310, '', '2017-08-18 07:57:10', 149, 18, 27);
+
 INSERT INTO `campaign_logsheets` (`id`, `date`, `height_north_meters`, `height_east_meters`, `height_south_meters`, `height_west_meters`, `time_start`, `time_end`, `failure_time`, `azimuth`, `notes`, `createdAt`, `site_id`, `antenna_id`, `receiver_id`) VALUES
 (1835, '2012-02-18 16:00:00', 1.192, 1.192, 1.193, 1.193, '16:10:50', '15:05:57', NULL, 190, '', '2017-08-18 07:58:21', 149, 18, 27),
 (1836, '2012-02-18 16:00:00', 1.409, 1.41, 1.409, 1.409, '17:45:57', '16:10:02', NULL, 190, '', '2017-08-18 08:01:24', 150, 20, 10),
@@ -2181,6 +2305,7 @@ INSERT INTO `campaign_logsheets` (`id`, `date`, `height_north_meters`, `height_e
 (2159, '2014-05-18 16:00:00', 0.234, 0.234, 0.234, 0.234, '16:00:43', '15:59:47', NULL, NULL, '', '2017-09-27 01:20:44', 227, 5, 16),
 (2160, '2012-05-17 16:00:00', 0.234, 0.234, 0.234, 0.234, '22:10:45', '15:59:49', NULL, NULL, '', '2017-09-27 01:21:45', 227, 5, 16),
 (2161, '2014-05-11 16:00:00', 1.373, 1.373, 1.373, 1.373, '21:52:45', NULL, NULL, NULL, '12.5V\nALL INDICATOR LIGHTS OK', '2017-09-27 01:30:03', 262, 2, 9);
+
 INSERT INTO `campaign_logsheets` (`id`, `date`, `height_north_meters`, `height_east_meters`, `height_south_meters`, `height_west_meters`, `time_start`, `time_end`, `failure_time`, `azimuth`, `notes`, `createdAt`, `site_id`, `antenna_id`, `receiver_id`) VALUES
 (2162, '2014-05-13 16:00:00', 1.37, 1.37, 1.37, 1.37, '16:00:22', '00:36:27', NULL, NULL, '12.3V BATTERIES\nINDICATOR LIGHTS OK', '2017-09-27 01:31:39', 262, 2, 9),
 (2165, '2014-05-12 16:00:00', 1.373, 1.373, 1.373, 1.373, '16:00:49', NULL, NULL, NULL, '12.3 V BATTERIES\nINDICATOR LIGHTS OK\nORIENTATION OK\nBUBBLE CENTERED', '2017-09-27 01:33:31', 262, 2, 9),
@@ -2279,16 +2404,6 @@ INSERT INTO `campaign_logsheets` (`id`, `date`, `height_north_meters`, `height_e
 (2258, '2008-09-17 16:00:00', 1.507, 1.508, 1.508, 1.508, '16:00:07', NULL, NULL, NULL, '', '2017-10-20 03:10:10', 258, 31, 45),
 (2259, '2008-09-18 16:00:00', 1.458, 1.458, 1.458, 1.45, '16:00:56', '15:30:01', NULL, NULL, '', '2017-10-20 06:53:14', 253, 31, 45);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `campaign_observers`
---
-
-CREATE TABLE `campaign_observers` (
-  `campaign_logsheet_id` int(11) NOT NULL,
-  `person_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `campaign_observers`
@@ -5972,17 +6087,6 @@ INSERT INTO `campaign_observers` (`campaign_logsheet_id`, `person_id`) VALUES
 (1144, 39),
 (1145, 39);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `contact_numbers`
---
-
-CREATE TABLE `contact_numbers` (
-  `id` int(11) NOT NULL,
-  `number` varchar(30) NOT NULL,
-  `person_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `contact_numbers`
@@ -6035,46 +6139,7 @@ INSERT INTO `contact_numbers` (`id`, `number`, `person_id`) VALUES
 (44, '09987211247', 37),
 (45, '09236922204', 38);
 
--- --------------------------------------------------------
 
---
--- Table structure for table `continuous_logsheets`
---
-
-CREATE TABLE `continuous_logsheets` (
-  `id` int(11) NOT NULL,
-  `is_power_on` int(1) NOT NULL,
-  `date` datetime NOT NULL,
-  `battery_condition` varchar(1024) DEFAULT NULL,
-  `charger_condition` varchar(1024) DEFAULT NULL,
-  `other_notes` varchar(1024) DEFAULT NULL,
-  `createdAt` datetime NOT NULL,
-  `site_id` int(11) DEFAULT NULL,
-  `antenna_id` int(11) DEFAULT NULL,
-  `receiver_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `continuous_observers`
---
-
-CREATE TABLE `continuous_observers` (
-  `continuous_logsheet_id` int(11) NOT NULL,
-  `person_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `divisions`
---
-
-CREATE TABLE `divisions` (
-  `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `divisions`
@@ -6085,18 +6150,6 @@ INSERT INTO `divisions` (`id`, `name`) VALUES
 (2, 'SOEPD'),
 (3, 'VMEPD'),
 (4, 'ADMIN/SCIENCE AIDE');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `emails`
---
-
-CREATE TABLE `emails` (
-  `id` int(11) NOT NULL,
-  `address` varchar(255) NOT NULL,
-  `person_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `emails`
@@ -6134,17 +6187,6 @@ INSERT INTO `emails` (`id`, `address`, `person_id`) VALUES
 (29, 'lsalugsugan@yahoo.com', 28),
 (30, 'r_pigtain@yahoo.com', 29),
 (31, 'angelo.abang@philvolcs.dost.gov.ph', 30);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `equipment_brands`
---
-
-CREATE TABLE `equipment_brands` (
-  `id` int(11) NOT NULL,
-  `name` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `equipment_brands`
@@ -6927,16 +6969,6 @@ INSERT INTO `sites` (`id`, `name`, `date_established`, `latitude`, `longitude`, 
 (1386, 'TYTY', NULL, NULL, NULL, 'Taytay Municipal Hall, Taytay, Rizal', NULL, '2017-10-24 21:28:34', '2017-10-24 21:28:34', 1, NULL),
 (1390, 'VCAC', NULL, NULL, NULL, 'Alert Center, Valenzuela City', NULL, '2017-10-24 21:28:34', '2017-10-24 21:28:34', 1, NULL);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `survey_types`
---
-
-CREATE TABLE `survey_types` (
-  `id` int(1) NOT NULL,
-  `type` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `survey_types`
@@ -6945,22 +6977,6 @@ CREATE TABLE `survey_types` (
 INSERT INTO `survey_types` (`id`, `type`) VALUES
 (1, 'continuous'),
 (2, 'campaign');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(200) NOT NULL,
-  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `access_level_id` int(11) DEFAULT '3',
-  `person_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
