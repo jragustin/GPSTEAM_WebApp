@@ -4,17 +4,18 @@ import { withStyles } from 'material-ui/styles';
 import ListSubheader from 'material-ui/List/ListSubheader';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import Collapse from 'material-ui/transitions/Collapse';
-import InboxIcon from 'material-ui-icons/MoveToInbox';
+import Book from 'material-ui-icons/Book';
 import DraftsIcon from 'material-ui-icons/Drafts';
-import SendIcon from 'material-ui-icons/Send';
+import BuildIcon from 'material-ui-icons/Build';
+import MyLocation from 'material-ui-icons/MyLocation';
+import MapIcon from 'material-ui-icons/Map';
+import Person from 'material-ui-icons/Person';
 import ExpandLess from 'material-ui-icons/ExpandLess';
 import ExpandMore from 'material-ui-icons/ExpandMore';
 import StarBorder from 'material-ui-icons/StarBorder';
 import Divider from 'material-ui/Divider'
 import { Link } from 'react-router-dom'
 
-
-//for styling
 const styles = theme => ({
   root: {
     width: '100%',
@@ -26,93 +27,81 @@ const styles = theme => ({
   },
 });
 
-
-
-
-
-// Component that contains the components in the side list
 class NavList extends React.Component {
   state = { 
         openLogsheets: true,
         openEquipments: true
     };
 
-// function that toggles the Logsheet options in the sidebar
-  toggleLogsheets = () => {
+/*  toggleLogsheets = () => {
         this.setState({ openLogsheets: !this.state.openLogsheets });
   };
 
-//fnx that toggles the Equipments option in the sidebar
   toggleEquipments = () => {
         this.setState({ openEquipments: !this.state.openEquipments });
-  }
-
-
-
-/*renders the navlist in the sidebar*/
+  }*/
 
   render() {
     const { classes } = this.props;
 
     return (
       <List className={classes.root} subheader={<ListSubheader>Site Navigation</ListSubheader>}>
-    {/*button list that navigates to the component(Link) that links to the path(to) */}
         <ListItem button component={Link} to='/dash/map'>
           <ListItemIcon>
-            <SendIcon />
+            <MapIcon />
           </ListItemIcon>
           <ListItemText inset primary="Map" />
         </ListItem>
-
         <ListItem button component={Link} to='/dash/sites'>
           <ListItemIcon>
-            <DraftsIcon />
+            <MyLocation />
           </ListItemIcon>
           <ListItemText inset primary="Sites" />
         </ListItem>
-
-        <ListItem button onClick={this.toggleLogsheets} component={Link} to='/dash/logsheets'>
+        <ListItem button component={Link} to='/dash/logsheets'>
+          <ListItemIcon>
+            <Book />
+          </ListItemIcon>
+          <ListItemText inset primary="Logsheets" />
+        </ListItem>
+        <ListItem button component={Link} to='/dash/equipments'>
+          <ListItemIcon>
+            <BuildIcon />
+          </ListItemIcon>
+          <ListItemText inset primary="Equipments" />
+        </ListItem>
+        {/*<ListItem button onClick={this.toggleLogsheets} component={Link} to='/dash/logsheets'>
           <ListItemIcon>
             <InboxIcon />
           </ListItemIcon>
           <ListItemText inset primary="Logsheets" />
           {this.state.openLogsheets ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-
         <Collapse component="li" in={this.state.openLogsheets} timeout="auto" unmountOnExit>
-
           <List disablePadding>
-
             <ListItem button className={classes.nested} component={Link} to='/dash/logsheets/campaign'>
               <ListItemIcon>
                 <StarBorder />
               </ListItemIcon>
               <ListItemText inset primary="Campaign" />
             </ListItem>
-
             <ListItem button className={classes.nested} component={Link} to='/dash/logsheets/continuous'> 
               <ListItemIcon>
                 <StarBorder />
               </ListItemIcon>
               <ListItemText inset primary="Continuous" />
             </ListItem>
-
           </List>
-
-        </Collapse>
-
-        <ListItem button onClick={this.toggleEquipments} component={Link} to='/dash/equipments'>
+        </Collapse>*/}
+        {/*<ListItem button onClick={this.toggleEquipments} component={Link} to='/dash/equipments'>
           <ListItemIcon>
             <InboxIcon />
           </ListItemIcon>
           <ListItemText inset primary="Equipments" />
           {this.state.openEquipments ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-
         <Collapse component="li" in={this.state.openEquipments} timeout="auto" unmountOnExit>
-
           <List disablePadding>
-
             <ListItem button className={classes.nested} component={Link} to='/dash/equipments/antennas'>
               <ListItemIcon>
                 <StarBorder />
@@ -125,27 +114,19 @@ class NavList extends React.Component {
               </ListItemIcon>
               <ListItemText inset primary="Receivers" />
             </ListItem>
-
           </List>
-
-        </Collapse>
-
+        </Collapse>*/}
         <Divider />
-
         <ListItem button component={Link} to='/dash/users'>
           <ListItemIcon>
-            <DraftsIcon />
+            <Person />
           </ListItemIcon>
-
           <ListItemText inset primary="Users" />
         </ListItem>
       </List>
     );
   }
 }
-
-
-
 
 NavList.propTypes = {
   classes: PropTypes.object.isRequired,

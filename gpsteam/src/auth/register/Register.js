@@ -21,13 +21,21 @@ class Register extends Component {
 
     handleRegistration(data) {
         const { register, login } = this.props
-
+        /*
+        the data will be registered into the database
+        using the function below.
+        */
         register({
             variables: {
                 username: data.username, 
                 password: data.password
             }
         }).then((d) => {
+            /*
+            successfully registered...
+            Study more about promises
+            */
+            console.log(d)
             tryLogin(data, login)
         }).catch((msg) => {
             console.log(msg)
@@ -67,7 +75,10 @@ class Register extends Component {
         )
     }
 }
-
+/*
+this is the function that is used for adding the data to the database.
+It follows a blueprint that tells how the data can be added to the "users" table
+*/
 const register = gql`
     mutation register($username: String!, $password: String!) {
         register(username: $username, password: $password) {

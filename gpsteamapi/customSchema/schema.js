@@ -1,21 +1,60 @@
-//it looks like a javascript but it's not. it's graphql
+/*
+it looks like a javascript but it's not. it's graphql
 
 
-// this is the graphql schema. 
-//Schema Definition Language(SDL)
-//GraphQL Schema Defines the server's API
+this is the graphql schema. 
+Schema Definition Language(SDL)
+GraphQL Schema Defines the server's API
+
+/*
+the typedefs has three very important types:
+Query - fetch or get or request data from server
+Mutation - Makes all the (Creating, Updating, and Deleting) CUD in the database
+Subscription - Listens to an event so that a user may know any event or CUD done by the server
+
+The structuring here is modularized. The resolver is separated from these definitions.
+To know more about modularizing read:
+
+https://www.apollographql.com/docs/graphql-tools/generate-schema.html#modularizing
+https://www.apollographql.com/docs/graphql-tools/generate-schema.html#Example
+*/
 
 export const typeDefs = `
-    #defines a structure of a User model
-    type User {
-        id: ID
-        username: String
+    type User{
+        id: ID!
+        username: String!
+        password: String!
+        access_level_id: Int
+        person_id: Int
+    }
 
+    type Site{
+        id: ID!
+        name: String!
+        dateEstablished: String
+        latitude: Float
+        longitude: Float
+        location: String
+        description: String
+        createdAt: String!
+        updatedAt: String!
+        survey_type_id: Int
+        marker_id: Int
     }
-    type Site {
-        id: ID
-        name: String
+
+    type ContinuousLogsheet{
+        id: ID!
+        isPowerOn: Int!
+        date: String!
+        batteryCondition: String
+        chargerCondition: String
+        otherNotes: String
+        createdAt: String!
+        site_id: Int
+        antenna_id: Int
+        receiver_id: Int
     }
+
     type AuthPayload {
         token: String!
         refreshToken: String!
@@ -33,17 +72,16 @@ export const typeDefs = `
         users: [User]
         sites: [Site]
     }
-    
+
     type Mutation {
+        # a register mutation of type regUser as desc above
+        # regUser is the payload new
+        register( username: String!, password: String ) : regUser!
 
-        register(
-            username: String!
-            password: String
-        ) : regUser!
-
-        login( username: String!, password: String) : AuthPayload!
+        login( username: String!, password: String ) : AuthPayload!
         
-        refreshTokens(token: String!, refreshToken: String!) : AuthPayload!
+        refreshTokens(token: String!, refreshToken: String! ) : AuthPayload!
+        # this should reflect the declaration in the schema as seen here: ../../schema.graphql
+        createContinuousLogsheet( isPowerOn:Int!, date:String, batteryCondition:String, chargerCondition:String, otherNotes:String, createdAt:String!, site_id:Int, antenna_id:Int, receiver_id: Int ) : ContinuousLogsheet
     }
-
 `
