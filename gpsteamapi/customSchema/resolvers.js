@@ -43,6 +43,7 @@ export const resolvers = {
         },
         campaignLogsheets(){
             return CampaignLogsheet.findAll();
+
         }
 
     },
@@ -61,7 +62,7 @@ export const resolvers = {
 
         refreshTokens: (parent, { token, refreshToken }, { SECRET }) => refreshTokens(token, refreshToken, SECRET),
 
-        createContinuousLogsheet: (obj,args,context) =>{ 
+        createContinuousLogsheet: (_,args) =>{ 
             const continuousLog = args;
             console.log("Submitted", continuousLog) 
             return ContinuousLogsheet.create(continuousLog)

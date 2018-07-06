@@ -166,7 +166,10 @@ class PhMap extends Component {
             } else {
                 cont = []
             }
-            newMarkers = camp.concat(cont)
+
+            if(camp !== null){
+                newMarkers = camp.concat(cont)
+            }
         }
 
         return (

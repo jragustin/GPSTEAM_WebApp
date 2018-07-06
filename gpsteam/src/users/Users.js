@@ -16,11 +16,10 @@ const usersQuery = gql `
 class Users extends Component {
     
 	renderList() {
-		// console.log(this.props.data.users)
+		console.log(this.props.data.users)
 		return this.props.data.users.map((user) => {
 			return(
 				<li key={user.id}>
-					
 					{user.username}				
 				</li>
 				);
@@ -31,7 +30,7 @@ class Users extends Component {
     render() {
         return (
         	<Grid container style = {{alignItems: 'center'}}>
-	            <Paper>
+	            <Paper style={{maxHeight:500, overflow:'auto', width:1000, textAlign:'center', marginTop:20}} center='true'>
 	            <ul>
 	                {this.renderList()}
 	            </ul>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Typography from 'material-ui/Typography';
 import { Route } from 'react-router-dom'
 
 import Map from '../map/MapContainer'

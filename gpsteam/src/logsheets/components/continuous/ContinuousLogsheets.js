@@ -19,13 +19,12 @@ const continuousLogsheetsQuery = gql `
 `
 
 class ContinuousLogsheets extends Component {
-    
-
     renderList(){
-    	return( this.props.data.continuousLogsheets.map((continuousLogsheet) => {
+        console.log(this.props.data.continuousLogsheets)
+    	return(this.props.data.continuousLogsheets.map((continuousLogsheet) => {
     	   		return(
     	   			<li key={continuousLogsheet.id}>
-    	   				{continuousLogsheet.id}
+    	   				{continuousLogsheet.isPowerOn}
     	   			</li>
     	   			);
     	   		}

@@ -15,7 +15,6 @@ const campaignLogsheetsQuery = gql `
 `
 
 class CampaignLogsheets extends Component {
-
     renderList(){
     	console.log(this.props.data.campaignLogsheets)
     	return( this.props.data.campaignLogsheets.map((campaignLogsheet) => {
