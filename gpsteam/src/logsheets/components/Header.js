@@ -76,8 +76,5 @@ class Header extends React.Component {
 /*
 To check if property "classes" returns an object
 */
-Header.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default (Header);

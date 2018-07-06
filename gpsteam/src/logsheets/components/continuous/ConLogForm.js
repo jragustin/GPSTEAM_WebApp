@@ -22,7 +22,7 @@ momentLocaliser(moment)
 const renderDateTimePicker = ({ input: { onChange, value }, showTime }) =>
   <DateTimePicker
     onChange={onChange}
-    format="DD MMM YYYY"
+    format="MMM DD YYYY"
     time={showTime}
     value={!value ? null : new Date(value)}
   />
@@ -40,7 +40,7 @@ let ConLogForm = props => {
           <Field
             name="is_power_on"
             component="input"
-            type="text"
+            type="number"
             placeholder="1 or 0"
           />
         </div>
@@ -52,7 +52,6 @@ let ConLogForm = props => {
           name="date"
           showTime={false}
           component={renderDateTimePicker}
-          ref={date=>this.input = Field}
         />
         </div>
       </div>
@@ -103,7 +102,7 @@ let ConLogForm = props => {
           <Field
             name="site_id"
             component="input"
-            type="text"
+            type="number"
             placeholder="Site ID number"
           />
         </div>
@@ -114,7 +113,7 @@ let ConLogForm = props => {
           <Field
             name="antenna_id"
             component="input"
-            type="text"
+            type="number"
             placeholder="Antenna ID number"
           />
         </div>
@@ -125,7 +124,7 @@ let ConLogForm = props => {
           <Field
             name="receiver_id"
             component="input"
-            type="text"
+            type="number"
             placeholder="Receiver ID number"
           />
         </div>

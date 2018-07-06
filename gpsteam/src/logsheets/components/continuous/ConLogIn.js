@@ -6,7 +6,7 @@ and the form in ConLogForm which was imported herre will be displayed.
 import React, { Component } from 'react'
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo'
-import ConLogForm from './conLogForm';
+import ConLogForm from './ConLogForm';
 import PropTypes from 'prop-types';
 /*
 to define what types of values are coming in, we need to 
@@ -32,7 +32,6 @@ This ConLogIn is a component which is shown in a modal.
 class ConLogIn extends Component {
     
     submitForm =(values) => {
-      console.log("Submitted:",values.is_power_on)
       /*
     the values inserted here came from the conLogForm imported above.
     these are identified by the props "name" of the field of the redux form
@@ -49,7 +48,13 @@ class ConLogIn extends Component {
       antenna_id: values.antenna_id,
       receiver_id: values.receiver_id
         }
-      });
+      }).then(({data}) => {
+        //if data from mutation is returned, submit success!
+        console.log("Submit success!");
+      }).catch(error =>{
+        console.log("Submit unsuccessful!");
+        console.log(error);
+      })
     }
 
     render() {

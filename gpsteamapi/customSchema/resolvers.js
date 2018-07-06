@@ -38,6 +38,9 @@ export const resolvers = {
         sites(){
             return Site.findAll();
         },
+        continuousLogsheets(){
+            return ContinuousLogsheet.findAll();
+        },
         campaignLogsheets(){
             return CampaignLogsheet.findAll();
         }
@@ -62,6 +65,11 @@ export const resolvers = {
             const continuousLog = args;
             console.log("Submitted", continuousLog) 
             return ContinuousLogsheet.create(continuousLog)
+        },
+        createCampaignLogsheet: (obj,args,context) =>{ 
+            const campaignLog = args;
+            console.log("Submitted", campaignLog) 
+            return CampaignLogsheet.create(campaignLog)
         }
     }
 }

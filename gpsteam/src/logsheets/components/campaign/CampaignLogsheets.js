@@ -4,9 +4,7 @@ import React, { Component } from 'react'
 import gql from "graphql-tag";
 import { graphql } from 'react-apollo';
 import { Paper, Grid, List } from '@material-ui/core';
-
-import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
+// import CamLogMod from './CamLogMod'
 
 const campaignLogsheetsQuery = gql `
 	{
@@ -36,9 +34,8 @@ class CampaignLogsheets extends Component {
         	<Grid container centered='true' align='center'>
 		    	<Grid item align='center' xs={12}>
 			        <Paper style={{maxHeight:500, overflow:'auto', width:1000, textAlign:'center', marginTop:20}} center='true'>
-			            
+			            {/*<CamLogMod/>*/}
 			            <List >
-
 			            	{this.renderList()}
 			            </List>
 			        </Paper>

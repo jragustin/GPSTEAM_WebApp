@@ -1,0 +1,154 @@
+/*
+This file will import all individual sub-components
+in order to properly handle all inputs.
+It will be passed to ConLogIn wherein the values will be handled  
+and uploaded to the database.
+ */
+import React from 'react';
+import { Field, reduxForm } from 'redux-form';
+
+
+/*
+These are for dates
+*/
+import DateTimePicker from 'react-widgets/lib/DateTimePicker'
+import moment from 'moment'
+import momentLocaliser from 'react-widgets-moment'
+import 'react-widgets/dist/css/react-widgets.css'
+
+momentLocaliser(moment)
+
+
+const renderDateTimePicker = ({ input: { onChange, value }, showTime }) =>
+  <DateTimePicker
+    onChange={onChange}
+    format="MMM DD YYYY"
+    time={showTime}
+    value={!value ? null : new Date(value)}
+  />
+/*
+For more info: https://redux-form.com/6.1.0/examples/simple/
+*/
+
+//CamLogForm is Continuous Logsheet Form
+let CamLogForm = props => {
+  const { handleSubmit, pristine, reset, submitting } = props
+  return <form onSubmit={handleSubmit}>
+      <div>
+        <label>Date</label>
+        <div>
+          <Field
+          name="date"
+          showTime={false}
+          component={renderDateTimePicker}
+        />
+        </div>
+      </div>
+       <div>
+        <label>Height North (meters)</label>
+        <div>
+          <Field
+            name="height_north_meters"
+            component="input"
+            type="number"
+            placeholder="Input height in North"
+          />
+        </div>
+      </div>
+      <div>
+        <label>Height East (meters)</label>
+        <div>
+          <Field
+            name="height_east_meters"
+            component="input"
+            type="number"
+            placeholder="Input height in East"
+          />
+        </div>
+      </div>
+      <div>
+        <label>Height South (meters)</label>
+        <div>
+          <Field
+            name="height_south_meters"
+            component="input"
+            type="number"
+            placeholder="Input height in South"
+          />
+        </div>
+      </div>
+      <div>
+        <label>Height West (meters)</label>
+        <div>
+          <Field
+            name="height_west_meters"
+            component="input"
+            type="number"
+            placeholder="Input height in West"
+          />
+        </div>
+      </div>
+      <div>
+        <label>Time Start</label>
+        <div>
+          <Field
+            name="time_start"
+            component="input"
+            type="time"
+          />
+        </div>
+      </div>
+      <div>
+        <label>Time End</label>
+        <div>
+          <Field
+            name="time_end"
+            component="input"
+            type="time"
+          />
+        </div>
+      </div>
+      <div>
+        <label>Failure Time</label>
+        <div>
+          <Field
+            name="failure_time"
+            component="input"
+            type="time"
+          />
+        </div>
+      </div>
+      <div>
+        <label>Azimuth</label>
+        <div>
+          <Field
+            name="azimuth"
+            component="input"
+            type="number"
+          />
+        </div>
+      </div>
+      <div>
+        <label>Notes</label>
+        <div>
+          <Field
+            name="notes"
+            component="textarea"
+          />
+        </div>
+      </div>
+      <div>
+        <button type="submit" disabled={pristine || submitting}>
+          Submit
+        </button>
+        <button type="button" disabled={pristine || submitting} onClick={reset}>
+          Clear Values
+        </button>
+      </div>
+  		</form>
+}
+CamLogForm = reduxForm({
+  form: 'CamLogFormValues'
+})(CamLogForm)
+
+export default CamLogForm
