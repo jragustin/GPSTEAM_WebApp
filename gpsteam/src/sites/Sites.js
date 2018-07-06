@@ -1,13 +1,9 @@
 /*
 There is a bug here when opened...
 Sometimes it becomes an error, however
-
 if you rearrange 
-
     "return this.props.data.sites.map((site) => {"
-
 to
-
     "return 
         this.props.data.sites.map((site) => {"
 
@@ -35,7 +31,6 @@ const sitesQuery = gql `
 `
 
 class Sites extends Component {
-
     renderList(){
     	console.log(this.props.data.sites)
     	return( this.props.data.sites.map((site) => {
@@ -49,13 +44,16 @@ class Sites extends Component {
     	);
     }
 
-
     render() {
         return (
         	<Grid container centered='true' align='center'>
 		    	<Grid item align='center' xs={12}>
-			        <Paper style={{maxHeight:500, overflow:'auto', width:1000, textAlign:'center', marginTop:20}} center='true'>
-			            
+			        <Paper style={{
+                        maxHeight:'100%', 
+                        overflow: 'auto',
+                        textAlign:'center'
+                        }} 
+                        center='true'>
 			            <List >
 			            	{this.renderList()}
 			            </List>

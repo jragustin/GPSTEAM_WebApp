@@ -20,9 +20,7 @@ export default class Contents extends Component {
                 <Route path='/dash/sites' component={Sites} /> 
                 <Route path='/dash/logsheets' component={Logsheets} /> 
                 <Route path='/dash/equipments' component={Equipments} /> 
-                <Route path='/dash/users' component={Users} /> 
-
-                
+                <Route path='/dash/users' component={Users} />                
             </main>
         )
     }

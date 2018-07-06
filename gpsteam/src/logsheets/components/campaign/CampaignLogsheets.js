@@ -10,6 +10,7 @@ const campaignLogsheetsQuery = gql `
 	{
 		campaignLogsheets{
 			id
+            heightNorthMeters
 		}
 	}
 `
@@ -17,10 +18,13 @@ const campaignLogsheetsQuery = gql `
 class CampaignLogsheets extends Component {
     renderList(){
     	console.log(this.props.data.campaignLogsheets)
+        /*
+        Object { id: "1", heightNorthMeters: 1.45, __typename: "CampaignLogsheet", … }
+        */
     	return( this.props.data.campaignLogsheets.map((campaignLogsheet) => {
     	   		return(
     	   			<li key={campaignLogsheet.id}>
-    	   				{campaignLogsheet.id}
+    	   				{campaignLogsheet.heightNorthMeters}
     	   			</li>
     	   			);
     	   		}
@@ -32,7 +36,12 @@ class CampaignLogsheets extends Component {
         return (
         	<Grid container centered='true' align='center'>
 		    	<Grid item align='center' xs={12}>
-			        <Paper style={{maxHeight:500, overflow:'auto', width:1000, textAlign:'center', marginTop:20}} center='true'>
+			        <Paper style={{
+                        maxHeight:'100%', 
+                        overflow: 'auto',
+                        textAlign:'center'
+                        }} 
+                        center='true'>
 			            {/*<CamLogMod/>*/}
 			            <List >
 			            	{this.renderList()}

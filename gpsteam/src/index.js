@@ -42,10 +42,12 @@ const authLink = setContext((_, { headers }) => {
 
 const cache = new InMemoryCache()
 
+    
 persistCache({
     cache,
     storage: window.localStorage
 })
+
 
 //ApolloClient accepts an object that contains link and cache
 export const client = new ApolloClient({

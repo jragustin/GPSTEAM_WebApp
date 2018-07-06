@@ -27,20 +27,23 @@ export const resolvers = {
                     }
                 });
             } 
-
             // not logged in
             return 'Not logged in'
 
         },
+
         users(){
             return User.findAll();
         },
+
         sites(){
             return Site.findAll();
         },
+
         continuousLogsheets(){
             return ContinuousLogsheet.findAll();
         },
+        
         campaignLogsheets(){
             return CampaignLogsheet.findAll();
 
@@ -67,7 +70,7 @@ export const resolvers = {
             console.log("Submitted", continuousLog) 
             return ContinuousLogsheet.create(continuousLog)
         },
-        createCampaignLogsheet: (obj,args,context) =>{ 
+        createCampaignLogsheet: (_,args) =>{ 
             const campaignLog = args;
             console.log("Submitted", campaignLog) 
             return CampaignLogsheet.create(campaignLog)
