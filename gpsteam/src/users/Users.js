@@ -6,7 +6,7 @@ import { Paper, Grid, List } from '@material-ui/core';
 
 const usersQuery = gql `
 	{
-		users{
+		allUsers{
 			id
 			username
 		}
@@ -15,8 +15,8 @@ const usersQuery = gql `
 
 class Users extends Component {
 	renderList() {
-		console.log(this.props.data.users)
-		return this.props.data.users.map((user) => {
+		console.log(this.props.data.allUsers)
+		return this.props.data.allUsers.map((user) => {
 			return(
 				<li key={user.id}>
 					{user.username}				

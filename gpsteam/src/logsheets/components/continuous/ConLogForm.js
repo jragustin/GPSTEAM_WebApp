@@ -7,7 +7,6 @@ and uploaded to the database.
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-
 /*
 These are for dates
 */
@@ -40,7 +39,7 @@ let ConLogForm = props => {
           <Field
             name="is_power_on"
             component="input"
-            type="number"
+            type="number" min={0} max={1}
             placeholder="1 or 0"
           />
         </div>
@@ -102,7 +101,7 @@ let ConLogForm = props => {
           <Field
             name="site_id"
             component="input"
-            type="number"
+            type="number" min={0}
             placeholder="Site ID number"
           />
         </div>
@@ -113,7 +112,7 @@ let ConLogForm = props => {
           <Field
             name="antenna_id"
             component="input"
-            type="number"
+            type="number" min={0}
             placeholder="Antenna ID number"
           />
         </div>
@@ -124,7 +123,7 @@ let ConLogForm = props => {
           <Field
             name="receiver_id"
             component="input"
-            type="number"
+            type="number" min={0} 
             placeholder="Receiver ID number"
           />
         </div>

@@ -32,19 +32,19 @@ export const resolvers = {
 
         },
 
-        users(){
+        allUsers(){
             return User.findAll();
         },
 
-        sites(){
+        allSites(){
             return Site.findAll();
         },
 
-        continuousLogsheets(){
+        allContinuousLogsheets(){
             return ContinuousLogsheet.findAll();
         },
         
-        campaignLogsheets(){
+        allCampaignLogsheets(){
             return CampaignLogsheet.findAll();
 
         }

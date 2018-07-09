@@ -50,7 +50,7 @@ let CamLogForm = props => {
           <Field
             name="height_north_meters"
             component="input"
-            type="number"
+            type='number' step={0.001} min={0}
             placeholder="Input height in North"
           />
         </div>
@@ -61,7 +61,7 @@ let CamLogForm = props => {
           <Field
             name="height_east_meters"
             component="input"
-            type="number"
+            type='number' step={0.001} min={0}
             placeholder="Input height in East"
           />
         </div>
@@ -72,7 +72,7 @@ let CamLogForm = props => {
           <Field
             name="height_south_meters"
             component="input"
-            type="number"
+            type='number' step={0.001} min={0}
             placeholder="Input height in South"
           />
         </div>
@@ -83,7 +83,7 @@ let CamLogForm = props => {
           <Field
             name="height_west_meters"
             component="input"
-            type="number"
+            type='number' step={0.001} min={0}
             placeholder="Input height in West"
           />
         </div>
@@ -124,7 +124,7 @@ let CamLogForm = props => {
           <Field
             name="azimuth"
             component="input"
-            type="number"
+            type='number' step={0.1} min={0}
           />
         </div>
       </div>
@@ -134,6 +134,39 @@ let CamLogForm = props => {
           <Field
             name="notes"
             component="textarea"
+          />
+        </div>
+      </div>
+      <div>
+        <label>Site ID</label>
+        <div>
+          <Field
+            name="site_id"
+            component="input"
+            type="number" min={0}
+            placeholder="Site ID number"
+          />
+        </div>
+      </div>
+      <div>
+        <label>Antenna ID</label>
+        <div>
+          <Field
+            name="antenna_id"
+            component="input"
+            type="number" min={0}
+            placeholder="Antenna ID number"
+          />
+        </div>
+      </div>
+      <div>
+        <label>ReceiverID</label>
+        <div>
+          <Field
+            name="receiver_id"
+            component="input"
+            type="number" min={0}
+            placeholder="Receiver ID number"
           />
         </div>
       </div>

@@ -38,21 +38,21 @@ class ConLogIn extends Component {
     */
       this.props.createContinuousLogsheet({
         variables:{
-      isPowerOn: values.is_power_on,
-      date: new Date(values.date),
-      batteryCondition: values.battery_condition,
-      chargerCondition: values.charger_condition,
-      otherNotes: values.other_notes,
-      createdAt: values.createdAt,
-      site_id: values.site_id,
-      antenna_id: values.antenna_id,
-      receiver_id: values.receiver_id
+          isPowerOn: values.is_power_on,
+          date: new Date(values.date),
+          batteryCondition: values.battery_condition,
+          chargerCondition: values.charger_condition,
+          otherNotes: values.other_notes,
+          createdAt: values.createdAt,
+          site_id: values.site_id,
+          antenna_id: values.antenna_id,
+          receiver_id: values.receiver_id
         }
       }).then(({data}) => {
         //if data from mutation is returned, submit success!
-        console.log("Submit success!");
+        alert("Submit success!");
       }).catch(error =>{
-        console.log("Submit unsuccessful!");
+        alert("Submit unsuccessful!");
         console.log(error);
       })
     }

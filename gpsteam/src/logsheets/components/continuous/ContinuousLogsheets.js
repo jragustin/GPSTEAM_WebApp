@@ -4,11 +4,11 @@ import React, { Component } from 'react'
 import gql from "graphql-tag";
 import { graphql } from 'react-apollo';
 import { Paper, Grid, List } from '@material-ui/core';
-// import CamLogMod from './CamLogMod'
+import ConLogMod from './ConLogMod'
 
 const continuousLogsheetsQuery = gql `
     {
-        continuousLogsheets{
+        allContinuousLogsheets{
             id
         }
     }
@@ -16,12 +16,8 @@ const continuousLogsheetsQuery = gql `
 
 class ContinuousLogsheets extends Component {
     renderList(){
-        console.log(this.props.data.continuousLogsheets)
-        /*
-        Why is the typename different? It should be ContinuousLogsheet with a capital C
-        Object { id: "Y29udGludW91c0xvZ3NoZWV0OjEy", __typename: "continuousLogsheet", … }
-        */
-        return( this.props.data.continuousLogsheets.map((continuousLogsheet) => {
+        console.log(this.props.data.allContinuousLogsheets)
+        return( this.props.data.allContinuousLogsheets.map((continuousLogsheet) => {
                 return(
                     <li key={continuousLogsheet.id}>
                         {continuousLogsheet.id}
@@ -42,7 +38,7 @@ class ContinuousLogsheets extends Component {
                         textAlign:'center'
                         }} 
                         center='true'>
-                        {/*<CamLogMod/>*/}
+                        <ConLogMod/>
                         <List >
                             {this.renderList()}
                         </List>

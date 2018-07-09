@@ -4,27 +4,26 @@ import React, { Component } from 'react'
 import gql from "graphql-tag";
 import { graphql } from 'react-apollo';
 import { Paper, Grid, List } from '@material-ui/core';
-// import CamLogMod from './CamLogMod'
+import CamLogMod from './CamLogMod'
 
 const campaignLogsheetsQuery = gql `
 	{
-		campaignLogsheets{
+		allCampaignLogsheets{
 			id
-            heightNorthMeters
 		}
 	}
 `
 
 class CampaignLogsheets extends Component {
     renderList(){
-    	console.log(this.props.data.campaignLogsheets)
+    	console.log(this.props.data.allCampaignLogsheets)
         /*
         Object { id: "1", heightNorthMeters: 1.45, __typename: "CampaignLogsheet", … }
         */
-    	return( this.props.data.campaignLogsheets.map((campaignLogsheet) => {
+    	return( this.props.data.allCampaignLogsheets.map((campaignLogsheet) => {
     	   		return(
     	   			<li key={campaignLogsheet.id}>
-    	   				{campaignLogsheet.heightNorthMeters}
+    	   				{campaignLogsheet.id}
     	   			</li>
     	   			);
     	   		}
@@ -42,7 +41,7 @@ class CampaignLogsheets extends Component {
                         textAlign:'center'
                         }} 
                         center='true'>
-			            {/*<CamLogMod/>*/}
+			            <CamLogMod/>
 			            <List >
 			            	{this.renderList()}
 			            </List>

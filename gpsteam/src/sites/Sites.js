@@ -23,7 +23,7 @@ import { Paper, Grid, List } from '@material-ui/core';
 
 const sitesQuery = gql `
 	{
-		sites{
+		allSites{
 			id
 			name
 		}
@@ -32,8 +32,8 @@ const sitesQuery = gql `
 
 class Sites extends Component {
     renderList(){
-    	console.log(this.props.data.sites)
-    	return( this.props.data.sites.map((site) => {
+    	console.log(this.props.data.allSites)
+    	return( this.props.data.allSites.map((site) => {
     	   		return(
     	   			<li key={site.id}>
     	   				{site.name}
@@ -66,3 +66,24 @@ class Sites extends Component {
 }
 
 export default graphql(sitesQuery)(Sites)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

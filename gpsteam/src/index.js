@@ -40,14 +40,17 @@ const authLink = setContext((_, { headers }) => {
     }
 });
 
+/*
+cache is equal to the InMemoryCache
+*/
 const cache = new InMemoryCache()
 
-    
+
 persistCache({
     cache,
     storage: window.localStorage
 })
-
+console.log(cache)
 
 //ApolloClient accepts an object that contains link and cache
 export const client = new ApolloClient({

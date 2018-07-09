@@ -86,10 +86,10 @@ export const typeDefs = `
     type Query {
         developer: String!
         me: regUser
-        users: [User]
-        sites: [Site]
-        continuousLogsheets: [ContinuousLogsheet]
-        campaignLogsheets: [CampaignLogsheet]
+        allUsers: [User]
+        allSites: [Site]
+        allContinuousLogsheets: [ContinuousLogsheet]
+        allCampaignLogsheets: [CampaignLogsheet]
     }
 
     type Mutation {
