@@ -60,7 +60,7 @@ function SearchBox(props) {
       <div className={classes.search}>
         <SearchIcon color='contrast'/>
       </div>
-      <input id="search-input" className={classes.input} />
+      <input id="search-input" className={classes.input} placeholder='Search'/>
     </div>
   );
 }

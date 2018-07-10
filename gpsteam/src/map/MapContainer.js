@@ -179,7 +179,8 @@ class Map extends React.Component {
       </Drawer>
     );
 
-    const drawerBottom = (<Drawer
+// This does not make sense. Please stop doing this.
+/*    const drawerBottom = (<Drawer
         type="persistent"
         classes={{
           paper: classes.drawerPaperBottom,
@@ -198,7 +199,7 @@ class Map extends React.Component {
         </div>
       </Drawer>
     );
-
+*/
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>
@@ -211,7 +212,8 @@ class Map extends React.Component {
             <PhMap sites={sites}/>
           </main>
           <Hidden smDown>{drawerRight}</Hidden>
-          <Hidden smUp>{drawerBottom}</Hidden>
+          {/*part of the nonsense*/}
+          {/*<Hidden smUp>{drawerBottom}</Hidden>*/}
         </div>
       </div>
     );

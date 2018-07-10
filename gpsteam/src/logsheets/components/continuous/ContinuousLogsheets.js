@@ -25,7 +25,9 @@ class ContinuousLogsheets extends Component {
     renderList(){
         return( this.props.data.allContinuousLogsheets.map((continuousLogsheet) => {
                 return(
+
                     <li key={continuousLogsheet.id}>
+                        
                         {continuousLogsheet.id}
                     </li>
                     );
@@ -44,8 +46,9 @@ class ContinuousLogsheets extends Component {
                         textAlign:'center'
                         }} 
                         center='true'>
+                        {/*<ConLogMod refetch={this.props.data.refetch}/>*/}
                         <ConLogMod/>
-                        <List >
+                        <List>
                             {this.renderList()}
                         </List>
                     </Paper>

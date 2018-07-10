@@ -3,7 +3,9 @@ import gql from 'graphql-tag';
 import { graphql } from 'react-apollo'
 import CamLogForm from './CamLogForm';
 import PropTypes from 'prop-types';
-
+/*
+See ConLogIn to view documentation in mutations
+*/
 const createCampaignLogsheet = gql`
   mutation createCampaignLogsheet($date: String!, $heightNorthMeters: Float!, $heightEastMeters: Float!, $heightSouthMeters: Float!, $heightWestMeters: Float!, $timeStart: String, $timeEnd: String, $failureTime: String, $azimuth: Float, $notes: String, $site_id: Int, $antenna_id: Int, $receiver_id: Int){
     createCampaignLogsheet(date: $date, heightNorthMeters: $heightNorthMeters, heightEastMeters: $heightEastMeters, heightSouthMeters: $heightSouthMeters, heightWestMeters: $heightWestMeters, timeStart: $timeStart, timeEnd: $timeEnd, failureTime: $failureTime, azimuth: $azimuth, notes: $notes, site_id: $site_id, antenna_id: $antenna_id, receiver_id: $receiver_id){
