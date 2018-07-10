@@ -93,15 +93,22 @@ const styles = theme => ({
 });
 
 class Map extends React.Component {
-
   constructor() {
     super()
     this.state = {
-      sites:client.readQuery({
+      sites: client.readQuery({
         query: gql`
             {
-                sites{
+                sites(order: "name") {
                     id
+                    name
+                    description
+                    location
+                    longitude
+                    latitude
+                    surveyType {
+                        type
+                    }
                 }
             }
         `

@@ -14,6 +14,11 @@ This collection of functions is called the “resolver map”.
 This map relates the schema fields and types to a function. The resolverMap object (IResolvers) should have a map of 
 resolvers for each relevant GraphQL Object Type.
 */
+
+
+import { PubSub } from 'graphql-subscriptions';
+export const pubsub = new PubSub
+
 export const resolvers = {
     //queries are responsible for getting data from database
     // Query is the method wrapper
@@ -69,11 +74,26 @@ export const resolvers = {
             const continuousLog = args;
             console.log("Submitted", continuousLog) 
             return ContinuousLogsheet.create(continuousLog)
+            .then((newContinuousLogsheet) => {
+              pubsub.publish('continuousLogsheetCreated', newContinuousLogsheet.dataValues);
+              return newContinuousLogsheet;
+            }).catch((err) => {
+              console.error(err);
+              return err;
+            });
         },
         createCampaignLogsheet: (_,args) =>{ 
             const campaignLog = args;
             console.log("Submitted", campaignLog) 
             return CampaignLogsheet.create(campaignLog)
         }
+    },
+
+    Subscription: {
+        continuousLogsheetCreated: {
+          resolve: (payload) => { return payload},
+          subscribe: () => pubsub.asyncIterator('continuousLogsheetCreated')
+        }
     }
+
 }

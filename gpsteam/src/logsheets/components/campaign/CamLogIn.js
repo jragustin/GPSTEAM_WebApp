@@ -5,8 +5,8 @@ import CamLogForm from './CamLogForm';
 import PropTypes from 'prop-types';
 
 const createCampaignLogsheet = gql`
-  mutation createCampaignLogsheet($id: ID!, $date: String!, $heightNorthMeters: Float!, $heightEastMeters: Float!, $heightSouthMeters: Float!, $heightWestMeters: Float!, $timeStart: String, $timeEnd: String, $failureTime: String, $azimuth: Float, $notes: String, $site_id: Int, $antenna_id: Int, $receiver_id: Int){
-    createCampaignLogsheet(id: $id, date: $date, heightNorthMeters: $heightNorthMeters, heightEastMeters: $heightEastMeters, heightSouthMeters: $heightSouthMeters, heightWestMeters: $heightWestMeters, timeStart: $timeStart, timeEnd: $timeEnd, failureTime: $failureTime, azimuth: $azimuth, notes: $notes, site_id: $site_id, antenna_id: $antenna_id, receiver_id: $receiver_id){
+  mutation createCampaignLogsheet($date: String!, $heightNorthMeters: Float!, $heightEastMeters: Float!, $heightSouthMeters: Float!, $heightWestMeters: Float!, $timeStart: String, $timeEnd: String, $failureTime: String, $azimuth: Float, $notes: String, $site_id: Int, $antenna_id: Int, $receiver_id: Int){
+    createCampaignLogsheet(date: $date, heightNorthMeters: $heightNorthMeters, heightEastMeters: $heightEastMeters, heightSouthMeters: $heightSouthMeters, heightWestMeters: $heightWestMeters, timeStart: $timeStart, timeEnd: $timeEnd, failureTime: $failureTime, azimuth: $azimuth, notes: $notes, site_id: $site_id, antenna_id: $antenna_id, receiver_id: $receiver_id){
       id
     }
   }

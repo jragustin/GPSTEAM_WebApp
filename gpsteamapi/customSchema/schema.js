@@ -102,6 +102,10 @@ export const typeDefs = `
         refreshTokens(token: String!, refreshToken: String! ) : AuthPayload!
         # this should reflect the declaration in the schema as seen here: ../../schema.graphql
         createContinuousLogsheet( isPowerOn:Int!, date:String, batteryCondition:String, chargerCondition:String, otherNotes:String, createdAt:String!, site_id:Int, antenna_id:Int, receiver_id: Int ) : ContinuousLogsheet
-        createCampaignLogsheet( id: ID!, date: String!, heightNorthMeters: Float!, heightEastMeters: Float!, heightSouthMeters: Float!, heightWestMeters: Float!, timeStart: String, timeEnd: String, failureTime: String, azimuth: Float, notes: String, site_id: Int, antenna_id: Int, receiver_id: Int ) : CampaignLogsheet
+        createCampaignLogsheet(  date: String!, heightNorthMeters: Float!, heightEastMeters: Float!, heightSouthMeters: Float!, heightWestMeters: Float!, timeStart: String, timeEnd: String, failureTime: String, azimuth: Float, notes: String, site_id: Int, antenna_id: Int, receiver_id: Int ) : CampaignLogsheet
+    }
+    type Subscription {
+      # subscription for newly created contacts
+      continuousLogsheetCreated: ContinuousLogsheet
     }
 `
