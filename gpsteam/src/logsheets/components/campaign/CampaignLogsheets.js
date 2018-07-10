@@ -6,6 +6,9 @@ import { graphql } from 'react-apollo';
 import { Paper, Grid, List } from '@material-ui/core';
 import CamLogMod from './CamLogMod'
 
+/*
+To see the documetation on queries, see Sites.js
+*/
 const campaignLogsheetsQuery = gql `
 	{
 		allCampaignLogsheets{
@@ -13,15 +16,13 @@ const campaignLogsheetsQuery = gql `
 		}
 	}
 `
-
+/*
+To see the documetation on fetch, see Sites.js
+*/
 const campaignLogsheetsFetch = {fetchPolicy: 'cache-and-network'}
 
 class CampaignLogsheets extends Component {
     renderList(){
-    	console.log(this.props.data.allCampaignLogsheets)
-        /*
-        Object { id: "1", heightNorthMeters: 1.45, __typename: "CampaignLogsheet", … }
-        */
     	return( this.props.data.allCampaignLogsheets.map((campaignLogsheet) => {
     	   		return(
     	   			<li key={campaignLogsheet.id}>

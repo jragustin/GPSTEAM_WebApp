@@ -20,7 +20,11 @@ import gql from "graphql-tag";
 import { graphql } from 'react-apollo';
 import { Paper, Grid, List } from '@material-ui/core';
 
-
+/*
+sitesQuery is declared on the resolvers.js and schema.js on the server side.
+the sitesQuery will run to the server which is declared in the schema to connect 
+and do the allSites query in the database.
+*/
 const sitesQuery = gql `
 	{
 		allSites{
@@ -29,6 +33,11 @@ const sitesQuery = gql `
 		}
 	}
 `
+/*
+The fetch policy need to be changed so that the page will be updated. 
+The default fetch policy is cache first, so the changes in here (sites) and
+other components will not be seen on the client side.
+*/
 const sitesFetch = {fetchPolicy: 'cache-and-network'}
 
 class Sites extends Component {
@@ -66,6 +75,11 @@ class Sites extends Component {
     }
 }
 
+/*
+The declared constant will be added as an option configuration to the
+graphql tag. If you want to learn more about this, go to:
+https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-config-options
+*/
 export default graphql(sitesQuery, {options:sitesFetch})(Sites)
 
 

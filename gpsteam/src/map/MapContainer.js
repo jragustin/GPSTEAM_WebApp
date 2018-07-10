@@ -7,6 +7,7 @@ import ChevronRightIcon from 'material-ui-icons/ChevronRight';
 import { connect } from 'react-redux'
 import * as mapActions from './mapActions'
 import { client } from '../index'
+import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
 import SearchBox from './SearchBox'
