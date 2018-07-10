@@ -14,6 +14,8 @@ const campaignLogsheetsQuery = gql `
 	}
 `
 
+const campaignLogsheetsFetch = {fetchPolicy: 'cache-and-network'}
+
 class CampaignLogsheets extends Component {
     renderList(){
     	console.log(this.props.data.allCampaignLogsheets)
@@ -53,4 +55,4 @@ class CampaignLogsheets extends Component {
     }
 }
 
-export default graphql(campaignLogsheetsQuery)(CampaignLogsheets)
+export default graphql(campaignLogsheetsQuery, {options:campaignLogsheetsFetch})(CampaignLogsheets)

@@ -14,6 +14,8 @@ const continuousLogsheetsQuery = gql `
     }
 `
 
+const continuousLogsheetsFetch = {fetchPolicy: 'cache-and-network'}
+
 class ContinuousLogsheets extends Component {
     renderList(){
         console.log(this.props.data.allContinuousLogsheets)
@@ -50,4 +52,4 @@ class ContinuousLogsheets extends Component {
     }
 }
 
-export default graphql(continuousLogsheetsQuery)(ContinuousLogsheets)
+export default graphql(continuousLogsheetsQuery,{options:continuousLogsheetsFetch})(ContinuousLogsheets)

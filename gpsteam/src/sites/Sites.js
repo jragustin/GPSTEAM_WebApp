@@ -29,6 +29,7 @@ const sitesQuery = gql `
 		}
 	}
 `
+const sitesFetch = {fetchPolicy: 'cache-and-network'}
 
 class Sites extends Component {
     renderList(){
@@ -65,7 +66,7 @@ class Sites extends Component {
     }
 }
 
-export default graphql(sitesQuery)(Sites)
+export default graphql(sitesQuery, {options:sitesFetch})(Sites)
 
 
 

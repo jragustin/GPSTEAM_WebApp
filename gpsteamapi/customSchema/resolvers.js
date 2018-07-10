@@ -19,10 +19,13 @@ resolvers for each relevant GraphQL Object Type.
 import { PubSub } from 'graphql-subscriptions';
 export const pubsub = new PubSub
 
+
 export const resolvers = {
     //queries are responsible for getting data from database
     // Query is the method wrapper
+    
     Query: {
+        
         developer: () => "Oriel Vinci Absin",
         me: (_, args, { user }) => {
             if(user) {

@@ -12,6 +12,7 @@ const usersQuery = gql `
 		}
 	}
 `
+const usersFetch = {fetchPolicy: 'cache-and-network'}
 
 class Users extends Component {
 	renderList() {
@@ -47,4 +48,4 @@ class Users extends Component {
 }
 
 
-export default graphql(usersQuery)(Users)
+export default graphql(usersQuery, {options:usersFetch})(Users)
