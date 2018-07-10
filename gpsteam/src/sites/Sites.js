@@ -18,51 +18,127 @@ but just do it
 import React, { Component } from 'react'
 import gql from "graphql-tag";
 import { graphql } from 'react-apollo';
-import { Paper, Grid, List } from '@material-ui/core';
+import { Paper, Modal, Button, Grid, List, TextField, Table, TableRow, TableBody, TableCell, TableHead } from '@material-ui/core';
+import { List as RVList, AutoSizer } from 'react-virtualized';
+import SearchIcon from 'material-ui-icons/Search'
+import SiteDetails from './SiteDetails'
 
-
+/*
+sitesQuery is a gql query that is sent to the server(graphql) 
+to do the query that will get the values from the database 
+*/
 const sitesQuery = gql `
 	{
 		allSites{
 			id
 			name
+            dateEstablished
+            latitude
+            longitude
+            location
+            description
+            createdAt
+            updatedAt
+            survey_type_id
+            marker_id
 		}
 	}
 `
+/*
+indicates that the data  will be from cache and database directly*/
 const sitesFetch = {fetchPolicy: 'cache-and-network'}
 
+const style = {
+    search: {
+    // width: this.props.theme.spacing.unit * 9,
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+    input: {
+    font: 'inherit',
+    // padding: `${theme.spacing.unit}px ${theme.spacing.unit}px ${theme.spacing.unit}px ${theme.spacing.unit * 9}px`,
+    border: 0,
+    display: 'block',
+    verticalAlign: 'middle',
+    whiteSpace: 'normal',
+    background: 'none',
+    margin: 0, // Reset for Safari
+    color: 'inherit',
+    width: '100%',
+    '&:focus': {
+      outline: 0,
+        }
+    }
+}
+
+
+
+
+function getModalStyle() {
+  const top = 50 ;
+  const left = 50 ;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
+
+/*
+render the sites then pass 'site' as a property to the component SiteDetails to show more details of the sites
+*/
 class Sites extends Component {
+
+
     renderList(){
     	console.log(this.props.data.allSites)
     	return( this.props.data.allSites.map((site) => {
     	   		return(
-    	   			<li key={site.id}>
-    	   				{site.name}
-    	   			</li>
+                    <TableRow key={site.id}>
+                        <TableCell>{site.name}</TableCell>
+                        <TableCell>{site.location}</TableCell>
+                        <TableCell numeric><SiteDetails site={site}/></TableCell>
+                        
+                    </TableRow>
     	   			);
     	   		}
     	   	)
-    	);
+    	)
     }
 
     render() {
         return (
-        	<Grid container centered='true' align='center'>
+            <div>
+            <Grid container centered='true' align='center'>
 		    	<Grid item align='center' xs={12}>
-			        <Paper style={{
-                        maxHeight:'100%', 
-                        overflow: 'auto',
-                        textAlign:'center'
-                        }} 
+			        <Paper style={{maxHeight:500, 
+                        height:'auto', 
+                        overflow:'auto', 
+                        width:'60%', 
+                        textAlign:'center', 
+                        marginTop:10, 
+                        flexGrow:1, 
+                        overflowX:'auto'}} 
                         center='true'>
-			            <List >
+                        <Table style={{width:'100%'}}>
+                            <TableHead>
+                               {/* <div style={style.search}><SearchIcon color='contrast'/></div>
+                                <TextField style={style.input} placeholder='Search'/>*/}
+                            </TableHead>
+                            <TableBody>
 			            	{this.renderList()}
-			            </List>
+                            </TableBody>
+                        </Table>
 			        </Paper>
 		        </Grid>
             </Grid>
-
-        );
+            </div>
+        )
     }
 }
 
