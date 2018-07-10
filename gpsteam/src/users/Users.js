@@ -3,7 +3,9 @@ import gql from "graphql-tag";
 import { graphql } from 'react-apollo';
 import { Paper, Grid, List } from '@material-ui/core';
 
-
+/*
+To see the documetation on queries, see Sites.js
+*/
 const usersQuery = gql `
 	{
 		allUsers{
@@ -12,6 +14,9 @@ const usersQuery = gql `
 		}
 	}
 `
+/*
+To see the documetation on fetch, see Sites.js
+*/
 const usersFetch = {fetchPolicy: 'cache-and-network'}
 
 class Users extends Component {

@@ -13,7 +13,6 @@ showing the form
 export default class ConLogMod extends Component {
 	constructor(props) {
         super(props);
-
         this.state = { isOpen: false };
       }
 

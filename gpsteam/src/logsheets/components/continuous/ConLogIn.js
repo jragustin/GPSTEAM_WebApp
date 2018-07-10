@@ -49,7 +49,8 @@ class ConLogIn extends Component {
           receiver_id: values.receiver_id
         }
       }).then(({data}) => {
-        //if data from mutation is returned, submit success!
+        // if data from mutation is returned, submit success!
+        // this.props.refetch();
         alert("Submit success!");
       }).catch(error =>{
         alert("Submit unsuccessful!");
@@ -64,7 +65,7 @@ class ConLogIn extends Component {
           return ( 
             <div className="backdrop">
               <div className="modal">
-                <ConLogForm onSubmit={this.submitForm.bind(this)} />
+                <ConLogForm onSubmit={this.submitForm.bind(this)}/>
               <div className="footer">
                   <button onClick={this.props.onClose}>
                     Close

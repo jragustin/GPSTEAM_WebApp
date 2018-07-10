@@ -6,6 +6,9 @@ import { graphql } from 'react-apollo';
 import { Paper, Grid, List } from '@material-ui/core';
 import ConLogMod from './ConLogMod'
 
+/*
+To see the documetation on queries, see Sites.js
+*/
 const continuousLogsheetsQuery = gql `
     {
         allContinuousLogsheets{
@@ -13,15 +16,18 @@ const continuousLogsheetsQuery = gql `
         }
     }
 `
-
+/*
+To see the documetation on fetch, see Sites.js
+*/
 const continuousLogsheetsFetch = {fetchPolicy: 'cache-and-network'}
 
 class ContinuousLogsheets extends Component {
     renderList(){
-        console.log(this.props.data.allContinuousLogsheets)
         return( this.props.data.allContinuousLogsheets.map((continuousLogsheet) => {
                 return(
+
                     <li key={continuousLogsheet.id}>
+                        
                         {continuousLogsheet.id}
                     </li>
                     );
@@ -40,8 +46,9 @@ class ContinuousLogsheets extends Component {
                         textAlign:'center'
                         }} 
                         center='true'>
+                        {/*<ConLogMod refetch={this.props.data.refetch}/>*/}
                         <ConLogMod/>
-                        <List >
+                        <List>
                             {this.renderList()}
                         </List>
                     </Paper>
