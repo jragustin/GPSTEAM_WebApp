@@ -4,13 +4,15 @@ import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
 import { Drawer, IconButton, Hidden } from 'material-ui/';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
+import SearchIcon from 'material-ui-icons/Search';
+import { fade } from 'material-ui/styles/colorManipulator';
+import SearchBar from 'material-ui-icons/Search'
 import { connect } from 'react-redux'
 import * as mapActions from './mapActions'
 import { client } from '../index'
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
-import SearchBox from './SearchBox'
 import PhMap from './Map'
 import SitesList from './SitesList'
 
@@ -91,6 +93,48 @@ const styles = theme => ({
       marginBottom: 0,
     },
   },
+  wrapper: {
+    fontFamily: theme.typography.fontFamily,
+    position: 'relative',
+    marginRight: 0,
+    borderRadius: 2,
+    background: fade(theme.palette.common.white, 0.15),
+    '&:hover': {
+      background: fade(theme.palette.common.white, 0.25),
+    },
+    '& $input': {
+      transition: theme.transitions.create('width'),
+      width: 50,
+      '&:focus': {
+        width: 80,
+      },
+    },
+  },
+  search: {
+    width: theme.spacing.unit * 9,
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  input: {
+    font: 'inherit',
+    padding: `${theme.spacing.unit}px ${theme.spacing.unit}px ${theme.spacing.unit}px ${theme
+      .spacing.unit * 9}px`,
+    border: 0,
+    display: 'block',
+    verticalAlign: 'middle',
+    whiteSpace: 'normal',
+    background: 'none',
+    margin: 0, // Reset for Safari
+    color: 'inherit',
+    width: '50%',
+    '&:focus': {
+      outline: 0,
+    },
+  }
 });
 
 class Map extends React.Component {
@@ -114,13 +158,28 @@ class Map extends React.Component {
             }
         `
         }),
+        /*
+        Initializes the values of the sites of Camp, Continuous,
+        and searched. They are all null for the moment, values will added later.
+        The sitesSearched values will be dependent on the search state.
+        It is empty right now.
+        */
         sitesCamp: null,
-        sitesCont: null
+        sitesCont: null,
+        sitesSearched: null,
+        search: ''
     }
   }
 
   componentWillMount() {
     // remove undefined surveytypes and undefined coordinates
+    
+    /*
+    These are now the determined values of the sites.
+    They will be the given names, latitudes, and longitudes.
+    It will then be filtered later to display in the map and the 
+    sitesList.
+    */
     let filtered = this.state.sites.sites.filter(s => {
       return s.surveyType && s.latitude && s.longitude
     })
@@ -131,16 +190,34 @@ class Map extends React.Component {
 
     let sitesCont = filtered.filter(s => {
       return s.surveyType.type === 'continuous'
+    }) 
+
+    let sitesSearched = filtered.filter(s => {
+      return this.state.search
     })
 
-    this.setState({ sites: filtered, sitesCamp, sitesCont })
+    this.setState({ sites: filtered, sitesCamp, sitesCont, sitesSearched })
   }
   
-  render() {
-    const { classes, drawerOpen, showCampaignSites, showContinuousSites } = this.props;
-    const { sites, sitesCamp, sitesCont } = this.state
+  updateSearch(event) {
+    /*
+    This will handle the inputs given in the search bar.
+    The values should be only up to 20.
+    */
+    this.setState({search:event.target.value.substr(0, 20)})
+    console.log(event.target.value)
+  }
 
+  render() {
+    const { classes, drawerOpen, showCampaignSites, showContinuousSites, showSitesSearched } = this.props;
+    const { sites, sitesCamp, sitesCont, sitesSearched } = this.state
+
+    /*
+    An empty list will be declared first that will be filled up 
+    by the sites.
+    */
     let list = []
+    
     if(showCampaignSites) {
       list = sitesCamp
     }
@@ -151,8 +228,28 @@ class Map extends React.Component {
       list = sitesCont.concat(sitesCamp)
     }
 
+    /*
+    If the argument is to showSitesSearched,
+    the list will contain all the sitesSearched matched.
+    */
+
+    if(showSitesSearched){
+      list = sitesSearched
+    }
+
+    /*
+    the searchedlist will filter through the current list
+    which will then be passed to the sitesList.
+    */
+    let searchedList = list.filter(
+      (list) => {
+        return list.name.indexOf(
+          this.state.search) !==-1;
+      }
+    );
+
     // sort alphabetically
-    list.sort((a, b) => {
+    searchedList.sort((a, b) => {
       if(a.name < b.name) return -1;
       if(a.name > b.name) return 1;
       return 0;
@@ -169,17 +266,32 @@ class Map extends React.Component {
       >
         <div className={classes.drawerInner}>
           <div className={classes.drawerHeader}>
-            <SearchBox />
+            <div className={classes.wrapper}>
+              <div className={classes.search}>
+                <SearchIcon color='contrast'/>
+              </div>
+              {/*
+              The input bar for the search. To know more about searches in
+              React, view:
+              https://www.youtube.com/watch?v=OlVkYnVXPl0&index=16&list=PLLnpHn493BHFfs3Uj5tvx17mXk4B4ws4p
+              */}
+              <input type="text" 
+              className={classes.input} 
+              placeholder='Search' 
+              value={this.state.search} 
+              onChange={this.updateSearch.bind(this)}/>
+            </div>
             <IconButton onClick={this.props.closeDrawer}>
               <ChevronRightIcon />
             </IconButton>
+          
           </div>
-          <SitesList sites={list}/>
+          <SitesList sites={searchedList}/>
         </div>
       </Drawer>
     );
 
-// This does not make sense. Please stop doing this.
+// This does not make sense. Please uncomment if you see the significance doing this.
 /*    const drawerBottom = (<Drawer
         type="persistent"
         classes={{

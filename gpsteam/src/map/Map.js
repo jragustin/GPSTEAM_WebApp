@@ -227,9 +227,9 @@ class PhMap extends Component {
                             e.preventDefault()
                             this.props.openDrawer()
 
-                            setTimeout(() => {
+                           /* setTimeout(() => {
                                 document.getElementById('search-input').focus()
-                            }, 500)
+                            }, 500)*/
 
                         }} role='button' href=''>
                             <SearchIcon />
