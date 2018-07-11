@@ -204,7 +204,7 @@ class Map extends React.Component {
     This will handle the inputs given in the search bar.
     The values should be only up to 20.
     */
-    this.setState({search:event.target.value.substr(0, 20)})
+    this.setState({search:event.target.value.toUpperCase().substr(0, 4)})
     console.log(event.target.value)
   }
 
