@@ -12,6 +12,7 @@ See ConLogIn to view documentation in mutations
 const peoplesQuery = gql `
   {
     allPersons{
+      id
       firstName
       lastName
       nickName
@@ -32,13 +33,32 @@ function Transition(props) {
 }
 
 class ObserverFields extends Component {
+    constructor() {
+      super()
+      this.state = {
+       checked: false
+      }
+    }
+
+    handleChange(event) {
+      /*
+      put checked values in an array in this function
+      */
+
+      if (event.target.checked) {
+        console.log(event.target.value," is printed because checked is ",event.target.checked)
+      }
+    }
+
     renderList(){
         return( this.props.data.allPersons.map((person) => {
                 return(
                     <TableRow key={person.id}>
                         <TableCell>{person.firstName} {person.lastName}</TableCell>
                         <TableCell>
-                          <Checkbox color='primary'/>
+                          <Checkbox color='primary'
+                          onChange={this.handleChange.bind(this)}
+                          value={person.id}/>
                         </TableCell>
                     </TableRow>
                     );
