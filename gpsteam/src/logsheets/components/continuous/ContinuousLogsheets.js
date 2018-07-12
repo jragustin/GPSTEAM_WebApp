@@ -3,16 +3,35 @@
 import React, { Component } from 'react'
 import gql from "graphql-tag";
 import { graphql } from 'react-apollo';
-import { Paper, Grid, List } from '@material-ui/core';
+
+import { Paper, Modal, Button, Grid, List, TextField, Table, TableRow, TableBody, TableCell, TableHead } from '@material-ui/core';
 import ConLogMod from './ConLogMod'
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { Typography } from 'material-ui'
 /*
 To see the documetation on queries, see Sites.js
 */
+const styles = theme => ({
+  progress: {
+    margin: theme.spacing.unit,
+  },
+});
+
+
 const continuousLogsheetsQuery = gql `
     {
         allContinuousLogsheets{
             id
+            isPowerOn
+            date
+            batteryCondition
+            chargerCondition
+            otherNotes
+            createdAt
+            site_id:
+            antenna_id
+            receiver_id
         }
     }
 `
@@ -26,9 +45,9 @@ class ContinuousLogsheets extends Component {
         return( this.props.data.allContinuousLogsheets.map((continuousLogsheet) => {
                 return(
 
-                    <li key={continuousLogsheet.id}>     
-                        {continuousLogsheet.id}
-                    </li>
+                    <TableRow key={continuousLogsheet.id}>
+                        <TableCell>{continuousLogsheet.date}</TableCell>
+                    </TableRow>
                     );
                 }
             )
@@ -36,23 +55,40 @@ class ContinuousLogsheets extends Component {
     }
 
     render() {
-        return (
-            <Grid container centered='true' align='center'>
-                <Grid item align='center' xs={12}>
-                    <Paper style={{
-                        maxHeight:'100%', 
-                        overflow: 'auto',
-                        textAlign:'center'
-                        }} 
-                        center='true'>
-                        {/*<ConLogMod refetch={this.props.data.refetch}/>*/}
-                        <ConLogMod/>
-                        <List>
-                            {this.renderList()}
-                        </List>
-                    </Paper>
+        if(this.props.data.loading) {
+            return (                
+                 <Grid container centered='true' align='center'>
+                    <CircularProgress className={this.props.progress} thickness={7}/>
+                    <Typography color='primary'>Loading...</Typography>
                 </Grid>
-            </Grid>
+            );
+        }
+        
+        return (
+            <div>
+                <Grid container centered='true' align='center'>
+                    <Grid item align='center' xs={12}>
+                        <ConLogMod/>
+                        <Paper style={{maxHeight:500, 
+                            height:'80%', 
+                            overflow:'auto', 
+                            width:'60%', 
+                            textAlign:'center', 
+                            marginTop:10, 
+                            flexGrow:1, 
+                            overflowX:'auto'}} 
+                            center='true'>
+                            <Table style={{width:'100%'}}>
+                                
+                                <TableBody>
+                                {this.renderList()}
+                                </TableBody>
+
+                            </Table>
+                        </Paper>
+                    </Grid>
+                </Grid>
+            </div>
 
         );
     }

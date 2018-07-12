@@ -16,13 +16,20 @@ but just do it
 */
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
+
 import gql from "graphql-tag";
 import { graphql } from 'react-apollo';
 
 import { Paper, Modal, Button, Grid, List, TextField, Table, TableRow, TableBody, TableCell, TableHead } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { Typography } from 'material-ui'
+
 import { List as RVList, AutoSizer } from 'react-virtualized';
 import SearchIcon from 'material-ui-icons/Search'
 import SiteDetails from './SiteDetails'
+
 
 /*
 sitesQuery is a gql query that is sent to the server(graphql) 
@@ -57,34 +64,11 @@ other components will not be seen on the client side.
 // indicates that the data  will be from cache and database directly
 const sitesFetch = {fetchPolicy: 'cache-and-network'}
 
-const style = {
-    search: {
-    // width: this.props.theme.spacing.unit * 9,
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+const styles = theme => ({
+  progress: {
+    margin: theme.spacing.unit,
   },
-    input: {
-    font: 'inherit',
-    // padding: `${theme.spacing.unit}px ${theme.spacing.unit}px ${theme.spacing.unit}px ${theme.spacing.unit * 9}px`,
-    border: 0,
-    display: 'block',
-    verticalAlign: 'middle',
-    whiteSpace: 'normal',
-    background: 'none',
-    margin: 0, // Reset for Safari
-    color: 'inherit',
-    width: '100%',
-    '&:focus': {
-      outline: 0,
-        }
-    }
-}
-
-
+});
 
 
 function getModalStyle() {
@@ -103,49 +87,52 @@ render the sites then pass 'site' as a property to the component SiteDetails to 
 */
 class Sites extends Component {
 
-
     renderList(){
-    	console.log(this.props.data.allSites)
     	return( this.props.data.allSites.map((site) => {
-    	   		return(
+                return(
                     <TableRow key={site.id}>
                         <TableCell>{site.name}</TableCell>
                         <TableCell>{site.location}</TableCell>
-                        <TableCell numeric><SiteDetails site={site}/></TableCell>
-                        
+                        <TableCell numeric><SiteDetails site={site}/></TableCell>    
                     </TableRow>
     	   			);
     	   		}
     	   	)
     	)
     }
-
+    
     render() {
+        if(this.props.data.loading) {
+            return (                
+                 <Grid container centered='true' align='center'>
+                    <CircularProgress className={this.props.progress} thickness={7}/>
+                    <Typography color='primary'>Loading...</Typography>
+                </Grid>
+            );
+        }
         return (
             <div>
-            <Grid container centered='true' align='center'>
-		    	<Grid item align='center' xs={12}>
-			        <Paper style={{maxHeight:500, 
-                        height:'auto', 
-                        overflow:'auto', 
-                        width:'60%', 
-                        textAlign:'center', 
-                        marginTop:10, 
-                        flexGrow:1, 
-                        overflowX:'auto'}} 
-                        center='true'>
-                        <Table style={{width:'100%'}}>
-                            <TableHead>
-                               {/* <div style={style.search}><SearchIcon color='contrast'/></div>
-                                <TextField style={style.input} placeholder='Search'/>*/}
-                            </TableHead>
-                            <TableBody>
-			            	{this.renderList()}
-                            </TableBody>
-                        </Table>
-			        </Paper>
-		        </Grid>
-            </Grid>
+                <Grid container centered='true' align='center'>
+    		    	<Grid item align='center' xs={12}>
+    			        <Paper style={{maxHeight:500, 
+                            height:'auto', 
+                            overflow:'auto', 
+                            width:'60%', 
+                            textAlign:'center', 
+                            marginTop:10, 
+                            flexGrow:1, 
+                            overflowX:'auto'}} 
+                            center='true'>
+                            <Table style={{width:'100%'}}>
+                               
+                                <TableBody>
+    			            	{this.renderList()}
+                                </TableBody>
+                                
+                            </Table>
+    			        </Paper>
+    		        </Grid>
+                </Grid>
             </div>
         )
     }
