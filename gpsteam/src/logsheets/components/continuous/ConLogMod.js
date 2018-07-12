@@ -5,6 +5,9 @@ It will be exported to ContinuousLogsheets.
 
 import React, { Component } from 'react'
 import ConLogIn from './ConLogIn'
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
+
 
 /*
 This is the button that is responsible for 
@@ -25,17 +28,19 @@ export default class ConLogMod extends Component {
 
       render(){
       	return(
-
-      		<div>
-      			<button onClick={this.toggleModal}>
-                  Submit a Continuous Logsheets
-                </button>
-
-                <ConLogIn show={this.state.isOpen}
-                	onClose={this.toggleModal}>
-                	<ConLogIn/>
-                </ConLogIn>
-      		</div>
+            <div>
+              <Button 
+                variant="fab" 
+                color="primary" 
+                aria-label="add" 
+                className={this.props.button} 
+                onClick={this.toggleModal}>
+                  <AddIcon />
+              </Button>
+              <ConLogIn show={this.state.isOpen}
+                  onClose={this.toggleModal}>
+              </ConLogIn>
+            </div>
       	)
       }
 }

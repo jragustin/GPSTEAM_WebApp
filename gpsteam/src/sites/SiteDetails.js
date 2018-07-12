@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Paper, Slide, Dialog, DialogTitle, DialogContent, Divider, Grid, Table, TableRow, TableCell, TableBody } from '@material-ui/core';
+import { Button, Paper, Slide, Dialog, DialogTitle, DialogContent, Grid, Table, TableRow, TableCell, TableBody } from '@material-ui/core';
 
 //transition effects
 function Transition(props) {
@@ -38,7 +38,7 @@ class SiteDetails extends Component {
           <Grid item align='center' xs={12}>
 
             <DialogTitle id="alert-dialog-slide-title">
-              <h1>{site.name}</h1>
+              {site.name}
             </DialogTitle>
             <DialogContent>
             <Paper style={{maxHeight:500, 

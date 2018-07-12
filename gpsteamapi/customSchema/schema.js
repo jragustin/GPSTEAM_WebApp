@@ -58,6 +58,7 @@ export const typeDefs = `
         site_id: Int
         antenna_id: Int
         receiver_id: Int
+        #site: Site
     }
 
     type ContinuousLogsheet{
@@ -71,6 +72,7 @@ export const typeDefs = `
         site_id: Int
         antenna_id: Int
         receiver_id: Int
+        #site: Site
     }
 
     type Person{

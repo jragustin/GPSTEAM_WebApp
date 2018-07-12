@@ -3,6 +3,9 @@ import gql from 'graphql-tag';
 import { graphql } from 'react-apollo'
 import CamLogForm from './CamLogForm';
 import PropTypes from 'prop-types';
+
+import { Button, Paper, Slide, Dialog, DialogTitle, DialogContent } from '@material-ui/core';
+
 /*
 See ConLogIn to view documentation in mutations
 */
@@ -13,11 +16,13 @@ const createCampaignLogsheet = gql`
     }
   }
 `
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
 
 class CamLogIn extends Component {
     
     submitForm =(values) => {
-    console.log(values.height_north_meters)
       /*
     the values inserted here came from the camLogForm imported above.
     these are identified by the props "name" of the field of the redux form
@@ -52,17 +57,21 @@ class CamLogIn extends Component {
       if(!this.props.show) {
         return null;
       }else{
+
           return ( 
-            <div className="backdrop">
-              <div className="modal">
-                <CamLogForm onSubmit={this.submitForm.bind(this)} />
-              <div className="footer">
-                  <button onClick={this.props.onClose}>
-                    Close
-                  </button>
-                </div>
-              </div>
-            </div>
+            <Dialog
+              open
+              TransitionComponent={Transition}
+              keepMounted
+              onClose={this.props.onClose}
+              fullWidth>
+                <DialogTitle>
+                  Fill out Campaign Logsheet
+                </DialogTitle>
+                <DialogContent>
+                  <CamLogForm onSubmit={this.submitForm.bind(this)} />
+                </DialogContent>
+            </Dialog>
           )
       }
     }

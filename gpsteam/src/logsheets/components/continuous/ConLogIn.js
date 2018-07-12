@@ -8,6 +8,9 @@ import gql from 'graphql-tag';
 import { graphql } from 'react-apollo'
 import ConLogForm from './ConLogForm';
 import PropTypes from 'prop-types';
+
+import { Button, Paper, Slide, Dialog, DialogTitle, DialogContent } from '@material-ui/core';
+
 /*
 to define what types of values are coming in, we need to 
 put $(value_name):(value_type).
@@ -26,6 +29,10 @@ const createContinuousLogsheet = gql`
     }
   }
 `
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
+
 /*
 This ConLogIn is a component which is shown in a modal.
 */
@@ -63,16 +70,19 @@ class ConLogIn extends Component {
         return null;
       }else{
           return ( 
-            <div className="backdrop">
-              <div className="modal">
-                <ConLogForm onSubmit={this.submitForm.bind(this)}/>
-              <div className="footer">
-                  <button onClick={this.props.onClose}>
-                    Close
-                  </button>
-                </div>
-              </div>
-            </div>
+            <Dialog
+              open
+              TransitionComponent={Transition}
+              keepMounted
+              onClose={this.props.onClose}
+              fullWidth>
+                <DialogTitle>
+                  Fill out Campaign Logsheet
+                </DialogTitle>
+                <DialogContent>
+                  <ConLogForm onSubmit={this.submitForm.bind(this)} />
+                </DialogContent>
+            </Dialog>
           )
       }
     }

@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo'
 import PropTypes from 'prop-types';
-import { Paper, Grid, List } from '@material-ui/core';
+import { Paper, Slide, Dialog, DialogTitle, DialogContent, Table, TableRow, TableBody, TableCell, TableHead } from '@material-ui/core';
+import Checkbox from '@material-ui/core/Checkbox';
+
 /*
 See ConLogIn to view documentation in mutations
 */
@@ -10,19 +12,35 @@ See ConLogIn to view documentation in mutations
 const peoplesQuery = gql `
   {
     allPersons{
-      id
       firstName
+      lastName
+      nickName
+      birthdate
+      position_id
+      division_id
+      site_id
+      person_type_id
+      non_staff_position_id
+      office_location_id
     }
   }
 `
 const peoplesFetch = {fetchPolicy: 'cache-and-network'}
+
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
+
 class ObserverFields extends Component {
     renderList(){
         return( this.props.data.allPersons.map((person) => {
                 return(
-                    <li key={person.id}>
-                        {person.firstName}
-                    </li>
+                    <TableRow key={person.id}>
+                        <TableCell>{person.firstName} {person.lastName}</TableCell>
+                        <TableCell>
+                          <Checkbox color='primary'/>
+                        </TableCell>
+                    </TableRow>
                     );
                 }
             )
@@ -34,19 +52,24 @@ class ObserverFields extends Component {
         return null;
       }else{
           return ( 
-            <div className="backdrop">
-              <div className="modal">
-                <List>
-                  {this.renderList()}
-                </List>
-              <div className="footer">
-                  <button onClick={this.props.onClose}>
-                    Close
-                  </button>
-                </div>
-              </div>
-            </div>
-          )
+            <Dialog
+              open
+              TransitionComponent={Transition}
+              keepMounted
+              onClose={this.props.onClose}
+              fullWidth>
+                <DialogTitle>
+                  Select Observers
+                </DialogTitle>
+                <DialogContent>
+                  <Table style={{width:'100%'}}>
+                      <TableBody>
+                      {this.renderList()}
+                      </TableBody>
+                  </Table>
+                </DialogContent>
+            </Dialog>
+          )     
       }
     }
 }

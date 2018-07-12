@@ -24,15 +24,12 @@ export default class ObsFieldMod extends Component {
 
       render(){
       	return(
-
       		<div>
       			<button type="button" onClick={this.toggleModal}>
               Select Observers
             </button>
-
             <ObserverFields show={this.state.isOpen}
             	onClose={this.toggleModal}>
-            	<ObserverFields/>
             </ObserverFields>
       		</div>
       	)
