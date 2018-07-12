@@ -54,8 +54,12 @@ export const resolvers = {
         
         allCampaignLogsheets(){
             return CampaignLogsheet.findAll();
+        },
 
+        allPersons(){
+            return Person.findAll();
         }
+
 
     },
     //mutation is responsible for updating the state of the server

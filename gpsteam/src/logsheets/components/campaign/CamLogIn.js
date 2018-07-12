@@ -40,7 +40,7 @@ class CamLogIn extends Component {
 
         }
       }).then(({data}) => {
-        //if data from mutation is returned, submit success!
+        //if data from mutation is returned, refetch here!
         alert("Submit success!");
       }).catch(error =>{
         alert("Submit unsuccessful!");

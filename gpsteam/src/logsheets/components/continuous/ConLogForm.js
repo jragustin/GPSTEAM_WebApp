@@ -10,6 +10,8 @@ import { Field, reduxForm } from 'redux-form';
 /*
 These are for dates
 */
+
+import ObsFieldMod from '../ObsFieldMod'
 import DateTimePicker from 'react-widgets/lib/DateTimePicker'
 import moment from 'moment'
 import momentLocaliser from 'react-widgets-moment'
@@ -25,14 +27,21 @@ const renderDateTimePicker = ({ input: { onChange, value }, showTime }) =>
     time={showTime}
     value={!value ? null : new Date(value)}
   />
+
 /*
 For more info: https://redux-form.com/6.1.0/examples/simple/
 */
-
 //ConLogForm is Continuous Logsheet Form
 let ConLogForm = props => {
   const { handleSubmit, pristine, reset, submitting } = props
+  
   return <form onSubmit={handleSubmit}>
+      <div>
+        <label>Observers</label>
+        <div>
+          <ObsFieldMod/>
+        </div>
+      </div>
       <div>
         <label>Power</label>
         <div>

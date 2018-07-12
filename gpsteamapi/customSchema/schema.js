@@ -42,6 +42,7 @@ export const typeDefs = `
         survey_type_id: Int
         marker_id: Int
     }
+
     type CampaignLogsheet{
         id: ID!
         date: String!
@@ -72,6 +73,20 @@ export const typeDefs = `
         receiver_id: Int
     }
 
+    type Person{
+        id: ID!
+        firstName: String!
+        lastName: String!
+        nickName: String!
+        birthdate: String
+        position_id: Int
+        division_id: Int
+        site_id: Int
+        person_type_id: Int
+        non_staff_position_id: Int
+        office_location_id: Int
+    }
+
     type AuthPayload {
         token: String!
         refreshToken: String!
@@ -90,6 +105,7 @@ export const typeDefs = `
         allSites: [Site]
         allContinuousLogsheets: [ContinuousLogsheet]
         allCampaignLogsheets: [CampaignLogsheet]
+        allPersons: [Person]
     }
 
     type Mutation {

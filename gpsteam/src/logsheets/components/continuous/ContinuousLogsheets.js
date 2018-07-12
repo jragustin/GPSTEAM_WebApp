@@ -26,8 +26,7 @@ class ContinuousLogsheets extends Component {
         return( this.props.data.allContinuousLogsheets.map((continuousLogsheet) => {
                 return(
 
-                    <li key={continuousLogsheet.id}>
-                        
+                    <li key={continuousLogsheet.id}>     
                         {continuousLogsheet.id}
                     </li>
                     );
@@ -59,4 +58,4 @@ class ContinuousLogsheets extends Component {
     }
 }
 
-export default graphql(continuousLogsheetsQuery,{options:continuousLogsheetsFetch})(ContinuousLogsheets)
+export default graphql(continuousLogsheetsQuery, {options:continuousLogsheetsFetch})(ContinuousLogsheets)
