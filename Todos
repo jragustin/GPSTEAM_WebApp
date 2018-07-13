@@ -1,0 +1,23 @@
+Todos:
+
+1. display timeseries once site in map is clicked
+2. display year > days > logsheet details once view details is clicked on the search sidebar
+3. expand central display of the sites page 
+4. search funcitonality for the sites page
+5. campaign/continuous filter for sites page
+6. campaign/continuous logsheet form
+7. step by step documentation
+
+
+in MAP
+1. in Map: if clicked on the site locator (basta alam mo na yun), the site details and time series will pop up
+2. display year > days > logsheet details once view details is clicked on the search sidebar
+3. if view logsheet in map there will be an option to edit the logsheet
+
+in SITES
+1. the will be an add button to add sites
+2. filter campaign and continuous logsheet
+3. when clicked details, details will pop up then there will be an option to edit or delete sites
+
+in LOGSHEETS
+1. make it logsheet form that adds logsheet only
