@@ -55,10 +55,26 @@ class CampaignLogsheets extends Component {
     render() {
         if(this.props.data.loading) {
             return (                
-                 <Grid container centered='true' align='center'>
-                    <CircularProgress className={this.props.progress} thickness={7}/>
-                    <Typography color='primary'>Loading...</Typography>
-                </Grid>
+                <div>
+                    <Grid container centered='true' align='center'>
+                        <Grid item align='center' xs={12}>
+                            <Paper style={{maxHeight:500, 
+                                height:'auto', 
+                                overflow:'auto', 
+                                width:'60%', 
+                                textAlign:'center', 
+                                marginTop:10, 
+                                flexGrow:1, 
+                                overflowX:'auto'}} 
+                                center='true'>
+                                
+                                <CircularProgress className={this.props.progress} thickness={7}/>
+                                <Typography color='primary'>Loading...</Typography>
+                                
+                            </Paper>
+                        </Grid>
+                    </Grid>
+                </div>
             );
         }
         return (

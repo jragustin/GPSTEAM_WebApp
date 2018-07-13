@@ -1,18 +1,5 @@
-/*
-There is a bug here when opened...
-Sometimes it becomes an error, however
-if you rearrange 
-    "return this.props.data.sites.map((site) => {"
-to
-    "return 
-        this.props.data.sites.map((site) => {"
-
-then save and wait for reload then change back to
-
-    "return this.props.data.sites.map((site) => {"
-
-it's all well and good. It doesn't make sense I know
-but just do it
+/*note: whenever getting data from this.props.data that came from the gql
+always check if the data is still loading in order to avoid error undefined
 */
 
 import React, { Component } from 'react'
@@ -84,11 +71,27 @@ class Sites extends Component {
     
     render() {
         if(this.props.data.loading) {
-            return (                
-                 <Grid container centered='true' align='center'>
-                    <CircularProgress className={this.props.progress} thickness={7}/>
-                    <Typography color='primary'>Loading...</Typography>
+            return (
+            <div>
+                <Grid container centered='true' align='center'>
+                    <Grid item align='center' xs={12}>
+                        <Paper style={{maxHeight:500, 
+                            height:'auto', 
+                            overflow:'auto', 
+                            width:'60%', 
+                            textAlign:'center', 
+                            marginTop:10, 
+                            flexGrow:1, 
+                            overflowX:'auto'}} 
+                            center='true'>
+                            
+                            <CircularProgress className={this.props.progress} thickness={7}/>
+                            <Typography color='primary'>Loading...</Typography>
+                            
+                        </Paper>
+                    </Grid>
                 </Grid>
+            </div>
             );
         }
         return (

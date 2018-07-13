@@ -3,6 +3,9 @@ import gql from "graphql-tag";
 import { graphql } from 'react-apollo';
 import { Paper, Grid, List } from '@material-ui/core';
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { Typography } from 'material-ui'
+
 /*
 To see the documetation on queries, see Sites.js
 */
@@ -33,6 +36,14 @@ class Users extends Component {
 	}
 
     render() {
+    	if(this.props.data.loading) {
+            return (                
+                 <Grid container centered='true' align='center'>
+                    <CircularProgress className={this.props.progress} thickness={7}/>
+                    <Typography color='primary'>Loading...</Typography>
+                </Grid>
+            );
+        }
         return (
         	<Grid container centered='true' align='center'>
 	        	<Grid item align='center' xs={12}>
