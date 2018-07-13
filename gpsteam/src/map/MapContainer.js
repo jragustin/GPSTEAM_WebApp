@@ -6,11 +6,9 @@ import { Drawer, IconButton, Hidden } from 'material-ui/';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
 import SearchIcon from 'material-ui-icons/Search';
 import { fade } from 'material-ui/styles/colorManipulator';
-import SearchBar from 'material-ui-icons/Search'
 import { connect } from 'react-redux'
 import * as mapActions from './mapActions'
 import { client } from '../index'
-import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
 import PhMap from './Map'

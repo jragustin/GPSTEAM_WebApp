@@ -9,7 +9,7 @@ import { graphql } from 'react-apollo'
 import ConLogForm from './ConLogForm';
 import PropTypes from 'prop-types';
 
-import { Button, Paper, Slide, Dialog, DialogTitle, DialogContent } from '@material-ui/core';
+import { Slide, Dialog, DialogTitle, DialogContent } from '@material-ui/core';
 
 /*
 to define what types of values are coming in, we need to 

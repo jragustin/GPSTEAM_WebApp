@@ -4,7 +4,7 @@ import { withStyles } from 'material-ui/styles';
 import Header from './Header'
 import Sidebar from './Sidebar'
 import Contents from './Contents'
-
+import CssBaseline from '@material-ui/core/CssBaseline';
 /*
   App collects the contents of the application like the Header, sidebar and the contents
 */
@@ -74,6 +74,7 @@ class App extends React.Component {
 
     return (
       <div className={classes.root}>
+        <CssBaseline/>
         <div className={classes.appFrame}>
           <Header classes={classes} handleDrawerToggle={this.handleDrawerToggle}/>
           <Sidebar classes={classes} handleDrawerToggle={this.handleDrawerToggle} theme={theme} mobileOpen={this.state.mobileOpen}/>

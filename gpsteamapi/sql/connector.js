@@ -13,7 +13,7 @@ if (env === 'dev') {
 }
 
 // define the database
-export let db = new Sequelize(dbname, 'root', '', {
+export let db = new Sequelize(dbname, 'root', 'password', {
   dialect: 'mysql',
   host: 'localhost',
   port: '3306',

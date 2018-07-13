@@ -85,7 +85,7 @@ class SitesList extends Component {
   }
 
   _rowRenderer = ({index, isScrolling, key, style }) => {
-      const { sites, selectedSite, classes } = this.props
+      const { sites, selectedSite } = this.props
       let site = sites[index]
 
       let el = document.getElementById('followParent').classList

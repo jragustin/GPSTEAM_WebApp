@@ -12,11 +12,6 @@ import AddIcon from '@material-ui/icons/Add';
 This is the button that is responsible for 
 showing the form
 */
-const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit,
-  },
-});
 
 export default class CamLogMod extends Component {
     constructor(props) {

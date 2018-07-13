@@ -16,19 +16,18 @@ but just do it
 */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types';
 
 import gql from "graphql-tag";
 import { graphql } from 'react-apollo';
 
-import { Paper, Modal, Button, Grid, List, TextField, Table, TableRow, TableBody, TableCell, TableHead } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { Paper, Grid, Table, TableRow, TableBody, TableCell} from '@material-ui/core';
+// import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Typography } from 'material-ui'
 
-import { List as RVList, AutoSizer } from 'react-virtualized';
-import SearchIcon from 'material-ui-icons/Search'
-import SiteDetails from './SiteDetails'
+// import { List as RVList, AutoSizer } from 'react-virtualized';
+// import SearchIcon from 'material-ui-icons/Search'
+// import SiteDetails from './SiteDetails'
 
 
 /*
@@ -64,24 +63,6 @@ other components will not be seen on the client side.
 // indicates that the data  will be from cache and database directly
 const sitesFetch = {fetchPolicy: 'cache-and-network'}
 
-const styles = theme => ({
-  progress: {
-    margin: theme.spacing.unit,
-  },
-});
-
-
-function getModalStyle() {
-  const top = 50 ;
-  const left = 50 ;
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
 /*
 render the sites then pass 'site' as a property to the component SiteDetails to show more details of the sites
 */
@@ -93,7 +74,7 @@ class Sites extends Component {
                     <TableRow key={site.id}>
                         <TableCell>{site.name}</TableCell>
                         <TableCell>{site.location}</TableCell>
-                        <TableCell numeric><SiteDetails site={site}/></TableCell>    
+                        {/*<TableCell numeric><SiteDetails site={site}/></TableCell>*/}    
                     </TableRow>
     	   			);
     	   		}

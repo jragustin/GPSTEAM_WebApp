@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import gql from "graphql-tag";
 import { graphql } from 'react-apollo';
 
-import { Paper, Modal, Button, Grid, List, TextField, Table, TableRow, TableBody, TableCell, TableHead } from '@material-ui/core';
+import { Paper, Grid, Table, TableRow, TableBody, TableCell, } from '@material-ui/core';
 import CamLogMod from './CamLogMod'
 
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -13,11 +13,6 @@ import { Typography } from 'material-ui'
 /*
 To see the documetation on queries, see Sites.js
 */
-const styles = theme => ({
-  progress: {
-    margin: theme.spacing.unit,
-  },
-});
 
 const campaignLogsheetsQuery = gql `
 	{

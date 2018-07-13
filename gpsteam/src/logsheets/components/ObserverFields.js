@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo'
 import PropTypes from 'prop-types';
-import { Paper, Slide, Dialog, DialogTitle, DialogContent, Table, TableRow, TableBody, TableCell, TableHead } from '@material-ui/core';
+import { Slide, Dialog, DialogTitle, DialogContent, Table, TableRow, TableBody, TableCell } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 
 /*
@@ -30,19 +30,6 @@ const peoplesFetch = {fetchPolicy: 'cache-and-network'}
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
-}
-
-function inArray(value, array){
-  var count = array.length;
-  var i;
-  console.log(count)
-  for(i=0;i<count;i++){
-    
-    if(array[i] === value){
-      return true;
-    }
-    return false;
-  }
 }
 
 class ObserverFields extends Component {

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Button, Paper, Slide, Dialog, DialogTitle, DialogContent, Grid, Table, TableRow, TableCell, TableBody } from '@material-ui/core';
 
 //transition effects
