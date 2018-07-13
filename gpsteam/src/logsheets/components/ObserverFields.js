@@ -32,21 +32,44 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
+function inArray(value, array){
+  var count = array.length;
+  var i;
+  console.log(count)
+  for(i=0;i<count;i++){
+    
+    if(array[i] === value){
+      return true;
+    }
+    return false;
+  }
+}
+
 class ObserverFields extends Component {
     constructor() {
       super()
       this.state = {
+       observerList: [],
        checked: false
       }
     }
+
+    
 
     handleChange(event) {
       /*
       put checked values in an array in this function
       */
-
+      const { observerList } = this.state
+      // console.log(observerList)
       if (event.target.checked) {
-        console.log(event.target.value," is printed because checked is ",event.target.checked)
+       // observerList = observerList.push(event.target.value)
+        console.log(observerList.includes(event.target.value))
+        if(!observerList.includes(event.target.value)){
+          observerList.push(event.target.value)
+          console.log(observerList)
+        }
+
       }
     }
 
@@ -58,7 +81,7 @@ class ObserverFields extends Component {
                         <TableCell>
                           <Checkbox color='primary'
                           onChange={this.handleChange.bind(this)}
-                          value={person.id}/>
+                          value={person.firstName}/>
                         </TableCell>
                     </TableRow>
                     );
