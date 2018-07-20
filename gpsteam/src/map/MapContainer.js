@@ -4,12 +4,13 @@ import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
 import { Drawer, IconButton, Hidden } from 'material-ui/';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
-import SearchIcon from 'material-ui-icons/Search';
+// import SearchIcon from 'material-ui-icons/Search';
 import { fade } from 'material-ui/styles/colorManipulator';
 import { connect } from 'react-redux'
 import * as mapActions from './mapActions'
 import { client } from '../index'
 import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
 
 import PhMap from './Map'
 import SitesList from './SitesList'
@@ -37,12 +38,6 @@ const styles = theme => ({
     position: 'relative',
     height: '100%',
     width: drawerWidth,
-    border: 0
-  },
-  drawerPaperBottom: {
-    position: 'relative',
-    height: '50vh',
-    width: '100%',
     border: 0
   },
   drawerHeader: {
@@ -108,7 +103,7 @@ const styles = theme => ({
       },
     },
   },
-  search: {
+/*  search: {
     width: theme.spacing.unit * 9,
     height: '100%',
     position: 'absolute',
@@ -116,17 +111,17 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  },*/
   input: {
-    font: 'inherit',
+    font: 'inherit',/*
     padding: `${theme.spacing.unit}px ${theme.spacing.unit}px ${theme.spacing.unit}px ${theme
-      .spacing.unit * 9}px`,
+      .spacing.unit * 9}px`,*/
     border: 0,
     display: 'block',
     verticalAlign: 'middle',
     whiteSpace: 'normal',
     background: 'none',
-    margin: 0, // Reset for Safari
+    margin: 0,
     color: 'inherit',
     width: '50%',
     '&:focus': {
@@ -134,6 +129,8 @@ const styles = theme => ({
     },
   }
 });
+
+const sitesFetch = {fetchPolicy: 'cache-and-network'}
 
 class Map extends React.Component {
   constructor() {
@@ -152,6 +149,7 @@ class Map extends React.Component {
                     surveyType {
                         type
                     }
+                   
                 }
             }
         `
@@ -265,9 +263,9 @@ class Map extends React.Component {
         <div className={classes.drawerInner}>
           <div className={classes.drawerHeader}>
             <div className={classes.wrapper}>
-              <div className={classes.search}>
+            {/*  <div className={classes.search}>
                 <SearchIcon color='contrast'/>
-              </div>
+              </div>*/}
               {/*
               The input bar for the search. To know more about searches in
               React, view:
@@ -289,41 +287,20 @@ class Map extends React.Component {
       </Drawer>
     );
 
-// This does not make sense. Please uncomment if you see the significance doing this.
-/*    const drawerBottom = (<Drawer
-        type="persistent"
-        classes={{
-          paper: classes.drawerPaperBottom,
-        }}
-        anchor='bottom'
-        open={drawerOpen}
-      >
-        <div className={classes.drawerInner}>
-          <div className={classes.drawerHeader}>
-            <SearchBox />
-            <IconButton onClick={this.props.closeDrawer}>
-              <ChevronRightIcon />
-            </IconButton>
-          </div>
-          <SitesList sites={list}/>
-        </div>
-      </Drawer>
-    );
-*/
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>
           <main
             className={classNames(classes.content, classes[`content-style`], {
               [classes.contentShift]: drawerOpen,
+              //[classes.contentShift]: detailsOpen,
               [classes[`contentShift-margin`]]: drawerOpen,
+              //[classes[`contentShift-margin`]]: detailsOpen,
             })}
           >
             <PhMap sites={sites}/>
           </main>
-          <Hidden smDown>{drawerRight}</Hidden>
-          {/*part of the nonsense*/}
-          {/*<Hidden smUp>{drawerBottom}</Hidden>*/}
+          <Hidden>{drawerRight}</Hidden>
         </div>
       </div>
     );

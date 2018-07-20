@@ -1,6 +1,10 @@
 import React, { Component }  from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
+
+import { Drawer, IconButton, Hidden } from 'material-ui/';
+import ChevronRightIcon from 'material-ui-icons/ChevronRight';
+
 import Avatar from 'material-ui/Avatar';
 import { ListItem, ListItemText } from 'material-ui/List';
 import Button from 'material-ui/Button';
@@ -10,6 +14,10 @@ import * as mapActions from './mapActions'
 
 import Follow from '../follow.svg'
 import { setTimeout } from 'timers';
+
+import SiteDetails from './SiteDetails'
+
+const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
@@ -24,6 +32,24 @@ const styles = theme => ({
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
+  },
+  drawerPaperRight: {
+    position: 'relative',
+    height: '100%',
+    width: drawerWidth,
+    border: 0
+  },
+  drawerHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: '0 8px',
+    backgroundColor: '#bdc3c7',
+    ...theme.mixins.toolbar,
+  },
+  drawerInner: {
+    width: '100%',
+    height: '100%'
   },
   follow: {
     top: 0,
@@ -48,7 +74,8 @@ class SitesList extends Component {
     super(props, context);
     this.state = {
       currentLetter: 'A',
-      currentRows: []
+      currentRows: [],
+      site: null
     };
     this._getRowHeight = this._getRowHeight.bind(this);
   }
@@ -102,7 +129,6 @@ class SitesList extends Component {
       }
 
       let isSelected = selectedSite === site.name ? true : false
-
       return(
         <div key={key} style={{...style, backgroundColor: isSelected ? '#FFF' : '#ecf0f1' }}>
           <ListItem button={!isSelected} 
@@ -116,7 +142,17 @@ class SitesList extends Component {
                 : <span>unknown</span>
               }
             />
-            {isSelected && <Button color='accent' style={{ alignSelf: 'flex-end', marginBottom: '15px' }}>view details</Button>}
+            {/*
+            this handles the selected site It will open a drawer containing the logsheets of every 
+            site.
+            */}
+            {isSelected && 
+              <Button
+              onClick={(e) => {
+              e.preventDefault()
+              this.props.openDetails()
+            }} color='accent' style={{ alignSelf: 'flex-end', marginBottom: '15px' }}>view details</Button>}
+
           </ListItem>
         </div>
       )
@@ -155,8 +191,41 @@ class SitesList extends Component {
   }
 
   render() {
-    const { classes, sites } = this.props;
+    const { classes, sites, detailsOpen, selectedSite } = this.props;
     const { currentLetter } = this.state;
+
+
+    /*
+    passes the index of the current site clicked with the details
+    */
+    let siteIndex = sites.findIndex(s => {
+      return s.name === selectedSite
+    })
+       
+    const detailsRight = (
+      <Drawer
+        classes={{
+          paper: classes.drawerPaperRight,
+        }}
+        anchor='right'
+        open={detailsOpen}
+      >
+        <div className={classes.drawerInner}>
+          <div className={classes.drawerHeader}>
+            <div>
+              Logsheets
+            </div>
+            <IconButton onClick={this.props.closeDetails}>
+              <ChevronRightIcon/>
+            </IconButton>
+          </div>
+          {/*
+          This is where the value ofthe site in the index is passed
+          */}
+          <SiteDetails site={sites[siteIndex]}/>
+        </div>
+      </Drawer>
+    );
 
     return (
       <div className={classes.root}>
@@ -188,6 +257,7 @@ class SitesList extends Component {
               </div>
             )}
         </AutoSizer>
+        <Hidden>{detailsRight}</Hidden>
       </div>
     );
   }

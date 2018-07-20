@@ -58,7 +58,6 @@ export const typeDefs = `
         site_id: Int
         antenna_id: Int
         receiver_id: Int
-        #site: Site
     }
 
     type ContinuousLogsheet{
@@ -72,7 +71,6 @@ export const typeDefs = `
         site_id: Int
         antenna_id: Int
         receiver_id: Int
-        #site: Site
     }
 
     type Person{
@@ -108,6 +106,8 @@ export const typeDefs = `
         allContinuousLogsheets: [ContinuousLogsheet]
         allCampaignLogsheets: [CampaignLogsheet]
         allPersons: [Person]
+        sitesCampaignLogsheets(site_id: ID): [CampaignLogsheet]
+        sitesContinuousLogsheets(site_id: ID): [ContinuousLogsheet]
     }
 
     type Mutation {

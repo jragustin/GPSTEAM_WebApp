@@ -4,6 +4,7 @@ const initialState = {
     showContinuousSites: true,
     showFaultLines: false,
     drawerOpen: false,
+    detailsOpen: false,
     enableCluster: true,
     position: [ 12.8797,  121.7740 ],
     zoom: 6
@@ -40,6 +41,16 @@ export const mapReducer = (state = initialState , action) => {
             return {
                 ...state,
                 drawerOpen: false
+            }
+        case 'OPEN_DETAILS':
+            return {
+                ...state,
+                detailsOpen: true
+            }
+        case 'CLOSE_DETAILS':
+            return {
+                ...state,
+                detailsOpen: false
             }
         case 'SET_ZOOM': 
             return {
