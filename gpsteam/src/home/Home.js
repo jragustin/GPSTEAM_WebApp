@@ -60,7 +60,7 @@ export const sitesQuery = gql`
             latitude
             surveyType {
                 type
-            }
+            }   
         }
       }
 `

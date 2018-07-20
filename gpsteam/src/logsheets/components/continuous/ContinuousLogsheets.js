@@ -26,6 +26,9 @@ const continuousLogsheetsQuery = gql `
             site_id:
             antenna_id
             receiver_id
+            site{
+                id
+            }
         }
     }
 `

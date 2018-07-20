@@ -227,10 +227,6 @@ class PhMap extends Component {
                             e.preventDefault()
                             this.props.openDrawer()
 
-                           /* setTimeout(() => {
-                                document.getElementById('search-input').focus()
-                            }, 500)*/
-
                         }} role='button' href=''>
                             <SearchIcon />
                         </a>

@@ -23,6 +23,14 @@ export const closeDrawer = () => ({
     type: 'CLOSE_DRAWER'
 })
 
+export const openDetails = () => ({
+    type: 'OPEN_DETAILS'
+})
+
+export const closeDetails = () => ({
+    type: 'CLOSE_DETAILS'
+})
+
 export const setZoom = (zoom) => ({
     type: 'SET_ZOOM',
     payload: zoom

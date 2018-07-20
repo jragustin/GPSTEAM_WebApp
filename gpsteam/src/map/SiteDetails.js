@@ -1,22 +1,22 @@
-/*For the bug (is not a property), refer to Sites.js*/
+/*
+This file will contain all the logsheets of the site clicked.
+It will only be available for viewing (Read), but if the user wants to
+edit or delete a file, he must go to the sites tab.
+*/
 
-import React, { Component } from 'react'
+import React, { Component }  from 'react';
 import gql from "graphql-tag";
 import { graphql } from 'react-apollo';
 
-import { Paper, Grid, Table, TableRow, TableBody, TableCell, } from '@material-ui/core';
-import CamLogMod from './CamLogMod'
+import { Paper, Grid } from '@material-ui/core';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Typography } from 'material-ui'
+// import PropTypes from 'prop-types';
 
-/*
-To see the documetation on queries, see Sites.js
-*/
-
-const campaignLogsheetsQuery = gql `
-	{
-		allCampaignLogsheets{
+const sitesCampaignLogsheets = gql `
+	query sitesCampaignLogsheets($site_id: ID) {
+		sitesCampaignLogsheets(site_id:$site_id){
 			id
             date
             heightNorthMeters
@@ -33,28 +33,56 @@ const campaignLogsheetsQuery = gql `
             receiver_id 
 		}
 	}
+	
 `
+
 /*
-To see the documetation on fetch, see Sites.js
-*/
-const campaignLogsheetsFetch = {fetchPolicy: 'cache-and-network'}
-
-class CampaignLogsheets extends Component {
-    renderList(){
-        console.log(this.props.data)
-    	return ( this.props.data.allCampaignLogsheets.map((campaignLogsheet) => {
-    	   		return(
-    	   			<TableRow key={campaignLogsheet.id}>
-                        <TableCell>{campaignLogsheet.date}</TableCell>
-                    </TableRow>
-    	   			);
-    	   		}
-    	   	)
-    	);
+const continuousLogsheetsQuery = gql `
+    {
+        sitesContinuousLogsheets(site_id:ID){
+            id
+            isPowerOn
+            date
+            batteryCondition
+            chargerCondition
+            otherNotes
+            createdAt
+            site_id:
+            antenna_id
+            receiver_id
+        }
     }
+`*/
+const siteDetailsFetch = {fetchPolicy: 'cache-and-network'}
 
-    render() {
-        if(this.props.data.loading) {
+class SiteDetails extends Component {
+  
+  siteLogger(site){
+    try {
+    	console.log(site)
+        if (site.surveyType.type === 'campaign') {
+            return(
+                <div>    
+                    {site.name}
+                </div>
+            );
+              
+        }
+        return(
+            <div>    
+                {site.name}
+            </div>
+        );
+    	
+    } catch (error) {
+       	// console.log('Disregard this error: ',error)
+    }
+  }
+
+  render() {
+  	const { site, data } = this.props
+
+  	if(data.loading) {
             return (                
                 <div>
                     <Grid container centered='true' align='center'>
@@ -78,11 +106,11 @@ class CampaignLogsheets extends Component {
                 </div>
             );
         }
+        
         return (
-        	<div>
+            <div>
                 <Grid container centered='true' align='center'>
                     <Grid item align='center' xs={12}>
-                        <CamLogMod/>
                         <Paper style={{maxHeight:500, 
                             height:'80%', 
                             overflow:'auto', 
@@ -92,20 +120,14 @@ class CampaignLogsheets extends Component {
                             flexGrow:1, 
                             overflowX:'auto'}} 
                             center='true'>
-                            <Table style={{width:'100%'}}>
-                              
-                                <TableBody>
-                                {this.renderList()}
-                                </TableBody>
-
-                            </Table>
+                                {this.siteLogger(site)}
                         </Paper>
                     </Grid>
                 </Grid>
             </div>
 
         );
-    }
+  }
 }
 
-export default graphql(campaignLogsheetsQuery, {options:campaignLogsheetsFetch})(CampaignLogsheets)
+export default graphql(sitesCampaignLogsheets, {options:siteDetailsFetch})(SiteDetails)

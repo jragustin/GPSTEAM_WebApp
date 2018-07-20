@@ -58,6 +58,23 @@ export const resolvers = {
 
         allPersons(){
             return Person.findAll();
+        },
+
+        sitesCampaignLogsheets(_, args){
+            return CampaignLogsheet.findAll({
+                where: {
+                    site_id: args.site_id
+                }
+            });
+        },
+
+        sitesContinuousLogsheets(_, args, { site }){
+            return ContinuousLogsheet.findAll({
+                where: {
+                    site_id: args.site_id
+                }
+            });
+
         }
 
 
