@@ -4,8 +4,6 @@ import { graphql } from 'react-apollo'
 import CamLogForm from './CamLogForm';
 import PropTypes from 'prop-types';
 
-import { Slide, Dialog, DialogTitle, DialogContent } from '@material-ui/core';
-
 /*
 See ConLogIn to view documentation in mutations
 */
@@ -16,10 +14,6 @@ const createCampaignLogsheet = gql`
     }
   }
 `
-function Transition(props) {
-  return <Slide direction="up" {...props} />;
-}
-
 class CamLogIn extends Component {
     
     submitForm =(values) => {
@@ -54,34 +48,12 @@ class CamLogIn extends Component {
     }
 
     render() {
-      if(!this.props.show) {
-        return null;
-      }else{
-
-          return ( 
-            <Dialog
-              open
-              TransitionComponent={Transition}
-              keepMounted
-              onClose={this.props.onClose}
-              fullWidth>
-                <DialogTitle>
-                  Fill out Campaign Logsheet
-                </DialogTitle>
-                <DialogContent>
-                  <CamLogForm onSubmit={this.submitForm.bind(this)} />
-                </DialogContent>
-            </Dialog>
-          )
-      }
+        return ( 
+          <CamLogForm onSubmit={this.submitForm.bind(this)} />
+        )
     }
 }
 
-CamLogIn.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  show: PropTypes.bool,
-  children: PropTypes.node
-};
 export default graphql(createCampaignLogsheet,{
   name:"createCampaignLogsheet"
 })(CamLogIn)

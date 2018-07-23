@@ -41,13 +41,13 @@ class ObserverFields extends Component {
       }
     }
 
-    
-
     handleChange(event) {
       /*
       put checked values in an array in this function
       */
       const { observerList } = this.state
+
+
       // console.log(observerList)
       if (event.target.checked) {
        // observerList = observerList.push(event.target.value)
@@ -57,7 +57,17 @@ class ObserverFields extends Component {
           console.log(observerList)
         }
 
+      }else{
+        if(observerList.includes(event.target.value)){
+          observerList.splice(event.target.value.index+1,1)
+          console.log(observerList)
+        }
+
       }
+    }
+
+    passList=()=>{
+      console.log("Submitted",this.state.observerList)
     }
 
     renderList(){
@@ -98,6 +108,9 @@ class ObserverFields extends Component {
                       </TableBody>
                   </Table>
                 </DialogContent>
+                <button type="submit" onClick={this.passList}>
+                  Submit
+                </button>
             </Dialog>
           )     
       }

@@ -106,8 +106,8 @@ export const typeDefs = `
         allContinuousLogsheets: [ContinuousLogsheet]
         allCampaignLogsheets: [CampaignLogsheet]
         allPersons: [Person]
-        sitesCampaignLogsheets(site_id: ID): [CampaignLogsheet]
-        sitesContinuousLogsheets(site_id: ID): [ContinuousLogsheet]
+        campaignSites: [Site]
+        continuousSites: [Site]
     }
 
     type Mutation {

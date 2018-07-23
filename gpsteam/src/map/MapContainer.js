@@ -324,21 +324,21 @@ class Map extends React.Component {
     );
 
     return (
-      <div className={classes.root}>
-        <div className={classes.appFrame}>
-          <main
-            className={classNames(classes.content, classes[`content-style`], {
-              [classes.contentShift]: drawerOpen,
-              //[classes.contentShift]: detailsOpen,
-              [classes[`contentShift-margin`]]: drawerOpen,
-              //[classes[`contentShift-margin`]]: detailsOpen,
-            })}
-          >
-            <PhMap sites={sites}/>
-          </main>
-          <Hidden>{drawerRight}</Hidden>
+        <div className={classes.root}>
+          <div className={classes.appFrame}>
+            <main
+              className={classNames(classes.content, classes[`content-style`], {
+                [classes.contentShift]: drawerOpen,
+                //[classes.contentShift]: detailsOpen,
+                [classes[`contentShift-margin`]]: drawerOpen,
+                //[classes[`contentShift-margin`]]: detailsOpen,
+              })}
+            >
+              <PhMap sites={sites}/>
+            </main>
+            <Hidden>{drawerRight}</Hidden>
+          </div>
         </div>
-      </div>
     );
   }
 }

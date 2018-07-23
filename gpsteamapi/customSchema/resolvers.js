@@ -60,18 +60,18 @@ export const resolvers = {
             return Person.findAll();
         },
 
-        sitesCampaignLogsheets(_, args){
-            return CampaignLogsheet.findAll({
+        campaignSites(_, args){
+            return Site.findAll({
                 where: {
-                    site_id: args.site_id
+                    survey_type_id: 2
                 }
             });
         },
 
-        sitesContinuousLogsheets(_, args, { site }){
-            return ContinuousLogsheet.findAll({
+        continuousSites(_, args, { site }){
+            return Site.findAll({
                 where: {
-                    site_id: args.site_id
+                    survey_type_id: 1
                 }
             });
 

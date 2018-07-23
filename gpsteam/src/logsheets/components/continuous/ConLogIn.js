@@ -9,8 +9,6 @@ import { graphql } from 'react-apollo'
 import ConLogForm from './ConLogForm';
 import PropTypes from 'prop-types';
 
-import { Slide, Dialog, DialogTitle, DialogContent } from '@material-ui/core';
-
 /*
 to define what types of values are coming in, we need to 
 put $(value_name):(value_type).
@@ -29,10 +27,6 @@ const createContinuousLogsheet = gql`
     }
   }
 `
-function Transition(props) {
-  return <Slide direction="up" {...props} />;
-}
-
 /*
 This ConLogIn is a component which is shown in a modal.
 */
@@ -66,33 +60,12 @@ class ConLogIn extends Component {
     }
 
     render() {
-      if(!this.props.show) {
-        return null;
-      }else{
-          return ( 
-            <Dialog
-              open
-              TransitionComponent={Transition}
-              keepMounted
-              onClose={this.props.onClose}
-              fullWidth>
-                <DialogTitle>
-                  Fill out Campaign Logsheet
-                </DialogTitle>
-                <DialogContent>
-                  <ConLogForm onSubmit={this.submitForm.bind(this)} />
-                </DialogContent>
-            </Dialog>
-          )
-      }
+      return ( 
+        <ConLogForm onSubmit={this.submitForm.bind(this)} />
+      )
     }
 }
 
-ConLogIn.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  show: PropTypes.bool,
-  children: PropTypes.node
-};
 export default graphql(createContinuousLogsheet,{
   name:"createContinuousLogsheet"
 })(ConLogIn)
