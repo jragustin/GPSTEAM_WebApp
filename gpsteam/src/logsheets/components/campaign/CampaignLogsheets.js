@@ -41,16 +41,15 @@ const campaignLogsheetsFetch = {fetchPolicy: 'cache-and-network'}
 
 class CampaignLogsheets extends Component {
     renderList(){
-        console.log(this.props.data)
+        
     	return ( this.props.data.allCampaignLogsheets.map((campaignLogsheet) => {
-    	   		return(
-    	   			<TableRow key={campaignLogsheet.id}>
-                        <TableCell>{campaignLogsheet.date}</TableCell>
-                    </TableRow>
-    	   			);
-    	   		}
-    	   	)
-    	);
+	   		return(
+	   			<TableRow key={campaignLogsheet.id}>
+                    <TableCell>{campaignLogsheet.date}</TableCell>
+                </TableRow>
+	   			);
+	   		}
+	   	));
     }
 
     render() {

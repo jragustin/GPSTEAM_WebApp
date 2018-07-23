@@ -44,7 +44,7 @@ class NavList extends React.Component {
 
     return (
       <List className={classes.root} subheader={<ListSubheader>Site Navigation</ListSubheader>}>
-        <ListItem button component={Link} to='/dash/map'>
+        <ListItem button component={Link} to=''>
           <ListItemIcon>
             <MapIcon />
           </ListItemIcon>

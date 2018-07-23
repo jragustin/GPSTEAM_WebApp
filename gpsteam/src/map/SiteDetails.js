@@ -8,105 +8,45 @@ import React, { Component }  from 'react';
 import gql from "graphql-tag";
 import { graphql } from 'react-apollo';
 
-import { Paper, Grid } from '@material-ui/core';
+import { Paper, Grid, Table, TableRow, TableBody, TableCell } from '@material-ui/core';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Typography } from 'material-ui'
-// import PropTypes from 'prop-types';
-
-const sitesCampaignLogsheets = gql `
-	query sitesCampaignLogsheets($site_id: ID) {
-		sitesCampaignLogsheets(site_id:$site_id){
-			id
-            date
-            heightNorthMeters
-            heightEastMeters
-            heightSouthMeters
-            heightWestMeters
-            timeStart
-            timeEnd
-            failureTime
-            azimuth
-            notes
-            site_id
-            antenna_id
-            receiver_id 
-		}
-	}
-	
-`
-
-/*
-const continuousLogsheetsQuery = gql `
-    {
-        sitesContinuousLogsheets(site_id:ID){
-            id
-            isPowerOn
-            date
-            batteryCondition
-            chargerCondition
-            otherNotes
-            createdAt
-            site_id:
-            antenna_id
-            receiver_id
-        }
-    }
-`*/
-const siteDetailsFetch = {fetchPolicy: 'cache-and-network'}
 
 class SiteDetails extends Component {
   
   siteLogger(site){
     try {
-    	console.log(site)
+    	
         if (site.surveyType.type === 'campaign') {
-            return(
-                <div>    
-                    {site.name}
-                </div>
-            );
-              
+            return( site.campaignLogsheets.edges.map((campaign) => {
+                return(
+
+                    <TableRow key={campaign.node.id}>
+                        <TableCell>{campaign.node.date}</TableCell>
+                    </TableRow>
+                    );
+                }
+            ));    
         }
-        return(
-            <div>    
-                {site.name}
-            </div>
-        );
+        return( site.continuousLogsheets.edges.map((continuous) => {
+            return(
+
+                <TableRow key={continuous.node.id}>
+                    <TableCell>{continuous.node.date}</TableCell>
+                </TableRow>
+                );
+            }
+        ));
     	
     } catch (error) {
-       	// console.log('Disregard this error: ',error)
+       	console.log('Disregard this error: ',error)
     }
   }
 
   render() {
   	const { site, data } = this.props
 
-  	if(data.loading) {
-            return (                
-                <div>
-                    <Grid container centered='true' align='center'>
-                        <Grid item align='center' xs={12}>
-                            <Paper style={{maxHeight:500, 
-                                height:'auto', 
-                                overflow:'auto', 
-                                width:'60%', 
-                                textAlign:'center', 
-                                marginTop:10, 
-                                flexGrow:1, 
-                                overflowX:'auto'}} 
-                                center='true'>
-                                
-                                <CircularProgress className={this.props.progress} thickness={7}/>
-                                <Typography color='primary'>Loading...</Typography>
-                                
-                            </Paper>
-                        </Grid>
-                    </Grid>
-                </div>
-            );
-        }
-        
         return (
             <div>
                 <Grid container centered='true' align='center'>
@@ -120,7 +60,13 @@ class SiteDetails extends Component {
                             flexGrow:1, 
                             overflowX:'auto'}} 
                             center='true'>
+                            <Table style={{width:'100%'}}>
+                                
+                                <TableBody>
                                 {this.siteLogger(site)}
+                                </TableBody>
+
+                            </Table>
                         </Paper>
                     </Grid>
                 </Grid>
@@ -130,4 +76,4 @@ class SiteDetails extends Component {
   }
 }
 
-export default graphql(sitesCampaignLogsheets, {options:siteDetailsFetch})(SiteDetails)
+export default (SiteDetails)

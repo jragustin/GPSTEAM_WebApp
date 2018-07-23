@@ -149,6 +149,42 @@ class Map extends React.Component {
                     surveyType {
                         type
                     }
+                    campaignLogsheets {
+                      edges {
+                        node {
+                          id
+                          date
+                          heightNorthMeters
+                          heightEastMeters
+                          heightSouthMeters
+                          heightWestMeters
+                          timeStart
+                          timeEnd
+                          failureTime
+                          azimuth
+                          notes
+                          site_id
+                          antenna_id
+                          receiver_id
+                        }
+                      }
+                    }
+                    continuousLogsheets {
+                      edges {
+                        node {
+                          id
+                          isPowerOn
+                          date
+                          batteryCondition
+                          chargerCondition
+                          otherNotes
+                          createdAt
+                          site_id
+                          antenna_id
+                          receiver_id
+                        }
+                      }
+                    }   
                    
                 }
             }

@@ -26,9 +26,6 @@ const continuousLogsheetsQuery = gql `
             site_id:
             antenna_id
             receiver_id
-            site{
-                id
-            }
         }
     }
 `
@@ -38,17 +35,16 @@ To see the documetation on fetch, see Sites.js
 const continuousLogsheetsFetch = {fetchPolicy: 'cache-and-network'}
 
 class ContinuousLogsheets extends Component {
+    
     renderList(){
         return( this.props.data.allContinuousLogsheets.map((continuousLogsheet) => {
-                return(
-
-                    <TableRow key={continuousLogsheet.id}>
-                        <TableCell>{continuousLogsheet.date}</TableCell>
-                    </TableRow>
-                    );
-                }
-            )
-        );
+            return(
+                <TableRow key={continuousLogsheet.id}>
+                    <TableCell>{continuousLogsheet.date}</TableCell>
+                </TableRow>
+                );
+            }
+        ));
     }
 
     render() {
