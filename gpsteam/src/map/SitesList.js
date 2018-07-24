@@ -212,7 +212,7 @@ class SitesList extends Component {
       >
         <div className={classes.drawerInner}>
           <div className={classes.drawerHeader}>
-            <div>
+            <div  className={classes.wrapper}>
               Logsheets
             </div>
             <IconButton onClick={this.props.closeDetails}>

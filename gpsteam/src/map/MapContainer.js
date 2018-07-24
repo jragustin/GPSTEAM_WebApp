@@ -130,77 +130,77 @@ const styles = theme => ({
   }
 });
 
-const sitesFetch = {fetchPolicy: 'cache-and-network'}
-
 class Map extends React.Component {
   constructor() {
     super()
-    this.state = {
-      sites: client.readQuery({
-        query: gql`
-            {
-                sites(order: "name") {
-                    id
-                    name
-                    description
-                    location
-                    longitude
-                    latitude
-                    surveyType {
-                        type
-                    }
-                    campaignLogsheets {
-                      edges {
-                        node {
-                          id
-                          date
-                          heightNorthMeters
-                          heightEastMeters
-                          heightSouthMeters
-                          heightWestMeters
-                          timeStart
-                          timeEnd
-                          failureTime
-                          azimuth
-                          notes
-                          site_id
-                          antenna_id
-                          receiver_id
+    try{
+      this.state = {
+        sites: client.readQuery({
+          query: gql`
+              {
+                  sites(order: "name") {
+                      id
+                      name
+                      description
+                      location
+                      longitude
+                      latitude
+                      surveyType {
+                          type
+                      }
+                      campaignLogsheets {
+                        edges {
+                          node {
+                            id
+                            date
+                            heightNorthMeters
+                            heightEastMeters
+                            heightSouthMeters
+                            heightWestMeters
+                            timeStart
+                            timeEnd
+                            failureTime
+                            azimuth
+                            notes
+                            site_id
+                            antenna_id
+                            receiver_id
+                          }
                         }
                       }
-                    }
-                    continuousLogsheets {
-                      edges {
-                        node {
-                          id
-                          isPowerOn
-                          date
-                          batteryCondition
-                          chargerCondition
-                          otherNotes
-                          createdAt
-                          site_id
-                          antenna_id
-                          receiver_id
+                      continuousLogsheets {
+                        edges {
+                          node {
+                            id
+                            isPowerOn
+                            date
+                            batteryCondition
+                            chargerCondition
+                            otherNotes
+                            createdAt
+                            site_id
+                            antenna_id
+                            receiver_id
+                          }
                         }
-                      }
-                    }   
-                   
-                }
-            }
-        `
-        }),
-        /*
-        Initializes the values of the sites of Camp, Continuous,
-        and searched. They are all null for the moment, values will added later.
-        The sitesSearched values will be dependent on the search state.
-        It is empty right now.
-        */
-        sitesCamp: null,
-        sitesCont: null,
-        sitesSearched: null,
-        search: ''
-    }
+                      }   
+                     
+                  }
+              }
+          `
+          }),
+          /*
+          Initializes the values of the sites of Camp, Continuous,
+          and searched. They are all null for the moment, values will added later.
+          The sitesSearched values will be dependent on the search state.
+          It is empty right now.
+          */
+          sitesCamp: null,
+          sitesCont: null,
+          sitesSearched: null,
+          search: ''
+      }
+    }catch(error){}
   }
 
   componentWillMount() {
@@ -212,23 +212,25 @@ class Map extends React.Component {
     It will then be filtered later to display in the map and the 
     sitesList.
     */
-    let filtered = this.state.sites.sites.filter(s => {
-      return s.surveyType && s.latitude && s.longitude
-    })
+    try{
+      let filtered = this.state.sites.sites.filter(s => {
+        return s.surveyType && s.latitude && s.longitude
+      })
 
-    let sitesCamp = filtered.filter(s => {
-      return s.surveyType.type === 'campaign'
-    })
+      let sitesCamp = filtered.filter(s => {
+        return s.surveyType.type === 'campaign'
+      })
 
-    let sitesCont = filtered.filter(s => {
-      return s.surveyType.type === 'continuous'
-    }) 
+      let sitesCont = filtered.filter(s => {
+        return s.surveyType.type === 'continuous'
+      }) 
 
-    let sitesSearched = filtered.filter(s => {
-      return this.state.search
-    })
+      let sitesSearched = filtered.filter(s => {
+        return this.state.search
+      })
 
-    this.setState({ sites: filtered, sitesCamp, sitesCont, sitesSearched })
+      this.setState({ sites: filtered, sitesCamp, sitesCont, sitesSearched })
+    }catch(error){}
   }
   
   updateSearch(event) {
@@ -237,109 +239,116 @@ class Map extends React.Component {
     The values should be only up to 20.
     */
     this.setState({search:event.target.value.toUpperCase().substr(0, 4)})
-    console.log(event.target.value)
   }
 
   render() {
-    const { classes, drawerOpen, showCampaignSites, showContinuousSites, showSitesSearched } = this.props;
-    const { sites, sitesCamp, sitesCont, sitesSearched } = this.state
+    try{
+      const { classes, drawerOpen, showCampaignSites, showContinuousSites, showSitesSearched } = this.props;
+      const { sites, sitesCamp, sitesCont, sitesSearched } = this.state
 
-    /*
-    An empty list will be declared first that will be filled up 
-    by the sites.
-    */
-    let list = []
-    
-    if(showCampaignSites) {
-      list = sitesCamp
-    }
-    if(showContinuousSites) {
-      list = sitesCont
-    }
-    if(showCampaignSites && showContinuousSites) {
-      list = sitesCont.concat(sitesCamp)
-    }
-
-    /*
-    If the argument is to showSitesSearched,
-    the list will contain all the sitesSearched matched.
-    */
-
-    if(showSitesSearched){
-      list = sitesSearched
-    }
-
-    /*
-    the searchedlist will filter through the current list
-    which will then be passed to the sitesList.
-    */
-    let searchedList = list.filter(
-      (list) => {
-        return list.name.indexOf(
-          this.state.search) !==-1;
+      /*
+      An empty list will be declared first that will be filled up 
+      by the sites.
+      */
+      let list = []
+      
+      if(showCampaignSites) {
+        list = sitesCamp
       }
-    );
+      if(showContinuousSites) {
+        list = sitesCont
+      }
+      if(showCampaignSites && showContinuousSites) {
+        list = sitesCont.concat(sitesCamp)
+      }
 
-    // sort alphabetically
-    searchedList.sort((a, b) => {
-      if(a.name < b.name) return -1;
-      if(a.name > b.name) return 1;
-      return 0;
-    })
+      /*
+      If the argument is to showSitesSearched,
+      the list will contain all the sitesSearched matched.
+      */
 
-    const drawerRight = (
-      <Drawer
-        type="persistent"
-        classes={{
-          paper: classes.drawerPaperRight,
-        }}
-        anchor='right'
-        open={drawerOpen}
-      >
-        <div className={classes.drawerInner}>
-          <div className={classes.drawerHeader}>
-            <div className={classes.wrapper}>
-            {/*  <div className={classes.search}>
-                <SearchIcon color='contrast'/>
-              </div>*/}
-              {/*
-              The input bar for the search. To know more about searches in
-              React, view:
-              https://www.youtube.com/watch?v=OlVkYnVXPl0&index=16&list=PLLnpHn493BHFfs3Uj5tvx17mXk4B4ws4p
-              */}
-              <input type="text" 
-              className={classes.input} 
-              placeholder='Search' 
-              value={this.state.search} 
-              onChange={this.updateSearch.bind(this)}/>
+      if(showSitesSearched){
+        list = sitesSearched
+      }
+
+      /*
+      the searchedlist will filter through the current list
+      which will then be passed to the sitesList.
+      */
+      let searchedList = list.filter(
+        (list) => {
+          return list.name.indexOf(
+            this.state.search) !==-1;
+        }
+      );
+
+      // sort alphabetically
+      searchedList.sort((a, b) => {
+        if(a.name < b.name) return -1;
+        if(a.name > b.name) return 1;
+        return 0;
+      })
+
+      const drawerRight = (
+        <Drawer
+          type="persistent"
+          classes={{
+            paper: classes.drawerPaperRight,
+          }}
+          anchor='right'
+          open={drawerOpen}
+        >
+          <div className={classes.drawerInner}>
+            <div className={classes.drawerHeader}>
+              <div className={classes.wrapper}>
+              {/*  <div className={classes.search}>
+                  <SearchIcon color='contrast'/>
+                </div>*/}
+                {/*
+                The input bar for the search. To know more about searches in
+                React, view:
+                https://www.youtube.com/watch?v=OlVkYnVXPl0&index=16&list=PLLnpHn493BHFfs3Uj5tvx17mXk4B4ws4p
+                */}
+                <input type="text" 
+                className={classes.input} 
+                placeholder='Search' 
+                value={this.state.search} 
+                onChange={this.updateSearch.bind(this)}/>
+              </div>
+              <IconButton onClick={this.props.closeDrawer}>
+                <ChevronRightIcon />
+              </IconButton>
+            
             </div>
-            <IconButton onClick={this.props.closeDrawer}>
-              <ChevronRightIcon />
-            </IconButton>
-          
+            <SitesList sites={searchedList}/>
           </div>
-          <SitesList sites={searchedList}/>
-        </div>
-      </Drawer>
-    );
+        </Drawer>
+      );
 
-    return (
-        <div className={classes.root}>
-          <div className={classes.appFrame}>
-            <main
-              className={classNames(classes.content, classes[`content-style`], {
-                [classes.contentShift]: drawerOpen,
-                //[classes.contentShift]: detailsOpen,
-                [classes[`contentShift-margin`]]: drawerOpen,
-                //[classes[`contentShift-margin`]]: detailsOpen,
-              })}
-            >
-              <PhMap sites={sites}/>
-            </main>
-            <Hidden>{drawerRight}</Hidden>
+      return (
+          <div className={classes.root}>
+            <div className={classes.appFrame}>
+              <main
+                className={classNames(classes.content, classes[`content-style`], {
+                  [classes.contentShift]: drawerOpen,
+                  //[classes.contentShift]: detailsOpen,
+                  [classes[`contentShift-margin`]]: drawerOpen,
+                  //[classes[`contentShift-margin`]]: detailsOpen,
+                })}
+              >
+                <PhMap sites={sites}/>
+              </main>
+              <Hidden>{drawerRight}</Hidden>
+            </div>
           </div>
+      );
+    }catch(error){
+      return (
+        <div>
+          Click on the Map sidebar to reload the cache...
         </div>
-    );
+      )
+    }
   }
 }
 
