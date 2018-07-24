@@ -26,7 +26,7 @@ and do the allSites query in the database.
 */
 const sitesQuery = gql `
 	{
-		allSites{
+		sites{
 			id
 			name
             dateEstablished
@@ -54,23 +54,23 @@ const sitesFetch = {fetchPolicy: 'cache-and-network'}
 render the sites then pass 'site' as a property to the component SiteDetails to show more details of the sites
 */
 class Sites extends Component {
-    
+    _onButtonClick(){
+        console.log('I do nothing yet');
+    }
     renderList(){
-    	return( 
-            'shhhh'
-            // this.props.data.allSites.map((site) => {
-            //     return(
+    	return( this.props.data.sites.map((site) => {
+                return(
 
-            //         // <SiteDetailsSlide/>
-            //         // <TableRow key={site.id} onClick={this._onButtonClick}>
-            //         //     <TableCell>{site.name}</TableCell>
-            //         //     <TableCell>{site.location}</TableCell>
-            //         //     {/*<TableCell numeric><SiteDetails site={site}/></TableCell>*/}
-            //         //     {/*this.state.openSiteDetails ? <SiteDetails site={site}/> : null */}    
-            //         // </TableRow>
-    	   	// 		);
-    	   	// 	}
-    	   	// )
+                    // <SiteDetailsSlide/>
+                    <TableRow key={site.id} onClick={this._onButtonClick}>
+                        <TableCell>{site.name}</TableCell>
+                        <TableCell>{site.location}</TableCell>
+                        {/*<TableCell numeric><SiteDetails site={site}/></TableCell>*/}
+                        {/*this.state.openSiteDetails ? <SiteDetails site={site}/> : null */}    
+                    </TableRow>
+    	   			);
+    	   		}
+    	   	)
     	)
     }
     
