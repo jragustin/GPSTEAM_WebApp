@@ -345,7 +345,7 @@ class Map extends React.Component {
     }catch(error){
       return (
         <div>
-          Click on the Map sidebar to reload the cache...
+          GPS Site Information has been reloaded... Please click on the navigation menu.
         </div>
       )
     }

@@ -31,7 +31,10 @@ export default class ObsFieldMod extends Component {
             <ObserverFields show={this.state.isOpen}
             	onClose={this.toggleModal}>
             </ObserverFields>
-      		</div>
+            <div>
+              List:
+      		  </div>
+          </div>
       	)
       }
 }
