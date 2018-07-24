@@ -39,9 +39,7 @@ class SiteDetails extends Component {
             }
         ));
     	
-    } catch (error) {
-       	console.log('Disregard this error: ',error)
-    }
+    } catch (error) {}
   }
 
   render() {
@@ -63,7 +61,7 @@ class SiteDetails extends Component {
                             <Table style={{width:'100%'}}>
                                 
                                 <TableBody>
-                                {this.siteLogger(site)}
+                                    {this.siteLogger(site)}
                                 </TableBody>
 
                             </Table>

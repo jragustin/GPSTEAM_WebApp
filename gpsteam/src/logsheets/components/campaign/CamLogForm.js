@@ -42,6 +42,7 @@ let CamLogForm = props => {
           <label>Observers</label>
           <div>
             <ObsFieldMod/>
+            List:
           </div>
         </div>
         <div>

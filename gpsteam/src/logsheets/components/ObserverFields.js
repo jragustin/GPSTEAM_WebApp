@@ -59,7 +59,7 @@ class ObserverFields extends Component {
 
       }else{
         if(observerList.includes(event.target.value)){
-          observerList.splice(event.target.value.index+1,1)
+          observerList.splice(event.target.value.index,1)
           console.log(observerList)
         }
 
