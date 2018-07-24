@@ -10,7 +10,6 @@ import { connect } from 'react-redux'
 import * as mapActions from './mapActions'
 import { client } from '../index'
 import gql from 'graphql-tag';
-import { graphql } from 'react-apollo';
 
 import PhMap from './Map'
 import SitesList from './SitesList'

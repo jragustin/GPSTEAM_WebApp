@@ -3,8 +3,6 @@
 import React, { Component } from 'react'
 import CamLogMod from './CamLogMod'
 
-const campaignLogsheetsFetch = {fetchPolicy: 'cache-and-network'}
-
 class CampaignLogsheets extends Component {
     render() {
         return (

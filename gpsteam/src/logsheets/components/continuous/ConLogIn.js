@@ -7,7 +7,6 @@ import React, { Component } from 'react'
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo'
 import ConLogForm from './ConLogForm';
-import PropTypes from 'prop-types';
 
 /*
 to define what types of values are coming in, we need to 

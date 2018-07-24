@@ -5,10 +5,6 @@ edit or delete a file, he must go to the sites tab.
 */
 
 import React, { Component }  from 'react';
-import gql from "graphql-tag";
-import { graphql } from 'react-apollo';
-
-import { Paper, Grid, Table, TableRow, TableBody, TableCell } from '@material-ui/core';
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -17,8 +13,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { Typography, List } from 'material-ui'
+import { Typography, ListItem, List } from '@material-ui/core'
 
 const styles = theme => ({
   root: {
@@ -37,7 +32,7 @@ class SiteDetails extends Component {
     try {
     	
         if (site.surveyType.type === 'campaign') {
-            const { site, data, classes } = this.props
+            const { site, classes } = this.props
             return( site.campaignLogsheets.edges.map((campaign) => {
                 return (
                       <ExpansionPanel key={campaign.node.id}>
@@ -46,49 +41,49 @@ class SiteDetails extends Component {
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
                             <List>
-                                <li>
+                                <ListItem>
                                     Date: {campaign.node.date}
-                                </li>
-                                <li>
+                                </ListItem>
+                                <ListItem>
                                     Height North Meters: {campaign.node.heightNorthMeters}
-                                </li>
-                                <li>
+                                </ListItem>
+                                <ListItem>
                                     Height East Meters: {campaign.node.heightEastMeters}
-                                </li>
-                                <li>
+                                </ListItem>
+                                <ListItem>
                                     Height South Meters: {campaign.node.heightSouthMeters}
-                                </li>
-                                <li>
+                                </ListItem>
+                                <ListItem>
                                     Height West Meters: {campaign.node.heightWestMeters}
-                                </li>
-                                <li>
+                                </ListItem>
+                                <ListItem>
                                     Time Started: {campaign.node.timeStart}
-                                </li>
-                                <li>
+                                </ListItem>
+                                <ListItem>
                                     Time Finished: {campaign.node.timeEnd}
-                                </li>
-                                <li>
+                                </ListItem>
+                                <ListItem>
                                     Failure Time: {campaign.node.failureTime}
-                                </li>
-                                <li>
+                                </ListItem>
+                                <ListItem>
                                     Azimuth: {campaign.node.azimuth}
-                                </li>
-                                <li>
+                                </ListItem>
+                                <ListItem>
                                     Notes: {campaign.node.notes}
-                                </li>
-                                <li>
+                                </ListItem>
+                                <ListItem>
                                      Antenna ID: {campaign.node.antenna_id}
-                                </li>
-                                <li>
+                                </ListItem>
+                                <ListItem>
                                     Receiver ID: {campaign.node.receiver_id}
-                                </li>
+                                </ListItem>
                             </List>
                         </ExpansionPanelDetails>
                       </ExpansionPanel>
                 );
             }));
         }else{
-            const { site, data, classes } = this.props
+            const { site, classes } = this.props
             return( site.continuousLogsheets.edges.map((continuous) => {
                 return (
                       <ExpansionPanel key={continuous.node.id}>
@@ -97,30 +92,30 @@ class SiteDetails extends Component {
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
                             <List>
-                                <li>
+                                <ListItem>
                                     Date: {continuous.node.date}
-                                </li>
-                                <li>
+                                </ListItem>
+                                <ListItem>
                                     Is On: {continuous.node.isPowerOn}
-                                </li>
-                                <li>
+                                </ListItem>
+                                <ListItem>
                                     Battery Condtion: {continuous.node.batteryCondition}
-                                </li>
-                                <li>
+                                </ListItem>
+                                <ListItem>
                                     Charger Condition: {continuous.node.chargerCondition}
-                                </li>
-                                <li>
+                                </ListItem>
+                                <ListItem>
                                     Other Notes: {continuous.node.otherNotes}
-                                </li>
-                                <li>
+                                </ListItem>
+                                <ListItem>
                                     Created at: {continuous.node.createdAt}
-                                </li>
-                                <li>
+                                </ListItem>
+                                <ListItem>
                                      Antenna ID: {continuous.node.antenna_id}
-                                </li>
-                                <li>
+                                </ListItem>
+                                <ListItem>
                                     Receiver ID: {continuous.node.receiver_id}
-                                </li>
+                                </ListItem>
                             </List>
                         </ExpansionPanelDetails>
                       </ExpansionPanel>
@@ -132,7 +127,7 @@ class SiteDetails extends Component {
   }
 
   render() {
-  	const { site, data, classes } = this.props
+  	const { site, classes } = this.props
 
         return (
             <div className={classes.root}>

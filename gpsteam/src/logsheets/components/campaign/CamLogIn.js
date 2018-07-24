@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo'
 import CamLogForm from './CamLogForm';
-import PropTypes from 'prop-types';
 
 /*
 See ConLogIn to view documentation in mutations
