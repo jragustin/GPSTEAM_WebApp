@@ -5,8 +5,7 @@ import { graphql } from 'react-apollo'
 import { reduxForm, Field } from 'redux-form';
 
 import PropTypes from 'prop-types';
-import { Slide, Dialog, DialogTitle, DialogContent, Table, TableRow, TableBody, TableCell } from '@material-ui/core';
-import Checkbox from '@material-ui/core/Checkbox';
+import { Slide, Dialog, DialogTitle, DialogContent } from '@material-ui/core';
 
 /*
 See ConLogIn to view documentation in mutations
@@ -57,16 +56,17 @@ class ObserverFields extends Component{
     // console.log(observerList)
     if (event.target.checked) {
      // observerList = observerList.push(event.target.value)
-      console.log(observerList.includes(event.target.value))
+      //console.log(observerList.includes(event.target.value))
+      console.log()
       if(!observerList.includes(event.target.value)){
         observerList.push(event.target.value)
-        console.log(observerList)
+        
       }
 
     }else{
       if(observerList.includes(event.target.value)){
         observerList.splice(observerList.indexOf(event.target.value),1)
-        console.log(observerList)
+        
       }
 
     }
@@ -79,12 +79,11 @@ class ObserverFields extends Component{
           <label>{person.firstName} {person.lastName}</label>
           
             <Field 
-            name="firstName" 
-            component="input" 
+            name={person.firstName}
+            component="input"
             type="checkbox" 
             onChange={this.handleChange.bind(this)}
-            placeholder="First Name"
-            id={person.id}
+            id={person.id} 
             value={person.id}/>
         </div>
       )
@@ -111,10 +110,10 @@ class ObserverFields extends Component{
             <form onSubmit={handleSubmit}>
               {this.renderCheckbox()}
               <div>
-                <button type="submit">
+                <button type="submit" disabled={ pristine|| submitting }>
                   Submit
                 </button>
-                <button type="button" onClick={reset}>
+                <button type="button" disabled={ pristine|| submitting } onClick={reset}>
                   Clear Values
                 </button>
               </div>
