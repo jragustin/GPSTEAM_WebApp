@@ -15,8 +15,9 @@ import Typography from '@material-ui/core/Typography';
 /*
 The two below are the campaign and continuous logsheets
 */
-import CampaignLogsheets from './campaign/CampaignLogsheets';
-import ContinuousLogsheets from './continuous/ContinuousLogsheets';
+// import CampaignLogsheets from './campaign/CampaignLogsheets';
+// import ContinuousLogsheets from './continuous/ContinuousLogsheets';
+import Steps from './Steps';
 
 function TabContainer(props) {
   return (
@@ -43,7 +44,7 @@ Just styles for the tabs
 
 class Header extends React.Component {
   state = {
-    value: 0,
+    value: 1,
   };
 
   handleChange = (event, value) => {
@@ -65,8 +66,10 @@ class Header extends React.Component {
           The values here are simply the lists of 
           logsheets exported from their components
         */}
-        {value === 0 && <TabContainer><CampaignLogsheets/></TabContainer>}
-        {value === 1 && <TabContainer><ContinuousLogsheets/></TabContainer>}
+        {/* {value === 0 && <TabContainer><CampaignLogsheets/></TabContainer>} */}
+        {/* {value === 1 && <TabContainer><ContinuousLogsheets/></TabContainer>} */}
+        {value === 0 && <TabContainer> <Steps /> </TabContainer>}
+        {value === 1 && <TabContainer> <Steps/> </TabContainer>}
       </div>
     );
   }

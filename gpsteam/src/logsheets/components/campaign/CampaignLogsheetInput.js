@@ -4,7 +4,7 @@ import { graphql } from 'react-apollo'
 import CamLogForm from './CamLogForm';
 
 /*
-See ConLogIn to view documentation in mutations
+See CampaignLogsheetInput to view documentation in mutations
 */
 const createCampaignLogsheet = gql`
   mutation createCampaignLogsheet($date: String!, $heightNorthMeters: Float!, $heightEastMeters: Float!, $heightSouthMeters: Float!, $heightWestMeters: Float!, $timeStart: String, $timeEnd: String, $failureTime: String, $azimuth: Float, $notes: String, $site_id: Int, $antenna_id: Int, $receiver_id: Int){
@@ -13,7 +13,7 @@ const createCampaignLogsheet = gql`
     }
   }
 `
-class CamLogIn extends Component {
+class CampaignLogsheetInput extends Component {
     
     submitForm =(values) => {
       /*
@@ -55,4 +55,4 @@ class CamLogIn extends Component {
 
 export default graphql(createCampaignLogsheet,{
   name:"createCampaignLogsheet"
-})(CamLogIn)
+})(CampaignLogsheetInput)

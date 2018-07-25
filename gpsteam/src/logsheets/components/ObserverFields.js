@@ -57,11 +57,11 @@ class ObserverFields extends Component{
     if (event.target.checked) {
      // observerList = observerList.push(event.target.value)
       //console.log(observerList.includes(event.target.value))
-      console.log()
       if(!observerList.includes(event.target.value)){
         observerList.push(event.target.value)
         
       }
+      
 
     }else{
       if(observerList.includes(event.target.value)){

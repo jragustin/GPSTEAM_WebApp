@@ -1,5 +1,5 @@
 /*
-ConLogIn will be uploaded to the ConLogMod where it will show the modal
+ContinuousLogsheetInput will be uploaded to the ConLogMod where it will show the modal
 and the form in ConLogForm which was imported herre will be displayed.
 (headache)
 */
@@ -28,9 +28,9 @@ const createContinuousLogsheet = gql`
   }
 `
 /*
-This ConLogIn is a component which is shown in a modal.
+This ContinuousLogsheetInput is a component which is shown in a modal.
 */
-class ConLogIn extends Component {
+class ContinuousLogsheetInput extends Component {
     
     submitForm =(values) => {
       /*
@@ -75,4 +75,4 @@ class ConLogIn extends Component {
 
 export default graphql(createContinuousLogsheet,{
   name:"createContinuousLogsheet"
-})(ConLogIn)
+})(ContinuousLogsheetInput)
