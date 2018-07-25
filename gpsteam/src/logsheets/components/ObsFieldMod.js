@@ -11,30 +11,34 @@ showing the form
 */
 export default class ObsFieldMod extends Component {
 	constructor(props) {
-        super(props);
-        this.state = { isOpen: false };
-      }
+    super(props);
+    this.state = { isOpen: false };
+  }
+
+  toggleModal = () => {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+
+  submitObservers =(values) =>{
+      console.log(values)
+    }
 
 
-      toggleModal = () => {
-        this.setState({
-          isOpen: !this.state.isOpen
-        });
-      }
-
-      render(){
-      	return(
-      		<div>
-      			<button type="button" onClick={this.toggleModal}>
-              Select Observers
-            </button>
-            <ObserverFields show={this.state.isOpen}
-            	onClose={this.toggleModal}>
-            </ObserverFields>
-            <div>
-              List:
-      		  </div>
-          </div>
-      	)
-      }
+  render(){
+  	return(
+  		<div>
+  			<button type="button" onClick={this.toggleModal}>
+          Select Observers
+        </button>
+        <ObserverFields
+          onSubmit={this.submitObservers.bind(this)}
+          show={this.state.isOpen}
+        	onClose={this.toggleModal}
+          >
+        </ObserverFields>
+      </div>
+  	)
+  }
 }

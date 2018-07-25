@@ -11,7 +11,6 @@ import { Field, reduxForm } from 'redux-form';
 These are for dates
 */
 
-import ObsFieldMod from '../ObsFieldMod'
 import DateTimePicker from 'react-widgets/lib/DateTimePicker'
 import moment from 'moment'
 import momentLocaliser from 'react-widgets-moment'
@@ -36,12 +35,6 @@ let ConLogForm = props => {
   const { handleSubmit, pristine, reset, submitting } = props
   
   return <form onSubmit={handleSubmit}>
-      <div>
-        <label>Observers</label>
-        <div>
-          <ObsFieldMod/>
-        </div>
-      </div>
       <div>
         <label>Power</label>
         <div>

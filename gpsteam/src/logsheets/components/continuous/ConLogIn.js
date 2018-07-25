@@ -8,6 +8,7 @@ import gql from 'graphql-tag';
 import { graphql } from 'react-apollo'
 import ConLogForm from './ConLogForm';
 
+import ObsFieldMod from '../ObsFieldMod'
 /*
 to define what types of values are coming in, we need to 
 put $(value_name):(value_type).
@@ -60,7 +61,14 @@ class ConLogIn extends Component {
 
     render() {
       return ( 
-        <ConLogForm onSubmit={this.submitForm.bind(this)} />
+        <div>
+          <div>
+            <ConLogForm onSubmit={this.submitForm.bind(this)}/>
+          </div>
+          <div>
+            <ObsFieldMod/>
+          </div>
+        </div>
       )
     }
 }

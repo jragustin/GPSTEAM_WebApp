@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo'
+
+import { reduxForm, Field } from 'redux-form';
+
 import PropTypes from 'prop-types';
 import { Slide, Dialog, DialogTitle, DialogContent, Table, TableRow, TableBody, TableCell } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -8,6 +11,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 /*
 See ConLogIn to view documentation in mutations
 */
+
+//const  { DOM: { input } } = React
 
 const peoplesQuery = gql `
   {
@@ -28,12 +33,13 @@ const peoplesQuery = gql `
 `
 const peoplesFetch = {fetchPolicy: 'cache-and-network'}
 
-function Transition(props) {
+let Transition = (props) =>{
   return <Slide direction="up" {...props} />;
 }
 
-class ObserverFields extends Component {
-    constructor() {
+class ObserverFields extends Component{
+  
+  constructor() {
       super()
       this.state = {
        observerList: [],
@@ -41,80 +47,83 @@ class ObserverFields extends Component {
       }
     }
 
-    handleChange(event) {
-      /*
-      put checked values in an array in this function
-      */
-      const { observerList } = this.state
+  handleChange(event) {
+    /*
+    put checked values in an array in this function
+    */
+    const { observerList } = this.state
 
 
-      // console.log(observerList)
-      if (event.target.checked) {
-       // observerList = observerList.push(event.target.value)
-        console.log(observerList.includes(event.target.value))
-        if(!observerList.includes(event.target.value)){
-          observerList.push(event.target.value)
-          console.log(observerList)
-        }
-
-      }else{
-        if(observerList.includes(event.target.value)){
-          observerList.splice(event.target.value.index,1)
-          console.log(observerList)
-        }
-
+    // console.log(observerList)
+    if (event.target.checked) {
+     // observerList = observerList.push(event.target.value)
+      console.log(observerList.includes(event.target.value))
+      if(!observerList.includes(event.target.value)){
+        observerList.push(event.target.value)
+        console.log(observerList)
       }
+
+    }else{
+      if(observerList.includes(event.target.value)){
+        observerList.splice(observerList.indexOf(event.target.value),1)
+        console.log(observerList)
+      }
+
     }
+  }
 
-    passList=()=>{
-      console.log("Submitted",this.state.observerList)
-    }
+  renderCheckbox(){
+    return (this.props.data.allPersons.map((person) => {
+      return(
+        <div key={person.id}>
+          <label>{person.firstName} {person.lastName}</label>
+          
+            <Field 
+            name="firstName" 
+            component="input" 
+            type="checkbox" 
+            onChange={this.handleChange.bind(this)}
+            placeholder="First Name"
+            id={person.id}
+            value={person.id}/>
+        </div>
+      )
+    }))
+  }
 
-    renderList(){
-        return( this.props.data.allPersons.map((person) => {
-                return(
-                    <TableRow key={person.id}>
-                        <TableCell>{person.firstName} {person.lastName}</TableCell>
-                        <TableCell>
-                          <Checkbox color='primary'
-                          onChange={this.handleChange.bind(this)}
-                          value={person.firstName}/>
-                        </TableCell>
-                    </TableRow>
-                    );
-                }
-            )
-        );
-    }  
+  render(){
+    const { handleSubmit, pristine, reset, submitting } = this.props
 
-    render() {
-      if(!this.props.show) {
-        return null;
-      }else{
-          return ( 
-            <Dialog
-              open
-              TransitionComponent={Transition}
-              keepMounted
-              onClose={this.props.onClose}
-              fullWidth>
-                <DialogTitle>
-                  Select Observers
-                </DialogTitle>
-                <DialogContent>
-                  <Table style={{width:'100%'}}>
-                      <TableBody>
-                      {this.renderList()}
-                      </TableBody>
-                  </Table>
-                </DialogContent>
-                <button type="submit" onClick={this.passList}>
+    if(!this.props.show) {
+      return null;
+    }else{
+      return ( 
+        <Dialog
+        open
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={this.props.onClose}
+        fullWidth>
+          <DialogTitle>
+            Select Observers
+          </DialogTitle>
+          <DialogContent>
+            <form onSubmit={handleSubmit}>
+              {this.renderCheckbox()}
+              <div>
+                <button type="submit">
                   Submit
                 </button>
-            </Dialog>
-          )     
-      }
+                <button type="button" onClick={reset}>
+                  Clear Values
+                </button>
+              </div>
+            </form>
+          </DialogContent>
+        </Dialog>
+      )   
     }
+  }
 }
 
 ObserverFields.propTypes = {
@@ -122,4 +131,9 @@ ObserverFields.propTypes = {
   show: PropTypes.bool,
   children: PropTypes.node
 };
+
+ObserverFields = reduxForm({
+  form: 'ObserversValues'
+})(ObserverFields)
+
 export default graphql(peoplesQuery, {options:peoplesFetch})(ObserverFields)

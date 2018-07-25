@@ -85,7 +85,6 @@ export const resolvers = {
         register: async (_, args) => {
             const user = args;
             user.password = await bcrypt.hash(user.password, 12);
-      
             console.log('Register user: ', user)
             return User.create(user)
         },
@@ -96,28 +95,13 @@ export const resolvers = {
 
         createContinuousLogsheet: (_,args) =>{ 
             const continuousLog = args;
-            console.log("Submitted", continuousLog) 
+            console.log("Submitted", continuousLog.date) 
             return ContinuousLogsheet.create(continuousLog)
-            .then((newContinuousLogsheet) => {
-              pubsub.publish('continuousLogsheetCreated', newContinuousLogsheet.dataValues);
-              return newContinuousLogsheet;
-            }).catch((err) => {
-              console.error(err);
-              return err;
-            });
         },
         createCampaignLogsheet: (_,args) =>{ 
             const campaignLog = args;
             console.log("Submitted", campaignLog) 
             return CampaignLogsheet.create(campaignLog)
         }
-    },
-
-    Subscription: {
-        continuousLogsheetCreated: {
-          resolve: (payload) => { return payload},
-          subscribe: () => pubsub.asyncIterator('continuousLogsheetCreated')
-        }
     }
-
 }

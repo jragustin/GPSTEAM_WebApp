@@ -122,8 +122,4 @@ export const typeDefs = `
         createContinuousLogsheet( isPowerOn:Int!, date:String, batteryCondition:String, chargerCondition:String, otherNotes:String, createdAt:String!, site_id:Int, antenna_id:Int, receiver_id: Int ) : ContinuousLogsheet
         createCampaignLogsheet(  date: String!, heightNorthMeters: Float!, heightEastMeters: Float!, heightSouthMeters: Float!, heightWestMeters: Float!, timeStart: String, timeEnd: String, failureTime: String, azimuth: Float, notes: String, site_id: Int, antenna_id: Int, receiver_id: Int ) : CampaignLogsheet
     }
-    type Subscription {
-      # subscription for newly created contacts
-      continuousLogsheetCreated: ContinuousLogsheet
-    }
 `
