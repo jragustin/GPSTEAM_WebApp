@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import { Paper } from '@material-ui/core';
 
 import ContinuousLogsheetInput from '../continuous/ContinuousLogsheetInput';
-import ObserverFields from '../ObserverFields';
+import ObserverFieldsInput from '../ObserverFieldsInput';
 
 import { connect } from 'react-redux'
 import * as logsheetActions from '../logsheetActions'  
@@ -37,7 +37,7 @@ function getStepContent(stepIndex) {
     case 0:
       return <ContinuousLogsheetInput/>;
     case 1:
-      return <ObserverFields/>;
+      return <ObserverFieldsInput/>;
     case 2:
       return 'This is the bit I really care about!';
     default:
