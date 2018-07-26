@@ -108,6 +108,7 @@ export const typeDefs = `
         allPersons: [Person]
         campaignSites: [Site]
         continuousSites: [Site]
+        lastCampaignLogsheet: CampaignLogsheet
     }
 
     type Mutation {

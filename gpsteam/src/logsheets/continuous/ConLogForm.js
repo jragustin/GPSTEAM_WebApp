@@ -36,7 +36,7 @@ let ConLogForm = props => {
   
   return <form onSubmit={handleSubmit}>
       <div>
-        <label>Power</label>
+        <label>Power*</label>
         <div>
           <Field
             name="is_power_on"
@@ -47,7 +47,7 @@ let ConLogForm = props => {
         </div>
       </div>
       <div>
-        <label>Date</label>
+        <label>Date*</label>
         <div>
           <Field
           name="date"
@@ -88,7 +88,7 @@ let ConLogForm = props => {
         </div>
       </div>
       <div>
-        <label>Creation Date</label>
+        <label>Creation Date*</label>
         <div>
           <Field
           name="createdAt"
@@ -98,7 +98,7 @@ let ConLogForm = props => {
         </div>
       </div>
       <div>
-        <label>Site ID</label>
+        <label>Site ID*</label>
         <div>
           <Field
             name="site_id"
@@ -109,7 +109,7 @@ let ConLogForm = props => {
         </div>
       </div>
       <div>
-        <label>Antenna ID</label>
+        <label>Antenna ID*</label>
         <div>
           <Field
             name="antenna_id"
@@ -120,7 +120,7 @@ let ConLogForm = props => {
         </div>
       </div>
       <div>
-        <label>ReceiverID</label>
+        <label>Receiver ID*</label>
         <div>
           <Field
             name="receiver_id"

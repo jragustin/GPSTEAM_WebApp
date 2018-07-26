@@ -39,7 +39,7 @@ let CamLogForm = props => {
   const { handleSubmit, pristine, reset, submitting } = props
   return <form onSubmit={handleSubmit}>
         <div>
-          <label>Date</label>
+          <label>Date*</label>
           <div>
             <Field
             name="date"
@@ -60,7 +60,7 @@ let CamLogForm = props => {
           </div>
         </div>
         <div>
-          <label>Height East (meters)</label>
+          <label>Height East (meters)*</label>
           <div>
             <Field
               name="height_east_meters"
@@ -71,7 +71,7 @@ let CamLogForm = props => {
           </div>
         </div>
         <div>
-          <label>Height South (meters)</label>
+          <label>Height South (meters)*</label>
           <div>
             <Field
               name="height_south_meters"
@@ -82,7 +82,7 @@ let CamLogForm = props => {
           </div>
         </div>
         <div>
-          <label>Height West (meters)</label>
+          <label>Height West (meters)*</label>
           <div>
             <Field
               name="height_west_meters"
@@ -142,7 +142,7 @@ let CamLogForm = props => {
           </div>
         </div>
         <div>
-          <label>Site ID</label>
+          <label>Site ID*</label>
           <div>
             <Field
               name="site_id"
@@ -153,7 +153,7 @@ let CamLogForm = props => {
           </div>
         </div>
         <div>
-          <label>Antenna ID</label>
+          <label>Antenna ID*</label>
           <div>
             <Field
               name="antenna_id"
@@ -164,7 +164,7 @@ let CamLogForm = props => {
           </div>
         </div>
         <div>
-          <label>ReceiverID</label>
+          <label>Receiver ID*</label>
           <div>
             <Field
               name="receiver_id"

@@ -3,8 +3,6 @@ import gql from 'graphql-tag';
 import { graphql } from 'react-apollo'
 
 import { reduxForm, Field } from 'redux-form';
-
-import PropTypes from 'prop-types';
 import { Paper } from '@material-ui/core';
 
 /*
@@ -28,8 +26,12 @@ const peoplesQuery = gql `
       non_staff_position_id
       office_location_id
     }
+    lastCampaignLogsheet{
+      id
+    }
   }
 `
+
 const peoplesFetch = {fetchPolicy: 'cache-and-network'}
 
 
@@ -89,7 +91,8 @@ class ObserverFields extends Component{
 
   render(){
     const { handleSubmit, pristine, reset, submitting } = this.props
-
+    const { lastCampaignLogsheet } = this.props.data
+      console.log(this.props.data)
       return ( 
         <Paper style={{maxHeight:500, 
           height:'auto', 
@@ -101,7 +104,7 @@ class ObserverFields extends Component{
           overflowX:'auto'}} 
           center='true'>
           <div>
-            Select Observers
+            Select Observers for CampaignLogsheet with ID of {lastCampaignLogsheet.id}
           </div>
           <div>
             <form onSubmit={handleSubmit}>

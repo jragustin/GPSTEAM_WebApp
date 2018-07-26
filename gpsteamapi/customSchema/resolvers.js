@@ -75,6 +75,14 @@ export const resolvers = {
                 }
             });
 
+        },
+
+        lastCampaignLogsheet(){
+            return CampaignLogsheet.findOne({
+                order:[
+                    ['id','desc']
+                ]
+            })
         }
 
 
