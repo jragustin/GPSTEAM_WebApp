@@ -11,7 +11,7 @@ See ConLogIn to view documentation in mutations
 
 //const  { DOM: { input } } = React
 
-const peoplesQuery = gql `
+const CampaignDetailsQuery = gql `
   {
     allPersons{
       id
@@ -92,7 +92,6 @@ class ObserverFields extends Component{
   render(){
     const { handleSubmit, pristine, reset, submitting } = this.props
     const { lastCampaignLogsheet } = this.props.data
-      console.log(this.props.data)
       return ( 
         <Paper style={{maxHeight:500, 
           height:'auto', 
@@ -129,4 +128,4 @@ ObserverFields = reduxForm({
   form: 'ObserversValues'
 })(ObserverFields)
 
-export default graphql(peoplesQuery, {options:peoplesFetch})(ObserverFields)
+export default graphql(CampaignDetailsQuery, {options:peoplesFetch})(ObserverFields)

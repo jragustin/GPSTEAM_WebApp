@@ -3,6 +3,9 @@ This sets the state of the modal and shows the form.
 */
 
 import React, { Component } from 'react'
+import gql from 'graphql-tag';
+import { graphql } from 'react-apollo'
+
 import ObserverFields from './ObserverFields'
 
 /*

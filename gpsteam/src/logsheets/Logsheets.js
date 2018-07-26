@@ -16,7 +16,7 @@ import Typography from '@material-ui/core/Typography';
 The two below are the campaign and continuous logsheets
 */
 
-import ContinuousSteps from './continuous/ContinuousSteps';
+import ContinuousLogsheetInput from './continuous/ContinuousLogsheetInput';
 import CampaignSteps from './campaign/CampaignSteps';
 
 function TabContainer(props) {
@@ -69,7 +69,7 @@ class Logsheets extends React.Component {
         {/* {value === 0 && <TabContainer><CampaignLogsheets/></TabContainer>} */}
         {/* {value === 1 && <TabContainer><ContinuousLogsheets/></TabContainer>} */}
         {value === 0 && <TabContainer> <CampaignSteps/> </TabContainer>}
-        {value === 1 && <TabContainer> <ContinuousSteps/> </TabContainer>}
+        {value === 1 && <TabContainer> <ContinuousLogsheetInput/> </TabContainer>}
       </div>
     );
   }

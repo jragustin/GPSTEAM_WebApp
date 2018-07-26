@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import { Paper } from '@material-ui/core';
 
 import CampaignLogsheetInput from '../campaign/CampaignLogsheetInput';
-import ObserverFieldsInput from '../ObserverFieldsInput';
+import ObserverFieldsInput from './ObserverFieldsInput';
 
 import { connect } from 'react-redux'
 import * as logsheetActions from '../logsheetActions'  
@@ -54,11 +54,13 @@ class CampaignSteps extends React.Component {
     const { openStep } = this.props;
     const { activeStep } = this.state;
     
-    console.log(openStep)
     if (openStep === true) {
       this.setState({
         activeStep: activeStep + 1,
       });
+    }
+    else{
+      alert("You cannot proceed yet!")
     }
   };
 
