@@ -330,9 +330,7 @@ class Map extends React.Component {
               <main
                 className={classNames(classes.content, classes[`content-style`], {
                   [classes.contentShift]: drawerOpen,
-                  //[classes.contentShift]: detailsOpen,
                   [classes[`contentShift-margin`]]: drawerOpen,
-                  //[classes[`contentShift-margin`]]: detailsOpen,
                 })}
               >
                 <PhMap sites={sites}/>

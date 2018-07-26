@@ -6,9 +6,13 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-// import CampaignLogsheetInput from './campaign/CampaignLogsheetInput';
 import { Paper } from '@material-ui/core';
-import ContinuousLogsheetInput from './continuous/ContinuousLogsheetInput';
+
+import CampaignLogsheetInput from '../campaign/CampaignLogsheetInput';
+import ObserverFields from '../ObserverFields';
+
+import { connect } from 'react-redux'
+import * as logsheetActions from '../logsheetActions'  
 
 const styles = theme => ({
   root: {
@@ -25,15 +29,15 @@ const styles = theme => ({
 });
 
 function getSteps() {
-  return ['Select master blaster campaign settings', 'Create an ad group', 'Create an ad'];
+  return ['Fill out Details', 'Select Campaign Observers', 'Select Campaign Contacts'];
 }
 
 function getStepContent(stepIndex) {
   switch (stepIndex) {
     case 0:
-      return <ContinuousLogsheetInput/>;
+      return <CampaignLogsheetInput/>;
     case 1:
-      return 'What is an ad group anyways?';
+      return <ObserverFields/>;
     case 2:
       return 'This is the bit I really care about!';
     default:
@@ -41,23 +45,31 @@ function getStepContent(stepIndex) {
   }
 }
 
-class Steps extends React.Component {
+class CampaignSteps extends React.Component {
   state = {
     activeStep: 0,
   };
 
   handleNext = () => {
+    const { openStep } = this.props;
     const { activeStep } = this.state;
-    this.setState({
-      activeStep: activeStep + 1,
-    });
+    
+    console.log(openStep)
+    if (openStep === true) {
+      this.setState({
+        activeStep: activeStep + 1,
+      });
+    }
   };
 
   handleBack = () => {
     const { activeStep } = this.state;
     this.setState({
       activeStep: activeStep - 1,
+
     });
+    this.props.disableNext()
+
   };
 
   handleReset = () => {
@@ -71,6 +83,7 @@ class Steps extends React.Component {
     const steps = getSteps();
     const { activeStep } = this.state;
 
+    
     return (
       <div className={classes.root}>
       <Paper>
@@ -93,14 +106,14 @@ class Steps extends React.Component {
             </div>
           ) : (
             <div>
-              <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+              {getStepContent(activeStep)}
               <div>
                 <Button
                   disabled={activeStep === 0}
                   onClick={this.handleBack}
                   className={classes.backButton}
                 >
-                  Back
+                Back
                 </Button>
                 <Button variant="contained" color="primary" onClick={this.handleNext}>
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
@@ -115,8 +128,15 @@ class Steps extends React.Component {
   }
 }
 
-Steps.propTypes = {
+CampaignSteps.propTypes = {
   classes: PropTypes.object,
 };
 
-export default withStyles(styles)(Steps);
+const mapStateToProps = (state) => {
+  return { ...state.logsheet }
+}
+
+CampaignSteps = connect(mapStateToProps, { ...logsheetActions })(CampaignSteps)
+
+
+export default withStyles(styles)(CampaignSteps);

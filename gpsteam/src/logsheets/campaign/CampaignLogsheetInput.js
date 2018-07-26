@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo'
+
 import CamLogForm from './CamLogForm';
+import { Paper } from '@material-ui/core';
+
+import { connect } from 'react-redux'
+import * as logsheetActions from '../logsheetActions' 
 
 /*
 See CampaignLogsheetInput to view documentation in mutations
@@ -38,20 +43,39 @@ class CampaignLogsheetInput extends Component {
 
         }
       }).then(({data}) => {
-        //if data from mutation is returned, refetch here!
+        // if data from mutation is returned, submit success!
+        // this.props.refetch();
+        this.props.openNext()
         alert("Submit success!");
       }).catch(error =>{
-        alert("Submit unsuccessful!");
+        this.props.disableNext()
+        alert("Cannot proceed...\nSubmit unsuccessful!");
         console.log(error);
       })
     }
 
     render() {
         return ( 
-          <CamLogForm onSubmit={this.submitForm.bind(this)} />
+          <Paper style={{maxHeight:500, 
+          height:'auto', 
+          overflow:'auto', 
+          width:'80%', 
+          textAlign:'center', 
+          marginTop:10, 
+          flexGrow:1, 
+          overflowX:'auto'}} 
+          center='true'>
+            <CamLogForm onSubmit={this.submitForm.bind(this)} />
+          </Paper>
         )
     }
 }
+
+const mapStateToProps = (state) => {
+  return { ...state.logsheet }
+}
+
+CampaignLogsheetInput = connect(mapStateToProps, { ...logsheetActions })(CampaignLogsheetInput)
 
 export default graphql(createCampaignLogsheet,{
   name:"createCampaignLogsheet"

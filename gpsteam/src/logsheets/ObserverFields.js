@@ -5,7 +5,7 @@ import { graphql } from 'react-apollo'
 import { reduxForm, Field } from 'redux-form';
 
 import PropTypes from 'prop-types';
-import { Slide, Dialog, DialogTitle, DialogContent } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 
 /*
 See ConLogIn to view documentation in mutations
@@ -32,9 +32,6 @@ const peoplesQuery = gql `
 `
 const peoplesFetch = {fetchPolicy: 'cache-and-network'}
 
-let Transition = (props) =>{
-  return <Slide direction="up" {...props} />;
-}
 
 class ObserverFields extends Component{
   
@@ -93,20 +90,20 @@ class ObserverFields extends Component{
   render(){
     const { handleSubmit, pristine, reset, submitting } = this.props
 
-    if(!this.props.show) {
-      return null;
-    }else{
       return ( 
-        <Dialog
-        open
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={this.props.onClose}
-        fullWidth>
-          <DialogTitle>
+        <Paper style={{maxHeight:500, 
+          height:'auto', 
+          overflow:'auto', 
+          width:'80%', 
+          textAlign:'center', 
+          marginTop:10, 
+          flexGrow:1, 
+          overflowX:'auto'}} 
+          center='true'>
+          <div>
             Select Observers
-          </DialogTitle>
-          <DialogContent>
+          </div>
+          <div>
             <form onSubmit={handleSubmit}>
               {this.renderCheckbox()}
               <div>
@@ -118,18 +115,12 @@ class ObserverFields extends Component{
                 </button>
               </div>
             </form>
-          </DialogContent>
-        </Dialog>
+          </div>
+        </Paper>
       )   
-    }
+    
   }
 }
-
-ObserverFields.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  show: PropTypes.bool,
-  children: PropTypes.node
-};
 
 ObserverFields = reduxForm({
   form: 'ObserversValues'

@@ -6,9 +6,14 @@ and the form in ConLogForm which was imported herre will be displayed.
 import React, { Component } from 'react'
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo'
-import ConLogForm from './ConLogForm';
 
-import ObsFieldMod from '../ObsFieldMod'
+import ConLogForm from './ConLogForm';
+import { Paper } from '@material-ui/core';
+
+import { connect } from 'react-redux'
+import * as logsheetActions from '../logsheetActions' 
+
+// import ObsFieldMod from '../ObsFieldMod'
 /*
 to define what types of values are coming in, we need to 
 put $(value_name):(value_type).
@@ -52,26 +57,37 @@ class ContinuousLogsheetInput extends Component {
       }).then(({data}) => {
         // if data from mutation is returned, submit success!
         // this.props.refetch();
+        this.props.openNext()
         alert("Submit success!");
       }).catch(error =>{
-        alert("Submit unsuccessful!");
+        this.props.disableNext()
+        alert("Cannot proceed...\nSubmit unsuccessful!");
         console.log(error);
       })
     }
 
     render() {
       return ( 
-        <div>
-          <div>
+          <Paper style={{maxHeight:500, 
+          height:'auto', 
+          overflow:'auto', 
+          width:'80%', 
+          textAlign:'center', 
+          marginTop:10, 
+          flexGrow:1, 
+          overflowX:'auto'}} 
+          center='true'>
             <ConLogForm onSubmit={this.submitForm.bind(this)}/>
-          </div>
-          <div>
-            <ObsFieldMod/>
-          </div>
-        </div>
+          </Paper>
       )
     }
 }
+
+const mapStateToProps = (state) => {
+  return { ...state.logsheet }
+}
+
+ContinuousLogsheetInput = connect(mapStateToProps, { ...logsheetActions })(ContinuousLogsheetInput)
 
 export default graphql(createContinuousLogsheet,{
   name:"createContinuousLogsheet"
