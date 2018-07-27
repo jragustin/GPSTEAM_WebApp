@@ -57,7 +57,9 @@ class CampaignSteps extends React.Component {
     if (openStep === true) {
       this.setState({
         activeStep: activeStep + 1,
+
       });
+      this.props.disableNext()
     }
     else{
       alert("You cannot proceed yet!")

@@ -27,6 +27,7 @@
     "npm": "^6.1.0",
     "react": "^16.3.0",
     "react-apollo": "^2.0.4",
+    "react-compose": "^2.0.0",
     "react-dom": "^16.3.0",
     "react-leaflet": "^1.7.8",
     "react-leaflet-control": "^1.4.0",

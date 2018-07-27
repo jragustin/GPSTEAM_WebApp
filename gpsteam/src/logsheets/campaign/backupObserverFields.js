@@ -71,13 +71,12 @@ class ObserverFields extends Component{
   renderCheckbox(){
     return (this.props.data.allPersons.map((person) => {
       
-      console.log(typeof(person.id))
       return(
+
         <div key={person.id}>
           <label>{person.firstName} {person.lastName}</label>
-          
             <Field 
-            name={`${person.id}`}
+            name = {person.id}
             component="input"
             type="checkbox" 
             onChange={this.handleChange.bind(this)}
@@ -89,34 +88,42 @@ class ObserverFields extends Component{
 
   render(){
     const { handleSubmit, pristine, reset, submitting } = this.props
-      return ( 
-        <Paper style={{maxHeight:500, 
-          height:'auto', 
-          overflow:'auto', 
-          width:'80%', 
-          textAlign:'center', 
-          marginTop:10, 
-          flexGrow:1, 
-          overflowX:'auto'}} 
-          center='true'>
+    const { loading } = this.props.data
+      if(loading){
+        return(
           <div>
-            Select Observers for Campaign Logsheet
+            Loading...
           </div>
-          <div>
-            <form onSubmit={handleSubmit}>
-              {this.renderCheckbox()}
-              <div>
-                <button type="submit" disabled={ pristine|| submitting }>
-                  Submit
-                </button>
-                <button type="button" disabled={ pristine|| submitting } onClick={reset}>
-                  Clear Values
-                </button>
-              </div>
-            </form>
-          </div>
-        </Paper>
-      )   
+        )
+      }
+        return ( 
+          <Paper style={{maxHeight:500, 
+            height:'auto', 
+            overflow:'auto', 
+            width:'80%', 
+            textAlign:'center', 
+            marginTop:10, 
+            flexGrow:1, 
+            overflowX:'auto'}} 
+            center='true'>
+            <div>
+              Select Observers for Campaign Logsheet
+            </div>
+            <div>
+              <form onSubmit={handleSubmit}>
+                {this.renderCheckbox()}
+                <div>
+                  <button type="submit" disabled={ pristine|| submitting }>
+                    Submit
+                  </button>
+                  <button type="button" disabled={ pristine|| submitting } onClick={reset}>
+                    Clear Values
+                  </button>
+                </div>
+              </form>
+            </div>
+          </Paper>
+        )   
     
   }
 }

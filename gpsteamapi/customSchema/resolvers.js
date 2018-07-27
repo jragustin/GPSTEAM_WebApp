@@ -103,13 +103,18 @@ export const resolvers = {
 
         createContinuousLogsheet: (_,args) =>{ 
             const continuousLog = args;
-            console.log("Submitted", continuousLog.date) 
+            console.log("Submitted", continuousLog) 
             return ContinuousLogsheet.create(continuousLog)
         },
         createCampaignLogsheet: (_,args) =>{ 
             const campaignLog = args;
             console.log("Submitted", campaignLog) 
             return CampaignLogsheet.create(campaignLog)
-        }
+        },
+         createCampaignObservers: (_,args) =>{ 
+            const campaignObservers = args;
+            console.log("Submitted", campaignObservers) 
+            return campaignObservers
+        },
     }
 }

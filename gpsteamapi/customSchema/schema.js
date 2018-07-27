@@ -87,6 +87,12 @@ export const typeDefs = `
         office_location_id: Int
     }
 
+    type CampaignObserver{
+        id: ID!
+        campaign_logsheet_id: Int!
+        person_id: Int!
+    }
+
     type AuthPayload {
         token: String!
         refreshToken: String!
@@ -97,6 +103,8 @@ export const typeDefs = `
         username: String
         access_level_id: Int
     }
+
+
 
     type Query {
         developer: String!
@@ -122,5 +130,6 @@ export const typeDefs = `
         # this should reflect the declaration in the schema as seen here: ../../schema.graphql
         createContinuousLogsheet( isPowerOn:Int!, date:String, batteryCondition:String, chargerCondition:String, otherNotes:String, createdAt:String!, site_id:Int, antenna_id:Int, receiver_id: Int ) : ContinuousLogsheet
         createCampaignLogsheet(  date: String!, heightNorthMeters: Float!, heightEastMeters: Float!, heightSouthMeters: Float!, heightWestMeters: Float!, timeStart: String, timeEnd: String, failureTime: String, azimuth: Float, notes: String, site_id: Int, antenna_id: Int, receiver_id: Int ) : CampaignLogsheet
+        createCampaignObservers( campaign_logsheet_id: Int!, person_id: Int! ) : CampaignObserver
     }
 `
